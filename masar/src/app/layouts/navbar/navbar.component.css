@@ -1,0 +1,353 @@
+
+        * {
+            font-family: 'Cairo', sans-serif;
+            color: #fff;
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            background-color: #f5f5f5;
+            direction: rtl;
+        }
+        
+        /* Base navbar styles - Mobile First Approach */
+        nav {
+            color: #fff;
+            background-color: var(--dark-night);
+            padding: 10px;
+            width: 100%;
+        }
+        
+        nav .container-fluid {
+            border: 1px solid;
+            border-radius: 20px; /* Smaller radius for mobile */
+            background-color: rgba(255, 255, 255, 0.11);
+            outline: 4px solid rgba(255, 255, 255, 0.11); /* Smaller outline for mobile */
+            padding: 8px 15px; /* Adjusted padding for mobile */
+        }
+        
+        .container-fluid, .collapse {
+            flex-direction: row-reverse;
+        }
+        
+        /* Navbar toggler styles */
+        .navbar-toggler {
+            border: none !important;
+            padding: 5px;
+            margin-right: 5px;
+        }
+        
+        .navbar-toggler:focus,
+        .navbar-toggler:active {
+            outline: none;
+            box-shadow: none;
+        }
+        
+        .navbar-toggler-icon {
+            margin: 5px;
+            width: 1.5em;
+            height: 1.5em;
+        }
+        
+        /* Discover title styles */
+        .discover-title {
+            font-size: 1.2rem; /* Smaller for mobile */
+            font-weight: bold;
+            display: flex;
+            align-items: center;
+            justify-content: flex-end;
+        }
+        
+        .discover-title:hover {
+            color: #fff;
+        }
+        
+        .discover-title svg {
+            width: 20px; /* Smaller for mobile */
+            height: 20px;
+            margin-left: 5px;
+        }
+        
+        /* Search styles */
+        .search-wrapper {
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        .search {
+            background-color: rgba(217, 217, 217, 0.72);
+            border: none;
+            border-radius: 10px;
+            color: #fff;
+            height: 35px;
+            width: 100%; /* Full width on mobile */
+            padding-right: 35px; /* Space for the icon */
+            background-image: url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23ffffff" d="M10 2a8 8 0 0 1 6.32 12.9l4.39 4.39a1 1 0 0 1-1.42 1.42l-4.39-4.39A8 8 0 1 1 10 2zm0 2a6 6 0 1 0 6 6 6 6 0 0 0-6-6z"/></svg>');
+            background-repeat: no-repeat;
+            background-position: calc(100% - 10px) center; /* Responsive positioning */
+            background-size: 20px;
+        }
+        
+        .search::placeholder {
+            color: #fff;
+            text-align: right;
+        }
+        
+        /* Button styles */
+        .buttons {
+            display: flex;
+            flex-direction: column; /* Stack on mobile */
+            gap: 10px;
+            width: 100%;
+            margin: 10px 0;
+        }
+        
+        .register-button, .login-button {
+            width: 100%; /* Full width on mobile */
+            padding: 8px 16px;
+            border: none;
+            border-radius: 4px;
+            font-size: 0.9rem;
+            text-align: center;
+        }
+        
+        .register-button {
+            background: none;
+            outline: 1px solid #fff;
+        }
+        
+        .login-button {
+            background: var(--alchemy);
+        }
+        
+        /* Flex container styles */
+        .right, .left {
+            display: flex;
+            flex-direction: column; /* Stack on mobile */
+            width: 100%;
+            align-items: center;
+        }
+        
+        .collapse {
+            justify-content: space-between;
+        }
+        
+        /* Dropdown styles */
+        .dropdown-menu {
+            background-color: #4D646C;
+            color: white;
+            width: 100%; /* Full width on mobile */
+            border: none;
+            border-radius: 10px;
+            margin-top: 5px;
+        }
+        
+        .dropdown-item {
+            padding: 8px 15px;
+            transition: 0.2s ease-in-out;
+            text-align: right;
+            white-space: normal; /* Allow text wrapping */
+        }
+        
+        .dropdown-item:hover, .dropdown-item:focus {
+            color: #1d2e3a;
+            padding-right: 25px !important;
+            background-color: rgba(255, 255, 255, 0.2);
+        }
+        
+        .dropdown-item:hover svg path, .dropdown-item:focus svg path {
+            stroke: #1d2e3a;
+        }
+        
+        .active-section {
+            color: var(--alchemy);
+            font-weight: 600;
+        }
+        
+        /* Submenu styles */
+        .sub-menu {
+            display: none;
+            border: none;
+            background-color: rgba(77, 100, 108, 0.9);
+            padding: 0;
+            width: 100%;
+        }
+        
+        .sub-menu.open {
+            display: block;
+            position: relative;
+            margin-top: 0;
+            padding-right: 15px;
+        }
+        
+        .submenu-toggle {
+            display: flex !important;
+            justify-content: space-between !important;
+            align-items: center !important;
+        }
+        
+        .submenu-toggle svg {
+            margin-right: 8px;
+            width: 14px;
+            height: 14px;
+        }
+        
+        /* Cart and language styles */
+        .cart, .lang {
+            margin: 10px 0;
+            text-align: center;
+        }
+        
+        .cart svg {
+            width: 30px; /* Smaller for mobile */
+            height: 30px;
+        }
+        
+        .lang .nav-link {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 5px;
+        }
+        
+        /* Navbar collapse styles */
+        .navbar-collapse {
+            background-color: rgba(77, 100, 108, 0.95);
+            border-radius: 15px;
+            margin-top: 10px;
+            padding: 10px;
+        }
+        
+        /* Instructor registration link */
+        .mx-3 .nav-link {
+            text-align: center;
+            display: block;
+            padding: 8px 0;
+            margin: 10px 0;
+        }
+        
+        /* Tablet styles */
+        @media (min-width: 576px) {
+            nav {
+                padding: 12px;
+            }
+            
+            nav .container-fluid {
+                border-radius: 30px;
+                outline: 5px solid rgba(255, 255, 255, 0.11);
+                padding: 10px 20px;
+            }
+            
+            .discover-title {
+                font-size: 1.3rem;
+            }
+            
+            .discover-title svg {
+                width: 24px;
+                height: 24px;
+            }
+            
+            .search-wrapper {
+                width: 80%;
+                margin: 10px auto;
+            }
+            
+            .buttons {
+                flex-direction: row;
+                justify-content: center;
+            }
+            
+            .register-button, .login-button {
+                width: auto;
+            }
+            
+            .cart svg {
+                width: 35px;
+                height: 35px;
+            }
+        }
+        
+        /* Desktop styles */
+        @media (min-width: 992px) {
+            nav {
+                padding: 18px;
+            }
+            
+            nav .container-fluid {
+                border-radius: 50px;
+                outline: 7px solid rgba(255, 255, 255, 0.11);
+                padding: 10px 25px;
+            }
+            
+            .navbar-collapse {
+                background-color: transparent;
+                margin-top: 0;
+                padding: 0;
+            }
+            
+            .discover-title {
+                font-size: 22px;
+            }
+            
+            .discover-title svg {
+                width: 30px;
+                height: 30px;
+            }
+            
+            .search-wrapper {
+                width: auto;
+                margin: 0;
+            }
+            
+            .search {
+                width: 340px;
+                background-position: calc(100% - 15px) center;
+            }
+            
+            .right, .left {
+                flex-direction: row-reverse;
+                align-items: center;
+                width: auto;
+            }
+            
+            .buttons {
+                flex-direction: row-reverse;
+                width: auto;
+                margin: 0;
+            }
+            
+            .register-button, .login-button {
+                width: auto;
+            }
+            
+            .dropdown-menu {
+                position: absolute;
+                width: auto;
+                min-width: 200px;
+            }
+            
+            .sub-menu.open {
+                position: absolute;
+                top: 0;
+                right: 100%;
+                width: auto;
+                min-width: 200px;
+            }
+            
+            .cart, .lang, .mx-3 {
+                margin: 0 10px;
+            }
+            
+            .cart svg {
+                width: 42px;
+                height: 42px;
+            }
+            
+            .mx-3 .nav-link {
+                text-align: right;
+                margin: 0;
+                padding: 8px;
+            }
+        }

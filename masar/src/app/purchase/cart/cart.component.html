@@ -1,0 +1,119 @@
+<div class="mx-1 my-3 d-flex justify-content-between flex-wrap align-items-center position-relative">
+    <div class="col-md-4 col-12 m-2 position-sticky left-0 top-0">
+        <div class="card">
+            <div class="card-body">
+                <h5 class="card-title m-2">ملخص ما هو داخل السلة</h5>
+                <hr>
+                <div class="items my-5">
+                    <div class="row my-3 justify-content-between">
+                        <div class="col-4">
+                            <h6 class="card-text price">988 ر.س</h6>
+                        </div>
+                        <div class="col-6">
+                            <h6 class="card-text description">
+                                السعر قبل الخصم
+                            </h6>
+                        </div>
+                    </div>
+                    <div class="row my-3 justify-content-between">
+                        <div class="col-4">
+                            <h6 class="card-text price">741 ر.س</h6>
+                        </div>
+                        <div class="col-6">
+                            <h6 class="card-text description">
+                                قيمة الخصم (75 % )
+                            </h6>
+                        </div>
+                    </div>
+                </div>
+                <hr>
+                <div class="row my-3 justify-content-between">
+                    <div class="col-4">
+                        <h6 class="card-text total-price">247 ر.س</h6>
+                    </div>
+                    <div class="col-6">
+                        <h6 class="card-text description fs-4">
+                            السعر النهائي
+                        </h6>
+                    </div>
+                </div>
+                <div class="note my-4 p-3 row d-flex align-items-center">
+                    <div class="col-9 d-flex text-end flex-column">
+                        <div class="note-title fs-5 fw-bold">
+                            ضمان 30 يوم من تاريخ الاشتراك
+                        </div>
+                        <div class="description">
+                            اذا لم تكن راضي عن محتوى الدورة
+                        </div>
+                    </div>
+                    <div class="col-3">
+                        <img src="assets/gu.png" alt="gurantee">
+                    </div>
+                </div>
+                <a routerLink="/purchase" class="btn btn-primary fs-5 p-2 main-btn">
+                    ادفع الان
+                </a>
+                <div class="description text-center m-2">
+                    اكتشف دورات اكثر
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-7 col-12 cart m-2 text-end">
+        <h2>
+            محتويات السلة
+        </h2>
+        <h4>
+            دورة
+            1
+        </h4>
+        <hr>
+            <div class="row justify-content-end">
+                <div class="card col-12 col-md-4 m-2" *ngFor="let i of [1]" (click)="navigateToCourseDetails()">
+                    <select class="label-top-right">
+                        <option *ngFor="let status of statusOptions" [value]="status">
+                            {{ status }}
+                        </option>
+                    </select>
+                    <img [src]="'../../../assets/course_thumb01.jpg.png'" class="card-img-top p-3" [alt]="'instructor'">
+                    <div class="card-body d-flex justify-content-end m-2">
+                        <div>
+                            <div class="rating d-flex flex-wrap justify-content-between align-items-center">
+                                <div class="badge">
+                                    CME 15
+                                </div>
+                                <div class="avg-rate mx-1">
+                                    4.3
+                                </div>
+                                <p-rating [stars]="5" [cancel]="false"></p-rating>
+                                <div class="total-rate mx-1">
+                                    (222)
+                                </div>
+                            </div>
+                            <h6 class="card-text">دورات التطور المهني المستمر</h6>
+                            <h6 class="card-title">إعتماد جمعية القلب السعودية</h6>
+                        </div>
+                    </div>
+                    <div class="description">
+                        الأسعافات الاولية والانعاش القلبي الرئوي واستخدام جهاز صدمات القلب الكهربائية الخارجي الالي 
+                        <br>(Heart Saver First Aid CPR AED)
+                    </div>
+                    <div class="d-flex justify-content-between flex-wrap align-items-center">
+                        <div class="price"> ر.س 247</div>
+                        <div class="button">
+                            <a href="#" class="btn btn-primary p-1 px-4 main-btn">
+                                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                    <path d="M4 12L20 12M4 12L10 6M4 12L10 18" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                </svg>
+                                اشتري الان
+                            </a>
+                        </div>
+                    </div>
+                    <div class="my-2 delete">
+                        حذف الدورة 
+                        <i class="fa-solid fa-trash-can"></i>
+                    </div>
+                </div>
+            </div>
+    </div>
+</div>

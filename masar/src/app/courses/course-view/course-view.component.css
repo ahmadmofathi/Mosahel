@@ -1,0 +1,309 @@
+*{
+    font-family: 'Cairo';
+}
+
+header{
+    background-image: url('../../../assets/courses-bg.png');
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: #fff;
+    position: relative;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(36, 56, 63, 0.85);
+    z-index: 1;
+}
+
+.title, .bg-icon {
+    position: relative;
+    z-index: 2;
+}
+.title{
+    font-size: 45px;
+}
+.bg-icon{
+    position: absolute;
+    left: 0;
+}
+
+.buttons{
+    font-size: 18px;
+}
+.buttons div{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.main-btn{
+    color:#fff;
+    background-color: #24383F;
+    border-radius: 10px;
+    border: none;
+    padding: 0.25rem 1rem 0.25rem 4rem;
+    position: relative;
+    width: 100%;
+    transition: 0.2s ease-in-out;
+}
+.filter-icon{
+    position: absolute;
+    left: 10px;
+    top: 9px;
+}
+.main-btn:hover{
+    color: #000000;
+    background-color: rgb(217, 217, 217, 0.09);
+    border: 1px solid #000000;
+}
+.main-btn:hover .filter-icon svg path{
+    stroke: #000000;
+}
+.main-btn:hover svg path{
+    stroke: #000000;
+}
+.sec-btn{
+    color: #000000;
+    background-color: rgb(217, 217, 217, 0.09);
+    border: 1px solid #000000;
+    border-radius: 14px;
+    padding: 0.25rem 4rem;
+}
+
+
+.filter-box h3{
+    color: #24383F;
+}
+.filter-box{
+    background-color: rgb(217, 217, 217,0.54);
+    border-radius: 22px;
+    text-align: right;
+}
+.option-text{
+    opacity: 50%;
+}
+.option-checkbox{
+    max-height: 16px;
+}
+
+
+
+.row .col-lg-4{
+    justify-items: center;
+}
+.card{
+    position: relative;
+    height: fit-content;
+    padding: 5px;
+}
+.card-text ,.card-title{
+    font-family: 'Poppins';
+    font-weight: 700;
+}
+.card-title{
+    color: #101828;
+    text-align: right;
+}
+.card-text{
+    color: #24383F;
+    text-align: right;
+}
+.description{
+    text-align: right;
+    color: #A2A2A2;
+}
+.card-body .button a{
+    background-color: #D9D9D9;
+    color: #24383F;
+    border: none;
+    font-family: 'Tajawal';
+    font-size: 18px;
+    font-weight: 800;
+}
+.label-top-right {
+    position: absolute;
+    font-family: 'Poppins';
+    top: 25px;
+    right: 25px;
+    background-color: #fff;
+    color: #24383F;
+    padding: 2px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 50px;
+    border: none;
+    z-index: 10; 
+}
+.price{
+    font-family: 'Poppins';
+    font-weight: 700;
+    color: #111C55;
+    font-size: 22px;
+    text-align: right;
+}
+.avg-rate{
+    color: #3269D3;
+    font-weight: 700;
+    font-size: 14px;
+}
+.total-rate{
+    color: #969696;
+    font-weight: 600;
+    font-size: 14px;
+}
+.badge{
+    background-color: #24383F;
+    padding: 4px;
+}
+p-rating {
+    margin-top: 5px;
+    color: #ffa000;
+}
+.small-rating ::ng-deep .p-rating-icon {
+    font-size: 12px; /* Adjust the size as needed */
+    margin-right: 2px; /* Optional spacing between stars */
+}
+
+
+.name{
+    font-family: 'Poppins';
+    font-size: 18px;
+    color: #222751;
+    font-weight: 700;
+}
+
+.card h3{
+    text-align: right;
+    font-weight: 700;
+}
+
+.image-card{
+    box-shadow: 0 4px 45px 0 rgba(0, 0, 0, 0.25);
+}
+
+.sec1{
+    color: #24383F;
+    text-align: right;
+}
+.sec1 h3{
+    font-weight: 700;
+}
+.sub-text{
+    font-weight: 300;
+    color: #24383F;
+}
+
+.border{
+    background-color: rgba(217, 217, 217, 0.54);
+    padding: 5px;
+}
+.border .card{
+    border: none;
+}
+.card h6{
+    background-color: rgba(217, 217, 217, 0.54);
+    padding: 10px;
+}
+.scroll-area {
+    direction: ltr; /* Forces left-to-right direction for scrollbar */
+    text-align: right; /* Ensures text stays aligned properly */
+    overflow-y: scroll;
+    height: 200px;
+    overflow-x: hidden;
+    background-color: #fff;
+    padding-right: 10px;
+    padding: 15px;
+    transform: scaleX(-1);
+}
+
+.scroll-area > *{
+    transform: scaleX(-1);
+}
+
+.name{
+    font-size: 1rem;
+}
+.card-body{
+    margin-right: 20%;
+    font-weight: 700;
+    text-align: right;
+}
+.card-body p{
+    font-size: 0.85rem;
+}
+.rating,.rating h5{
+    text-align: right;
+}
+.average{
+    font-size: 2rem;
+    font-weight: 800;
+    color:rgba(34, 39, 81, 0.54);
+}
+.rating-stars{
+    color: #969696;
+}
+
+
+.category{
+    background-color: rgba(17, 28, 85, 0.37);
+    color: #24383F;
+    padding: 5px 10px;
+    border-radius: 25px;
+    font-size: 0.8rem;
+    font-weight: 700;
+}
+.stars{
+    color: #3269D3;
+    font-size: 1.2rem;
+}
+.text{
+    color: #24383F;
+    font-weight: 800;
+    font-size: 1rem;
+}
+.sub-text{
+    color: #969696;
+    font-weight: 700;
+    font-size: 0.8rem;
+}
+.course-price{
+    color: #24383F;
+    font-weight: 800;
+    font-size: 2rem;
+}
+.discount{
+    color: rgba(17, 28, 85, 0.63);
+    font-weight: 800;
+    font-size: 1.2rem;
+    text-decoration: line-through;
+}
+.main-btn{
+    color:#fff;
+    background-color: #24383F;
+    border-radius: 10px;
+    border: none;
+    padding: 0.15rem 1rem 0.15rem 2rem;
+    position: relative;
+    width: 100%;
+    transition: 0.2s ease-in-out;
+    font-size: 1.5rem;
+}
+.main-btn:hover{
+    color: #000000;
+    background-color: rgb(217, 217, 217, 0.09);
+    /* border: 1px solid #000000; */
+}
+
+.purchase{
+    position: sticky;
+    left: 0;
+    top: 0;
+}

@@ -1,0 +1,100 @@
+
+*{
+    font-family: 'Cairo';
+}
+.background-container {
+    position: relative;
+    width: 100%;
+    height: 65vh;
+    border-radius: 31px;
+    background-image: url('../../../assets/student-class-looking-course 1.png');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+}
+.background-container::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(36, 56, 63, 0.75); /* Black filter with 50% opacity */
+    z-index: 1; /* Ensure this layer is below the text */
+}
+
+.overlay-text {
+    position: relative;
+    z-index: 2; /* Ensure text appears above the filter */
+    text-align: right;
+    color: white; /* Text color */
+}
+.welcome-text{
+    font-size: 32px;
+}
+.main-text{
+    font-size: 48px;
+    font-weight: 800;
+}
+.small-text{
+    font-size: 18px;
+}
+
+.title{
+    text-align: center;
+    font-size: 28px;
+    font-weight: 900;
+}
+.sub-title{
+    text-align: center;
+    font-size: 15px;
+    opacity: 84%;
+    font-weight: 300;
+}
+
+.login-form{
+    width: 80%;
+}
+.form-control::-webkit-input-placeholder {
+    /*color: #fff;  Placeholder text color */
+    text-align: right; /* Placeholder text alignment */
+    opacity: 48%;
+}
+
+.form-control::-moz-placeholder {
+    /*color: #fff;  For Firefox */
+    text-align: right;
+    opacity: 48%;
+}
+
+.form-control:-ms-input-placeholder {
+    /*color: #fff;  For Internet Explorer */
+    text-align: right;
+    opacity: 48%;
+}
+
+.form-control::placeholder {
+    /*color: #fff;  Placeholder for modern browsers */
+    text-align: right;
+    opacity: 48%;
+}
+
+.forgot-password{
+    color: #DF8317;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-button{
+    width: 100%;
+    background-color: #24383F;
+    color: #fff;
+    font-size: 22px;
+    padding: 10px;
+    border-radius: 17px;
+    border: 1px solid #24383F;
+    box-shadow: 0px 4px 15px rgba(223, 131, 23, 24%);
+}

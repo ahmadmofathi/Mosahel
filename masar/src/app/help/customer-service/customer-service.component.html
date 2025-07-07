@@ -1,0 +1,116 @@
+<app-header-item [title]="'تواصل معنا'"></app-header-item>
+
+
+<!-- FAQ Section -->
+<div class="faq-section row container my-3">
+    <h2 class="section-title col-12">الاسئلة الشائعة</h2>
+    <hr>
+    <div class="questions col-6 my-5">
+            <div class="faq-item text-end" *ngFor="let item of faqItems">
+                <button class="faq-button text-end" (click)="toggleAnswer(item)">
+                    <span>{{ item.question }}</span>
+                    <i class="arrow" [ngClass]="{ 'open': item.open }"></i>
+                </button>
+                <div
+                class="answer text-end"
+                *ngIf="item.open"
+                @toggleAnswer>
+                    <p>{{ item.answer }}</p>
+                </div>
+            </div>
+        </div>
+        <div class="col-6 my-2 d-flex justify-content-center">
+            <img src="assets/QA.png" alt="Questions" class="w-80">
+        </div>
+    </div>
+
+<!-- Contact Section -->
+<div class="contact-section py-3 row">
+    <div class="image-container col-12 col-lg-6">
+            <div class="circle-wrapper">
+                <div class="circle-frame"></div>
+                <img [src]="items[0].image" alt="Online Learning">
+            </div>
+            <div class="info-cards">
+                <div class="card videos-card">
+                    <div class="card-content d-flex align-items-center">
+                        <div class="icon">
+                            <svg width="37" height="37" viewBox="0 0 37 37" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <g clip-path="url(#clip0_3_23981)">
+                                <path d="M20.8203 28.733H14.5203L13.7703 26.708H2.44531V7.43296C2.44531 6.53296 3.19531 5.78296 4.09531 5.78296H32.1453C33.0453 5.78296 33.7953 6.53296 33.7953 7.43296V26.783H22.3203L20.8203 28.733ZM15.3453 27.608H20.2953L21.7953 25.583H32.6703V7.43296C32.6703 7.13296 32.4453 6.90796 32.1453 6.90796H4.09531C3.79531 6.90796 3.57031 7.13296 3.57031 7.43296V25.658H14.5953L15.3453 27.608Z" fill="white"/>
+                                <path d="M30.7215 30.9831H5.52148C2.82148 30.9831 0.646484 28.8081 0.646484 26.1081V25.5081H14.5215L15.2715 27.5331H20.2215L21.7215 25.5081H35.5215V26.1081C35.5965 28.8081 33.3465 30.9831 30.7215 30.9831ZM1.84648 26.7081C2.14648 28.5081 3.64648 29.8581 5.52148 29.8581H30.6465C32.5215 29.8581 34.0965 28.5081 34.3215 26.7081H22.3215L20.8215 28.7331H14.5215L13.7715 26.7081H1.84648Z" fill="white"/>
+                                <path d="M12.6461 9.75806H6.87109V14.7831H12.6461V9.75806Z" fill="white"/>
+                                <path d="M13.1715 15.3082H6.27148V9.1582H13.1715V15.3082ZM7.39648 14.1832H12.0465V10.2832H7.39648V14.1832Z" fill="white"/>
+                                <path d="M12.6461 17.708H6.87109V22.733H12.6461V17.708Z" fill="white"/>
+                                <path d="M13.1715 23.3331H6.27148V17.1831H13.1715V23.3331ZM7.39648 22.2081H12.0465V18.3081H7.39648V22.2081Z" fill="white"/>
+                                <path d="M29.6711 11.6331H16.2461V12.7581H29.6711V11.6331Z" fill="white"/>
+                                <path d="M29.6711 19.658H16.2461V20.783H29.6711V19.658Z" fill="white"/>
+                                </g>
+                                <defs>
+                                <clipPath id="clip0_3_23981">
+                                <rect width="36" height="36" fill="white" transform="translate(0.121094 0.383057)"/>
+                                </clipPath>
+                                </defs>
+                            </svg>
+                        </div>
+                        <div class="cont">
+                            <div class="num">
+                                {{ items[0].videos }}
+                            </div>
+                            <div class="num-title">
+                                Video Courses
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div class="card courses-card d-flex flex-column align-items-center justify-content-center">
+                    <div>
+                        <svg width="81" height="81" viewBox="0 0 81 81" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M40.0313 4.19189C44.7588 4.19189 49.4401 5.12306 53.8079 6.93223C58.1756 8.7414 62.1442 11.3931 65.4871 14.7361C68.83 18.079 71.4817 22.0476 73.2909 26.4153C75.1001 30.783 76.0313 35.4643 76.0312 40.1919C76.0312 44.9195 75.1001 49.6008 73.2909 53.9685C71.4817 58.3362 68.83 62.3048 65.4871 65.6477C62.1442 68.9907 58.1756 71.6424 53.8078 73.4516C49.4401 75.2607 44.7588 76.1919 40.0312 76.1919C35.3036 76.1919 30.6224 75.2607 26.2546 73.4516C21.8869 71.6424 17.9183 68.9906 14.5754 65.6477C11.2325 62.3048 8.58075 58.3362 6.77158 53.9685C4.96241 49.6008 4.03125 44.9195 4.03125 40.1919C4.03125 35.4643 4.96242 30.783 6.77159 26.4153C8.58077 22.0476 11.2325 18.0789 14.5754 14.736C17.9183 11.3931 21.8869 8.74139 26.2547 6.93222C30.6224 5.12306 35.3037 4.19189 40.0313 4.19189L40.0313 4.19189Z" stroke="#EAECF0" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                            <path d="M40.0313 4.19189C47.6337 4.19189 55.041 6.59867 61.1915 11.0673C67.342 15.5359 71.92 21.8369 74.2693 29.0673C76.6186 36.2976 76.6186 44.0861 74.2693 51.3165C71.92 58.5469 67.342 64.8479 61.1915 69.3165" stroke="#24383F" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </div>
+                    <div class="cont">
+                        <div class="num text-center">
+                            {{ items[0].courses }}
+                        </div>
+                        <div class="num-title">
+                            Online Courses
+                        </div>
+                    </div>
+                </div>
+                <div class="card tutors-card d-flex flex-row justify-content-center">
+                    <div class="icon">
+                        <svg width="32" height="32" viewBox="0 0 32 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <g clip-path="url(#clip0_3_23996)">
+                            <path d="M28.603 21.2998H27.5192V20.3436H28.603C29.368 20.3436 30.0055 19.7061 30.0055 18.9411V12.2473C30.0055 11.0361 28.9855 10.0161 27.7742 10.0161H20.7617C19.5505 10.0161 18.5305 11.0361 18.5305 12.2473V18.9411C18.5305 19.7061 19.168 20.3436 19.933 20.3436H21.0167V21.2998H19.933C18.5942 21.2998 17.5742 20.2161 17.5742 18.9411V12.2473C17.5742 10.4623 18.9767 9.05984 20.7617 9.05984H27.838C29.623 9.05984 31.0255 10.4623 31.0255 12.2473V18.9411C31.0255 20.2798 29.9417 21.2998 28.603 21.2998ZM24.268 8.03984C22.3555 8.03984 20.7617 6.44609 20.7617 4.53359C20.7617 2.62109 22.3555 1.02734 24.268 1.02734C26.1805 1.02734 27.7742 2.62109 27.7742 4.53359C27.7742 6.44609 26.2442 8.03984 24.268 8.03984ZM24.268 2.04734C22.8655 2.04734 21.718 3.19484 21.718 4.59734C21.718 5.99984 22.8655 7.14734 24.268 7.14734C25.6705 7.14734 26.818 5.99984 26.818 4.59734C26.818 3.19484 25.6705 2.04734 24.268 2.04734Z" fill="#F5F5F4"/>
+                            <path d="M25.9241 30.7347C25.2866 30.7347 24.7128 30.4159 24.3303 29.9697C23.9478 30.4159 23.3741 30.7347 22.7366 30.7347C21.5891 30.7347 20.6328 29.7784 20.6328 28.6309V13.0759H21.5891V28.6309C21.5891 29.2684 22.0991 29.7784 22.7366 29.7784C23.3741 29.7784 23.8203 29.2047 23.8203 28.6309V20.8534H24.7766V28.6309C24.7766 29.2684 25.2866 29.7784 25.9241 29.7784C26.5616 29.7784 27.0716 29.2684 27.0716 28.6309V13.0759H28.0278V28.6309C28.0278 29.7784 27.0716 30.7347 25.9241 30.7347Z" fill="#F5F5F4"/>
+                            <path d="M19.0396 24.1047H1.38086V4.08716H19.3584V5.04341H2.33711V23.1484H19.0396V24.1047Z" fill="#F5F5F4"/>
+                            <path d="M15.9162 13.0122H4.95117V13.9685H15.9162V13.0122Z" fill="#F5F5F4"/>
+                            <path d="M15.9162 16.2634H4.95117V17.2197H15.9162V16.2634Z" fill="#F5F5F4"/>
+                            <path d="M15.9162 19.5784H4.95117V20.5346H15.9162V19.5784Z" fill="#F5F5F4"/>
+                            </g>
+                            <defs>
+                            <clipPath id="clip0_3_23996">
+                            <rect width="30.6" height="30.6" fill="white" transform="translate(0.871094 0.581055)"/>
+                            </clipPath>
+                            </defs>
+                        </svg>
+                    </div>
+                    <div class="cont">
+                        <div class="num-title">
+                            Tutors
+                        </div>
+                        <div class="num">{{ items[0].tutors }}</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <form class="contact-form col-12 col-lg-6">
+            <h2 class="text-end">تواصل معنا الان</h2>
+            <input type="text" placeholder="اسمك" [(ngModel)]="name" name="name" required />
+            <input type="email" placeholder="البريد الالكتروني" [(ngModel)]="email" name="email" required />
+            <textarea placeholder="رسالتك" [(ngModel)]="message" name="message" required></textarea>
+            <button type="submit" (click)="submitForm()">إرسال</button>
+        </form>
+</div>

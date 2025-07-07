@@ -1,0 +1,96 @@
+<nav class="navbar navbar-expand-lg">
+    <div class="container-fluid">
+        <a class="navbar-brand ms-3" href="#">
+            <img src="../../../assets/whitelogo.png" alt="masar saheh" width="80">
+        </a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <div class="right">
+                <ul class="navbar-nav mb-2 mb-lg-0">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link discover-title" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                            <svg width="30" height="30" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M5.83398 13.125L17.5007 24.7917L29.1673 13.125" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                            استكشف
+                        </a>
+                        <ul class="dropdown-menu">
+                            <li><a class="dropdown-item" href="#">الرئيسية</a></li>
+                
+                            <!-- مسارات التدريب Dropdown -->
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item submenu-toggle" href="#" onclick="toggleSubmenu(event, 'training')">
+                                    مسارات التدريب
+                                    <svg class="arrow-down" width="16" height="16" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L9 9L17 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <svg class="arrow-up" style="display:none;" width="16" height="16" viewBox="0 0 18 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.8906 9.28003L9.17764 1.00296L0.900572 8.71594" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </a>
+                                <ul class="dropdown-menu sub-menu" id="training-submenu">
+                                    <li><a class="dropdown-item" href="#">بودكاست</a></li>
+                                    <li><a class="dropdown-item" href="#">ورش عمل</a></li>
+                                    <li><a class="dropdown-item" href="#">دورات</a></li>
+                                </ul>
+                            </li>
+
+                            <!-- المركز الإعلامي Dropdown -->
+                            <li class="dropdown-submenu">
+                                <a class="dropdown-item submenu-toggle" href="#" onclick="toggleSubmenu(event, 'media')">
+                                    المركز الإعلامي
+                                    <svg class="arrow-down" width="16" height="16" viewBox="0 0 18 10" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M1 1L9 9L17 1" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                    <svg class="arrow-up" style="display:none;" width="16" height="16" viewBox="0 0 18 11" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                        <path d="M16.8906 9.28003L9.17764 1.00296L0.900572 8.71594" stroke="white" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                                    </svg>
+                                </a>
+                                <ul class="dropdown-menu sub-menu" id="media-submenu">
+                                    <li><a class="dropdown-item" href="#">الاخبار</a></li>
+                                    <li><a class="dropdown-item" href="#">كتب</a></li>
+                                    <li><a class="dropdown-item" href="#">مدونة</a></li>
+                                </ul>
+                            </li>
+                            <li><a class="dropdown-item" href="#">تواصل معنا</a></li>
+                        </ul>
+                    </li>
+                </ul>
+                
+                <form class="d-flex search-wrapper mx-2" role="search">
+                    <input class="search" type="search" placeholder="ابحث عن دورتك" aria-label="Search">
+                </form>
+            </div>
+            <div class="left">
+                <div class="mx-3">
+                    <a href="#" class="nav-link">تسجيل كمدرب</a>
+                </div>
+                <div class="buttons">
+                    <button class="register-button mx-1">سجل الان</button>
+                    <button class="login-button mx-1">تسجيل دخول</button>
+                </div>
+                <div class="cart mx-3">
+                    <span>
+                        <svg width="42" height="42" viewBox="0 0 42 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M7.97152 6.41667H35.9703C38.8143 6.41667 40.8225 9.2029 39.9232 11.9009L36.451 22.3176C35.8838 24.019 34.2916 25.1667 32.4981 25.1667H10.6501M7.97152 6.41667L7.88736 5.82741C7.59412 3.77471 5.83611 2.25 3.76257 2.25H2.16797M7.97152 6.41667L10.6501 25.1667M10.6501 25.1667L11.0319 27.8393C11.3252 29.892 13.0832 31.4167 15.1567 31.4167H33.418M33.418 31.4167C31.1168 31.4167 29.2513 33.2821 29.2513 35.5833C29.2513 37.8845 31.1168 39.75 33.418 39.75C35.7192 39.75 37.5846 37.8845 37.5846 35.5833C37.5846 33.2821 35.7192 31.4167 33.418 31.4167ZM20.918 35.5833C20.918 37.8845 19.0525 39.75 16.7513 39.75C14.4501 39.75 12.5846 37.8845 12.5846 35.5833C12.5846 33.2821 14.4501 31.4167 16.7513 31.4167C19.0525 31.4167 20.918 33.2821 20.918 35.5833Z" stroke="white" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+                        </svg>
+                    </span>
+                </div>
+                <div class="lang dropdown mx-3">
+                    <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        EN
+                        <svg width="10" height="6" viewBox="0 0 10 6" fill="none" xmlns="http://www.w3.org/2000/svg">
+                            <path d="M0.759049 0H9.24095C9.39109 3.33974e-05 9.53784 0.0464399 9.66266 0.133353C9.78748 0.220267 9.88477 0.343785 9.94222 0.488291C9.99967 0.632798 10.0147 0.791806 9.98542 0.945213C9.95614 1.09862 9.88386 1.23954 9.77771 1.35016L5.53676 5.76842C5.39439 5.9167 5.20132 6 5 6C4.79868 6 4.60561 5.9167 4.46324 5.76842L0.222287 1.35016C0.116142 1.23954 0.0438603 1.09862 0.0145794 0.945213C-0.0147015 0.791806 0.000333387 0.632798 0.0577829 0.488291C0.115232 0.343785 0.212517 0.220267 0.337339 0.133353C0.462161 0.0464399 0.608915 3.33974e-05 0.759049 0Z" fill="white"/>
+                        </svg>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="#">EN</a></li>
+                        <li><a class="dropdown-item" href="#">AR</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+    </div>
+</nav>

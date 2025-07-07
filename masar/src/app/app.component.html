@@ -1,0 +1,40 @@
+<div class="position-relative">
+    <app-navbar></app-navbar>
+    <router-outlet></router-outlet>
+    <app-footer></app-footer>
+
+
+
+    <div class="chat" (click)="toggle($event)">
+        <div class="icon" *ngIf="!isOpen">
+            <svg  width="45" height="45" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M11.25 48.75C18.75 48.75 30 48.9417 30 58.125V69.375C30 78.2324 18.75 78.75 11.25 78.75V48.75ZM11.25 48.75V45C11.25 26.3604 26.3604 11.25 45 11.25C63.6396 11.25 78.75 26.3604 78.75 45V48.75M78.75 48.75C71.25 48.75 60 49.2676 60 58.125V69.375C60 78.2324 71.25 78.75 78.75 78.75V48.75Z" stroke="white" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+        <div class="icon" *ngIf="isOpen">
+            <svg width="45" height="45" viewBox="0 0 90 90" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M71.25 18.75L18.75 71.25M18.7501 18.75L71.2502 71.25" stroke="white" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+        </div>
+    </div>
+
+    <!-- Sticky Chat Box -->
+    <div class="chat-fixed" *ngIf="isOpen">
+        <div class="chat-container">
+            <div class="question-list">
+                <p *ngFor="let item of questions" (click)="askQuestion(item)" class="question">
+                {{ item.q }}
+                </p>
+            </div>
+            <div class="messages">
+                <div *ngFor="let message of messages" [ngClass]="message.from">
+                {{ message.text }}
+                </div>
+                <br>
+            </div>
+            <div class="input my-1">
+                <input type="text" class="form-control" placeholder="اكتب سؤالك هنا">
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,37 @@
+*{
+    font-family: 'Cairo';
+}
+
+header{
+    background-image: url('../../../assets/courses-bg.png');
+    background-size: cover;
+    background-position: center;
+    height: 300px;
+    width: 100%;
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    color: #fff;
+    position: relative;
+}
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(36, 56, 63, 0.85);
+    z-index: 1;
+}
+
+.title, .bg-icon {
+    position: relative;
+    z-index: 2;
+}
+.title{
+    font-size: 45px;
+}
+.bg-icon{
+    position: absolute;
+    left: 0;
+}

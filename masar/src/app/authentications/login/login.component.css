@@ -1,0 +1,58 @@
+
+*{
+    font-family: 'Cairo';
+}
+.title{
+    text-align: right;
+    font-size: 32px;
+    font-weight: 700;
+}
+.sub-title{
+    text-align: right;
+    font-size: 20px;
+    opacity: 84%;
+    font-weight: 300;
+}
+
+.login-form{
+    width: 80%;
+}
+.form-control::-webkit-input-placeholder {
+    /*color: #fff;  Placeholder text color */
+    text-align: right; /* Placeholder text alignment */
+    opacity: 48%;
+}
+
+.form-control::-moz-placeholder {
+    /*color: #fff;  For Firefox */
+    text-align: right;
+    opacity: 48%;
+}
+
+.form-control:-ms-input-placeholder {
+    /*color: #fff;  For Internet Explorer */
+    text-align: right;
+    opacity: 48%;
+}
+
+.form-control::placeholder {
+    /*color: #fff;  Placeholder for modern browsers */
+    text-align: right;
+    opacity: 48%;
+}
+
+.forgot-password{
+    color: #DF8317;
+    text-decoration: none;
+    font-weight: 500;
+}
+
+.login-button{
+    width: 100%;
+    background-color: rgba(217, 217, 217, 10%);
+    font-size: 22px;
+    padding: 10px;
+    border-radius: 17px;
+    border: 1px solid #000000;
+    box-shadow: 0px 4px 15px rgba(223, 131, 23, 24%);
+}

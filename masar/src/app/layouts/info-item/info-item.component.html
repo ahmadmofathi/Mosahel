@@ -1,0 +1,16 @@
+<div class="item d-flex flex-column justify-content-center align-items-center" (click)="onSelect()">
+<!-- Icon Container (project your SVG icon here) -->
+<div class="info-icon">
+    <ng-content select="[icon]"></ng-content>
+</div>
+
+<!-- Clickable text area -->
+<div class="drop">
+    {{ title }}
+    <svg width="20" height="20" viewBox="0 0 24 24" fill="none"
+        xmlns="http://www.w3.org/2000/svg">
+    <path d="M4 9L12 17L20 9"
+            stroke="#222751" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+    </svg>
+</div>
+</div>

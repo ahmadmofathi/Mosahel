@@ -1,0 +1,214 @@
+<app-header-item [title]="'تفاصيل الدورة'"></app-header-item>
+
+
+<main class="row">
+    <div class="courses row col-12 justify-content-end position-relative">
+        <div class="col-5 purchase">
+            <div class="card m-3">
+                <h3 class="p-3">دورات التطوير المهني المستمر</h3>
+                <div class="d-flex flex-row-reverse align-items-center">
+                    <div class="category mx-1">
+                    الاكثر مبيعا
+                    </div>
+                    <div class="stars mx-1">
+                        {{ stars }}
+                    </div>
+                    <p-rating [(ngModel)]="stars" [stars]="5" [cancel]="false" />
+                    <div class="rating-stars mx-1">
+                        (14,333)
+                    </div>
+                </div>
+                <!-- Instructor Info -->
+                <div class="d-flex justify-content-end align-items-center my-3">
+                    <div class="side-text text-end d-flex flex-column">
+                        <div class="rating-stars">
+                            مقدم الدورة
+                        </div>
+                        <div class="name">{{ cards[0].name }}</div>
+                    </div>
+                    <img [src]="cards[0].image" style="width: 20%;" class="card-img-top" alt="{{ cards[0].image }}">
+                </div>
+                <!-- Features -->
+                <div class="features mx-3">
+                    <div class="feature d-flex justify-content-end align-items-center">
+                        <div class="text">
+                            8 ساعات تدريبية
+                        </div>
+                        <div class="icon m-1">
+                            <img src="assets/icons/clock.png" alt="clock icon">
+                        </div>
+                    </div>
+                    <div class="feature d-flex justify-content-end align-items-center">
+                        <div class="text">
+                            شهادات اتمام اون لاين معتمدة
+                        </div>
+                        <div class="icon m-1">
+                            <img src="assets/icons/trophy.png" alt="clock icon">
+                        </div>
+                    </div>
+                    <div class="feature d-flex justify-content-end align-items-center">
+                        <div class="text">
+                            مرفقات حصرية جاهزة للتحميل
+                        </div>
+                        <div class="icon m-1">
+                            <img src="assets/icons/list-left.png" alt="clock icon">
+                        </div>
+                    </div>
+                    <div class="feature d-flex justify-content-end align-items-center">
+                        <div class="text">
+                            تتبع الدورات من اي لاب توب او موبيل
+                        </div>
+                        <div class="icon m-1">
+                            <img src="assets/icons/laptop.png" alt="clock icon">
+                        </div>
+                    </div>
+                </div>
+                <!-- Price and Discount -->
+                <div class="course-price text-end mx-3">
+                    200 ر.س
+                </div>
+                <div class="discount text-end mx-3">
+                        988 ر.س ( خصم 75 % )
+                </div>
+                
+                <div class="m-3">
+                    <a href="#" class="btn btn-primary p-1 px-4 main-btn">
+                        اشتري الدورة الآن
+                    </a>
+                </div>
+
+                <div class="gurantee d-flex flex-row-reverse align-items-center">
+                    <img src="assets/icons/new-money-guarantee 1.png" alt="gurantee" class="m-2">
+                    <div class="text-end">
+                        <div class="text">
+                            30 يوم ضمان ذهبي استرداد كامل للمبلغ 
+                        </div>
+                        <div class="sub-text">
+                            إذا لم تكن راضي عن المحتوي
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-7">
+            <!-- Image Section -->
+            <div class="card m-4 image-card">
+                <img [src]="'../../../assets/courses_details.jpg.png'" class="card-img-top p-4" [alt]="'course details'">
+            </div>
+            <!-- Course Details Section -->
+            <div class="m-4">
+                <div class="sec1 m-3">
+                    <h3 class="my-2">دورات التطوير المهني المستمر</h3>
+                    <div class="sub-text">
+                        هذا النص يمكن تغييره عند البرمجة هذا النص يمكن تغييره عند البرمجة 
+                    </div>
+                    <div class="sub-text">
+                        هذا النص يمكن تغييره عند البرمجة هذا النص يمكن تغييره عند البرمجة 
+                    </div>
+                    <div class="sub-text">
+                        هذا النص يمكن تغييره عند البرمجة هذا النص يمكن تغييره عند البرمجة 
+                    </div>
+                    <div class="sub-text">
+                        هذا النص يمكن تغييره عند البرمجة هذا النص يمكن تغييره عند البرمجة 
+                    </div>
+                </div>
+                <!-- Course Goals Section -->
+                <div class="sec1 m-3">
+                    <h3 class="my-2"> ماذا سوف تتعلم خلال الدورة </h3>
+                    <div class="sub-text d-flex align-items-center flex-row-reverse my-1" *ngFor="let i of [1,2,3,4,5]">
+                        <div class="icon mx-2">
+                            <svg width="22" height="17" viewBox="0 0 22 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path d="M20.3328 1.04175L7.49947 15.25L1.66602 8.79175" stroke="#FF9B26" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                            </svg>
+                        </div>
+                        هذا النص يمكن تغييره عند البرمجة هذا النص يمكن تغييره عند البرمجة 
+                    </div>
+                </div>
+                <!-- More Details Section -->
+                <div class="sec1 m-3">
+                    <h3 class="my-2">تفاصيل الدورة</h3>
+                    <div class="sub-text">
+                        هذا النص يمكن تغييره عند البرمجة هذا النص يمكن تغييره عند البرمجة 
+                    </div>
+                    <div class="sub-text">
+                        هذا النص يمكن تغييره عند البرمجة هذا النص يمكن تغييره عند البرمجة 
+                    </div>
+                    <div class="sub-text">
+                        هذا النص يمكن تغييره عند البرمجة هذا النص يمكن تغييره عند البرمجة 
+                    </div>
+                    <div class="sub-text">
+                        هذا النص يمكن تغييره عند البرمجة هذا النص يمكن تغييره عند البرمجة 
+                    </div>
+                </div>
+                <!-- Course Content Section -->
+                <div class="sec1 details-card m-3">
+                    <h3 class="my-2">تفاصيل الدورة</h3>
+                    <div class="border">
+                        <div class="card p-0">
+                            <h6>المنهج الذي ستتعلمه</h6>
+                            <div class="scroll-area">
+                                <div class="sub-text d-flex align-items-center flex-row-reverse my-1" *ngFor="let i of [1,2,3,4,5]">
+                                    <div class="icon mx-2">
+                                        <svg width="22" height="17" viewBox="0 0 22 17" fill="none" xmlns="http://www.w3.org/2000/svg">
+                                            <path d="M20.3328 1.04175L7.49947 15.25L1.66602 8.79175" stroke="#FF9B26" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+                                        </svg>
+                                    </div>
+                                    هذا النص يمكن تغييره عند البرمجة هذا النص يمكن تغييره عند البرمجة 
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <!-- Certificate Section -->
+                <div class="sec1 card m-3 p-2">
+                    <p>سوف تحصل علي</p>
+                    <h3 class="my-1">
+                        شهادة من تدرب بعد إتمام الدورة
+                    </h3>
+                    <div class="mx-auto my-3">
+                        <img [src]="'../../../assets/BlankCertificate 1.png'" alt="certificate">
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="reviews col-12">
+            <div class="rating m-5">
+                <h4 class="my-2">التقييم العام للدورة</h4>
+                <div class="rating-num d-flex flex-row-reverse">
+                    <div class="average">
+                        4.7
+                    </div>
+                    <div class="rating-stars mx-3 d-flex flex-column">
+                        <p-rating [(ngModel)]="stars" [stars]="5" [cancel]="false" />
+                        <div class="d-flex flex-row-reverse">
+                            <div class="nums mx-1">
+                                (16,325)
+                            </div>
+                            تقيم
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="user-reviews">
+                <p-carousel [value]="cards" [numVisible]="3" [numScroll]="1" [circular]="true" [autoplayInterval]="3000">
+                    <ng-template pTemplate="item" let-card>
+                    <div class="card border my-2" style="width: 22rem; padding: 15px; border-radius: 39px; margin: auto;">
+                        <div class="border d-flex justify-content-end align-items-center" style="border: none !important;background: none;">
+                        <div class="side-text d-flex flex-column justify-content-center align-items-center">
+                            <div class="name text-end">{{ card.name }}</div>
+                            <div class="rating d-flex justify-content-between align-items-center">
+                                <p-rating [(ngModel)]="card.rating" [stars]="5" [cancel]="false" />
+                            </div>
+                        </div>
+                        <img [src]="card.image" style="width: 20%;" class="card-img-top" alt="{{ card.image }}">
+                        </div>
+                        <div class="card-body">
+                        <p>{{ card.description }}</p>
+                        </div>
+                    </div>
+                    </ng-template>
+                </p-carousel>
+            </div>
+        </div>
+    </div>
+</main>

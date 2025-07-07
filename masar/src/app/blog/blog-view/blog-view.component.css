@@ -1,0 +1,96 @@
+*{
+    font-family: 'Cairo';
+}
+
+.buttons{
+    font-size: 18px;
+}
+.buttons div{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.main-btn{
+    color:#fff;
+    background-color: #24383F;
+    border-radius: 10px;
+    border: none;
+    padding: 0.25rem 1rem 0.25rem 4rem;
+    position: relative;
+    width: 100%;
+    transition: 0.2s ease-in-out;
+}
+.main-btn:hover{
+    color: #000000;
+    background-color: rgb(217, 217, 217, 0.09);
+    border: 1px solid #000000;
+}
+.main-btn:hover .filter-icon svg path{
+    stroke: #000000;
+}
+.main-btn:hover svg path{
+    stroke: #000000;
+}
+.sec-btn{
+    color: #000000;
+    background-color: rgb(217, 217, 217, 0.09);
+    border: 1px solid #000000;
+    border-radius: 14px;
+    padding: 0.25rem 4rem;
+}
+
+.card {
+    position: relative;
+    background-color: rgba(0, 0, 0, 0.27);
+    border-radius: 20px;
+    box-shadow: 0 4px 45px 0 rgba(0, 0, 0, 0.25);
+}
+
+.label {
+    position: absolute;
+    top: 50%;             /* Position from the top */
+    left: 50%;            /* Position from the left */
+    transform: translate(-50%, -50%); /* Center the element by offsetting its own dimensions */
+    text-align: center;   /* Center the text inside the label */
+    background-color: rgba(217, 217, 217, 0.62);
+    font-size: 1.5rem;
+    font-weight: 700;
+    border-radius: 13px;
+    padding: 0.5rem 1rem; /* Optional: adds some padding for better appearance */
+}
+
+
+.row .col-lg-4{
+    justify-items: center;
+}
+.search {
+    background-color: rgba(0, 0, 0, 0.08);
+    border: 0.5px solid rgba(0,0,0,0.57);
+    border-radius: 8px;
+    color: #24383F; /* Text color */
+    height: 35px; /* Input height */
+    width: 340px; /* Input width */
+    padding-right: 20px; /* Space for the icon */
+    background: rgba(0, 0, 0, 0.08) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"><path fill="%23000000" d="M10 2a8 8 0 0 1 6.32 12.9l4.39 4.39a1 1 0 0 1-1.42 1.42l-4.39-4.39A8 8 0 1 1 10 2zm0 2a6 6 0 1 0 6 6 6 6 0 0 0-6-6z"/></svg>') no-repeat 312px center;
+    background-size: 20px; /* Icon size */
+}
+
+.search::-webkit-input-placeholder {
+    color: #24383F; /* Placeholder text color */
+    text-align: right; /* Placeholder text alignment */
+}
+
+.search::-moz-placeholder {
+    color: #24383F; /* For Firefox */
+    text-align: right;
+}
+
+.search:-ms-input-placeholder {
+    color: #24383F; /* For Internet Explorer */
+    text-align: right;
+}
+
+.search::placeholder {
+    color: #24383F; /* Placeholder for modern browsers */
+    text-align: right;
+}

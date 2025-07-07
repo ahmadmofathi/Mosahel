@@ -1,0 +1,218 @@
+*{
+    font-family: 'Poppins';
+    font-weight: 600;
+}
+.cart h2,.card-title{
+    font-size:28px;
+    font-weight: 900;
+    color: #24383F;
+}
+.cart h4{
+    font-size:18px;
+    color: #FF9B26;
+}
+.card-text{
+    font-size: 20px;
+}
+
+.note{
+    background-color: rgba(217, 217, 217, 0.62);
+    border-radius: 20px;
+}
+
+.title, .bg-icon {
+    position: relative;
+    z-index: 2;
+}
+
+.title {
+    font-size: 45px;
+    line-height: 1.2;
+}
+
+.bg-icon {
+    position: absolute;
+    left: 0;
+}
+
+.buttons {
+    font-size: 18px;
+}
+
+.buttons div {
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+
+.main-btn {
+    color: #fff;
+    background-color: #24383F;
+    border-radius: 10px;
+    border: 1px solid #24383F;
+    padding: 0.25rem 1rem 0.25rem 4rem;
+    position: relative;
+    width: 100%;
+    transition: 0.2s ease-in-out;
+}
+
+.filter-icon {
+    position: absolute;
+    left: 10px;
+    top: 9px;
+}
+
+.main-btn:hover {
+    color: #000000;
+    background-color: rgba(217, 217, 217, 0.09);
+    border: 1px solid #000000;
+}
+
+.main-btn:hover .filter-icon svg path {
+    stroke: #000000;
+}
+
+.main-btn:hover svg path {
+    stroke: #000000;
+}
+
+.sec-btn {
+    color: #000000;
+    background-color: rgba(217, 217, 217, 0.09);
+    border: 1px solid #000000;
+    border-radius: 14px;
+    padding: 0.25rem 4rem;
+}
+
+.filter-box h3 {
+    color: #24383F;
+}
+
+.filter-box {
+    background-color: rgba(217, 217, 217, 0.54);
+    border-radius: 22px;
+    text-align: right;
+    padding: 10px;
+}
+
+.option-text {
+    opacity: 50%;
+}
+
+.option-checkbox {
+    max-height: 16px;
+}
+
+.row .col-lg-4 {
+    justify-items: center;
+}
+
+.card {
+    position: relative;
+    height: fit-content;
+    padding: 5px;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.card-text, .card-title {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+}
+
+.card-title {
+    color: #101828;
+    text-align: right;
+}
+
+.card-text {
+    color: #24383F;
+    text-align: right;
+}
+
+.description {
+    text-align: right;
+    color: #A2A2A2;
+}
+
+.card-body .button a {
+    background-color: #D9D9D9;
+    color: #24383F;
+    border: none;
+    font-family: 'Tajawal', sans-serif;
+    font-size: 18px;
+    font-weight: 800;
+    padding: 0.25rem 1rem;
+}
+
+.label-top-right {
+    position: absolute;
+    font-family: 'Poppins', sans-serif;
+    top: 25px;
+    right: 25px;
+    background-color: #fff;
+    color: #24383F;
+    padding: 2px 12px;
+    font-size: 12px;
+    font-weight: 600;
+    border-radius: 50px;
+    border: none;
+    z-index: 10;
+}
+
+.price,.total-price {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 700;
+    color: #111C55;
+    font-size: 22px;
+    text-align: right;
+}
+
+.total-price{
+    font-size: 28px;
+}
+.avg-rate {
+    color: #3269D3;
+    font-weight: 700;
+    font-size: 14px;
+}
+
+.total-rate {
+    color: #969696;
+    font-weight: 600;
+    font-size: 14px;
+}
+
+.badge {
+    background-color: #24383F;
+    padding: 4px;
+}
+
+p-rating {
+    margin-top: 5px;
+    color: #ffa000;
+}
+
+.small-rating ::ng-deep .p-rating-icon {
+    font-size: 12px;
+    margin-right: 2px;
+}
+
+.delete{
+    color: rgba(17, 28, 85, 0.6);
+}
+
+
+.purchase{
+    border: 2px solid #ddd;
+}
+
+.half .year{
+    width: 70%;
+}
+.half .cvv{
+    width: 25%;
+}
+
+.form-control{
+    background-color: rgba(217, 217, 217, 0.22);
+}

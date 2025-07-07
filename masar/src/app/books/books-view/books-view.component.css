@@ -1,0 +1,108 @@
+*{
+    font-family: 'Cairo';
+}
+.main-text{
+    font-size: 34px;
+    color: #24383F;
+}
+.sec-text{
+    color: var(--alchemy);
+}
+.settings-icon{
+    background-color: lightgray;
+    padding: 5px;
+    border-radius: 50px;
+    cursor: pointer;
+}
+.buttons{
+    font-size: 18px;
+}
+.buttons div{
+    display: flex;
+    justify-content: end;
+    align-items: center;
+}
+.main-btn{
+    color:#fff;
+    background-color: #24383F;
+    border-radius: 10px;
+    border: none;
+    padding: 0.15rem 1rem 0.15rem 2rem;
+    position: relative;
+    width: 100%;
+    transition: 0.2s ease-in-out;
+}
+.filter-icon{
+    position: absolute;
+    left: 10px;
+    top: 9px;
+}
+.main-btn:hover{
+    color: #000000;
+    background-color: rgb(217, 217, 217, 0.09);
+    /* border: 1px solid #000000; */
+}
+.main-btn:hover .filter-icon svg path{
+    stroke: #000000;
+}
+.main-btn:hover svg path{
+    stroke: #000000;
+    transform: translateX(-3px);
+}
+.sec-btn{
+    color: #000000;
+    background-color: rgb(217, 217, 217, 0.09);
+    border: 1px solid #000000;
+    border-radius: 14px;
+    padding: 0.25rem 4rem;
+}
+
+
+.filter-box h3{
+    color: #24383F;
+}
+.filter-box{
+    background-color: rgb(217, 217, 217,0.54);
+    border-radius: 22px;
+    text-align: right;
+}
+.option-text{
+    opacity: 50%;
+    font-weight: 700;
+}
+.option-checkbox{
+    max-height: 16px;
+}
+
+
+
+.row .col-lg-4{
+    justify-items: center;
+}
+.card{
+    position: relative;
+    height: fit-content;
+    padding: 2px;
+}
+
+.card-body .button a{
+    background-color: #D9D9D9;
+    color: #24383F;
+    border: none;
+    font-family: 'Tajawal';
+    font-size: 18px;
+    font-weight: 800;
+}
+
+.price{
+    font-family: 'Poppins';
+    font-weight: 700;
+    color: #111C55;
+    font-size: 22px;
+    text-align: right;
+    margin: 5px;
+}
+
+.w-22{
+    width: 22% !important;
+}

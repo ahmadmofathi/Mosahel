@@ -1,0 +1,19 @@
+/* Style for the dropdown content (hidden by default) */
+.dropdown-content {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease-out, padding 0.3s ease-out;
+    padding: 0 1rem;
+}
+
+/* When the dropdown is active, expand the container */
+.dropdown-content.active {
+    max-height: 200px;  /* Adjust this value if you have more content */
+    padding: 1rem;
+}
+
+.dropdown-content p {
+    margin: 0;
+    color: #222751;
+    font-size: 0.9rem;
+}

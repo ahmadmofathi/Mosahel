@@ -1,0 +1,86 @@
+<app-header-item [title]="'الكتب والملخصات'"></app-header-item>
+
+<!-- Buttons Section -->
+<div
+    class="buttons m-3 d-flex row justify-content-end align-items-center"
+>
+    <div class="col-9 d-flex align-items-center justify-content-end">
+        <div class="d-flex flex-column align-items-end">
+            <div class="main-text me-4">الكتب والملخصات</div>
+            <div class="sec-text me-4">الكتب والملخصات</div>
+        </div>
+        <div class="settings-icon" (click)="toggleFilter()">
+            <svg width="35" height="35" viewBox="0 0 35 35" fill="none" xmlns="http://www.w3.org/2000/svg">
+                <path d="M5.83203 7.29167L14.582 7.29167M14.582 7.29167C14.582 8.9025 15.8879 10.2083 17.4987 10.2083C19.1095 10.2083 20.4154 8.9025 20.4154 7.29167M14.582 7.29167C14.582 5.68084 15.8879 4.375 17.4987 4.375C19.1095 4.375 20.4154 5.68084 20.4154 7.29167M20.4154 7.29167L29.1654 7.29167M5.83203 17.5L23.332 17.5M23.332 17.5C23.332 19.1108 24.6379 20.4167 26.2487 20.4167C27.8595 20.4167 29.1654 19.1108 29.1654 17.5C29.1654 15.8892 27.8595 14.5833 26.2487 14.5833C24.6379 14.5833 23.332 15.8892 23.332 17.5ZM11.6654 27.7083L29.1654 27.7083M11.6654 27.7083C11.6654 26.0975 10.3595 24.7917 8.7487 24.7917C7.13787 24.7917 5.83203 26.0975 5.83203 27.7083C5.83203 29.3192 7.13787 30.625 8.7487 30.625C10.3595 30.625 11.6654 29.3192 11.6654 27.7083Z" stroke="#24383F" stroke-width="2" stroke-linecap="round"/>
+            </svg>
+        </div>
+    </div>
+</div>
+
+<!-- Main Content -->
+<main class="row">
+    <!-- Books Section
+        The ngClass binding switches the container width:
+        - col-12 when no filter (4 books per row)
+        - col-9 when filter is shown (3 books per row)
+    -->
+    <div
+    class="courses row"
+    [ngClass]="{ 'col-12 justify-content-evenly': !showFilter, 'col-9 justify-content-end': showFilter }"
+    >
+    <!-- Each card uses col-3 so that 12/3 = 4 cards per row (or 9/3 = 3 cards) -->
+    <div 
+    class="card col-3"
+    [ngClass]="{ 'm-4 w-22': !showFilter, 'm-4': showFilter }"
+    *ngFor="let i of [1,2,3,4,5,6,7,8,9,10,11,12]">
+        <img
+        src="../../../assets/book_thumb01.jpg.png"
+        class="card-img-top p-1"
+        alt="book"
+        />
+        <div class="card-body d-flex justify-content-end m-2">
+        <div class="d-flex justify-content-between align-items-center">
+            <div class="price"> ر.س 247 </div>
+            <div>
+            <a href="#" class="btn btn-primary p-1 px-4 main-btn">
+                <svg
+                width="24"
+                height="24"
+                viewBox="0 0 24 24"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+                >
+                <path
+                    d="M4 12L20 12M4 12L10 6M4 12L10 18"
+                    stroke="white"
+                    stroke-width="1.5"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                />
+                </svg>
+                اشتري الان
+            </a>
+            </div>
+        </div>
+        </div>
+    </div>
+    </div>
+
+    <!-- Filter Section (only rendered when showFilter is true) -->
+    <div *ngIf="showFilter" class="filter col-3">
+    <div class="filter-box m-3">
+        <h3 class="p-3">التخصصات</h3>
+        <div class="options d-flex flex-column me-4 pb-3">
+        <div class="option d-flex align-items-center justify-content-end" *ngFor="let i of [1,2,3,4,5,6,7,8,9]">
+            <div class="option-text">بودكاست</div>
+            <div class="option-checkbox m-2">
+            <input
+                type="checkbox"
+                style="min-width: 16px; min-height: 16px;"
+            />
+            </div>
+        </div>
+    </div>
+    </div>
+    </div>
+</main>

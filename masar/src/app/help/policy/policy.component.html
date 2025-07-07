@@ -1,0 +1,18 @@
+<app-header-item [title]="'سياسة المركز'"></app-header-item>
+
+
+<div class="questions col-10 mx-auto my-5">
+    <div class="faq-item text-end" *ngFor="let item of faqItems">
+        <button class="faq-button" (click)="toggleAnswer(item)">
+            <span class="question-text">{{ item.question }}</span>
+            <i class="arrow" [ngClass]="{ 'open': item.open }"></i>
+        </button>
+        <div
+            class="answer text-end"
+            *ngIf="item.open"
+            @toggleAnswer>
+            <div class="container text-end" [innerHTML]="item.answer"></div>
+        </div>
+    </div>
+</div>
+
