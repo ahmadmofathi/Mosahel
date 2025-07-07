@@ -1,0 +1,42 @@
+/* Chat container styling */
+.chat-container {
+    max-width: 600px;
+    margin: auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    background-color: #f9f9f9;
+  }
+  
+  /* Message input styling */
+  .message-input {
+    margin-bottom: 20px;
+  }
+  
+  /* Individual message styling */
+  .messages {
+    display: flex;
+    flex-direction: column;
+  }
+  
+  .message {
+    padding: 10px;
+    margin-bottom: 10px;
+    border-radius: 5px;
+    background-color: #e9ecef;
+    border: 1px solid #dee2e6;
+  }
+  
+  .message-content {
+    display: block;
+    word-break: break-word;
+  }
+  
+  /* Styling for messages from different users */
+  .message:nth-child(odd) {
+    background-color: #f1f1f1;
+  }
+  
+  .message:nth-child(even) {
+    background-color: #e9ecef;
+  }

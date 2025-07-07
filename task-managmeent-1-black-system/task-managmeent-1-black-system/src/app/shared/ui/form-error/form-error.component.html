@@ -1,0 +1,27 @@
+<div
+  *ngIf="control?.invalid && (control?.dirty || control?.touched)"
+  class="text-red-500 text-sm"
+>
+  <div *ngIf="control?.errors?.['required']">هذا الحقل اجباري</div>
+  <div *ngIf="control?.errors?.['email']">Please enter a valid email</div>
+  <div *ngIf="control?.errors?.['minlength']">
+    Minimum length is
+    {{ control?.errors?.['minlength']?.requiredLength }} characters
+  </div>
+  <div *ngIf="control?.errors?.['passwordStrength']">
+    Password must contain:
+    <ul class="list-disc list-inside">
+      <li *ngIf="!control?.errors?.['passwordStrength']?.hasUpperCase">
+        Uppercase letter
+      </li>
+      <li *ngIf="!control?.errors?.['passwordStrength']?.hasLowerCase">
+        Lowercase letter
+      </li>
+      <li *ngIf="!control?.errors?.['passwordStrength']?.hasNumeric">Number</li>
+      <li *ngIf="!control?.errors?.['passwordStrength']?.hasSpecialChar">
+        Special character
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="control?.errors?.['matching']">Values do not match</div>
+</div>

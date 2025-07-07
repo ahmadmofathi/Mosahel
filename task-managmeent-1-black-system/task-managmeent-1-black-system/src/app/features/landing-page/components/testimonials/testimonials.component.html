@@ -1,0 +1,27 @@
+<div class="container mx-auto p-8">
+  <h1 class="text-4xl text-[#4D646C] font-extrabold mb-5">{{header}}</h1>
+
+  <!-- Navigation Buttons -->
+  <div class="flex gap-5 mb-5 items-center">
+    <div class="swiper-button-next">→</div>
+    <div class="swiper-button-prev">←</div>
+  </div>
+
+  <!-- Swiper Container -->
+  <div class="swiper-container">
+    <div class="swiper-wrapper">
+      <div class="swiper-slide" *ngFor="let customer of customers">
+        <div class="bg-[#D9D9D94F] w-80 aspect-square shadow-lg rounded-lg p-6 text-center">
+          <div class="flex justify-between items-center">
+            <h3 class="text-2xl font-bold text-[#4FB8EE] mb-2">{{ customer.name }}</h3>
+            <img [src]="customer.image" alt="Customer Image" class="w-24 h-24 mb-4">
+          </div>
+          <p class="text-black text-xl pb-2 font-light">{{ customer.review }}</p>
+        </div>
+      </div>
+    </div>
+
+    <!-- Pagination -->
+    <div class="swiper-pagination"></div>
+  </div>
+</div>

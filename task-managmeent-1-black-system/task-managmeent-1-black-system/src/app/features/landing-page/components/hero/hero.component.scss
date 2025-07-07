@@ -1,0 +1,30 @@
+@keyframes border-rotate {
+  0% {
+    box-shadow: 0 0 5px transparent;
+    border-color: #4fb8ee;
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(79, 184, 238, 0.7);
+    border-color: white;
+  }
+  100% {
+    box-shadow: 0 0 5px transparent;
+    border-color: #4fb8ee;
+  }
+}
+
+button:hover {
+  animation: border-rotate 1.5s linear infinite;
+  border-width: 2px;
+}
+
+video::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #1b4861;
+  // opacity: 0.31;
+  pointer-events: none;
+  width: 100%;
+  height: 100%;
+}

@@ -1,0 +1,100 @@
+// .marquee {
+//   width: 100%;
+//   overflow: hidden;
+//   position: relative;
+// }
+
+// .track {
+//   display: flex;
+//   gap: 2rem; /* المسافة بين العناصر */
+//   position: relative;
+//   white-space: nowrap; /* لضمان بقاء العناصر في نفس السطر */
+//   height: 150px;
+//   width: 100%;
+// }
+
+// .slide {
+//   position: absolute;
+//   display: inline-block;
+//   width: 200px; /* حجم ثابت لكل صورة */
+//   height: 100px;
+//   animation: marquee-animation 20s linear infinite; /* الأنيميشن على كل عنصر بشكل منفصل */
+//   animation-timing-function: linear;
+// }
+
+// img {
+//   height: 100%;
+//   width: 100%;
+//   object-fit: contain;
+// }
+
+// @keyframes marquee-animation {
+//   0% {
+//     left: 100dvw;
+//   }
+//   100% {
+//     left: 0dvw;
+//   }
+// }
+
+// /* التأخير بين الصور */
+// .track .slide:nth-child(1) {
+//   animation-delay: 0s;
+// }
+// .track .slide:nth-child(2) {
+//   animation-delay: 2s;
+// }
+// .track .slide:nth-child(3) {
+//   animation-delay: 4s;
+// }
+// .track .slide:nth-child(4) {
+//   animation-delay: 6s;
+// }
+// .track .slide:nth-child(5) {
+//   animation-delay: 8s;
+// }
+// .track .slide:nth-child(6) {
+//   animation-delay: 10s;
+// }
+@keyframes marquee-animation {
+  0% {
+    left: 100dvw;
+  }
+  100% {
+    left: -200px; /* يخرج العنصر تمامًا من الشاشة */
+  }
+}
+
+.slide {
+  animation: marquee-animation 20s linear infinite;
+}
+
+.animate-wrapper {
+  -webkit-mask-image: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 0, 0, 0.776) 10%,
+    #000 90%,
+    transparent
+  );
+  mask-image: linear-gradient(
+    90deg,
+    transparent,
+    rgba(0, 0, 0, 0.776) 10%,
+    #000 90%,
+    transparent
+  );
+}
+
+.logos-slide-left-to-right {
+  animation: slideLeftToRight 20s linear infinite;
+}
+
+@keyframes slideLeftToRight {
+  0% {
+    transform: translateX(-100%);
+  }
+  100% {
+    transform: translateX(50%);
+  }
+}

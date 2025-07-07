@@ -1,0 +1,73 @@
+<!-- file-uploader.component.html -->
+<div
+  class="upload-container"
+  (dragover)="onDragOver($event)"
+  (drop)="onDrop($event)"
+>
+  <label [for]="idInput" class="upload-label">
+    @if (imagePreview) {
+    <div class="upload-placeholder">
+      <img
+        [style.height]="ispdf || isFile ? '70px' : '100px'"
+        [src]="imagePreview"
+        alt="Placeholder Image"
+        id="profile preview"
+        class="preview-image"
+      />
+      @if(fileName){
+      <div class="font-normal text-sm py-1 text-center">
+        {{ fileName.slice(0, 50) }}
+      </div>
+      }
+      <div class="flex gap-2 items-center">
+        <div class="cancel-button" (click)="onCancelClick($event)">
+          <span class="pi pi-trash"> </span>
+          <span class="underline">حذف</span>
+        </div>
+        <div class="vr-line"></div>
+        <div class="cancel-button">
+          <span class="pi pi-upload"> </span>
+          <span class="underline">إعاده تحميل</span>
+        </div>
+      </div>
+    </div>
+    } @else {
+    <div
+      class="upload-placeholder reguired-file"
+      [class.reguiredFile]="isRequired"
+    >
+      <div>
+        <img
+          class="w-16"
+          src="https://cdn-icons-png.flaticon.com/512/3097/3097412.png"
+        />
+      </div>
+      <p class="text-sm mb-2">تصفخ الملفات</p>
+      <p class="text-xs">قم بسحب وإسقاط الملفات هنا</p>
+    </div>
+    }
+  </label>
+  <input
+    #fileInput
+    (change)="onFileSelected($event)"
+    [id]="idInput"
+    type="file"
+    [accept]="
+      isVideo
+        ? 'video/*'
+        : ispdf
+        ? 'application/pdf'
+        : isFile
+        ? '.xlsx,.xlx,.csv,.pdf,.txt,.docx,.doc,.ppt,.pptx'
+        : 'image/*'
+    "
+    class="form-control"
+    style="display: none"
+  />
+  @if (fileSizeError) {
+  <small class="text-red-800"
+    >size is larger than {{ maxFileSize }}MB, please reupload with small
+    size</small
+  >
+  }
+</div>

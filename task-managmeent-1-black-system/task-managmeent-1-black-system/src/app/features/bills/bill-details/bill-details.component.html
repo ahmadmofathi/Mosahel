@@ -1,0 +1,154 @@
+<div style="overflow-y: auto; height: 98dvh; margin: 20px;">
+  <!-- bill.component.html -->
+  <div id="bill-content" dir="rtl" [style.background-image]="'url(' + bill.logoUrl + ')'" style="padding: 24px; background-color: white; background-repeat: no-repeat; background-position: center; background-size: 100%; background-blend-mode: overlay; box-shadow: 0px 4px 12px rgba(0, 0, 0, 0.1); border-radius: 8px; border: 1px solid #E5E7EB; margin: 20px auto;">
+    
+    <!-- Company Info -->
+    <table dir="rtl" style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+      <thead>
+        <tr>
+          <th colspan="2" style="border: 1px solid #E5E7EB; padding: 12px; background-color: #3B82F6; color: white; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">
+            معلومات الشركة / Company Info
+          </th>
+        </tr>
+      </thead>
+      <tr>
+        <td style="text-align: right; vertical-align: top;">
+          <h2 style="font-size: 24px; font-weight: bold; margin: 0; color: #1F2937;">{{ bill.companyName }}</h2>
+          <p style="color: #6B7280; margin: 4px 0;">السجل التجاري: {{ bill.commercialRegister }}</p>
+          <p style="color: #6B7280; margin: 4px 0;">عنوان الشركه: {{ bill.companyTitle }}</p>
+        </td>
+        <td style="text-align: left; vertical-align: top;">
+          <ng-container *ngIf="bill.logoUrl">
+            <img [src]="bill.logoUrl" alt="Company Logo" style="height: 64px; border-radius: 8px;" aria-label="Company Logo">
+          </ng-container>
+        </td>
+      </tr>
+    </table>
+
+    <!-- Invoice Info -->
+    <table dir="rtl" style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+      <thead>
+        <tr>
+          <th colspan="3" style="border: 1px solid #E5E7EB; padding: 12px; background-color: #3B82F6; color: white; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">
+            معلومات الفاتورة / Invoice Info
+          </th>
+        </tr>
+      </thead>
+      <tr>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; background-color: #3B82F6; color: white; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">رقم الفاتورة</td>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; text-align: center; color: #4B5563;">{{ bill.invoiceId }}</td>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; background-color: #F9FAFB; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">Invoice Number</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; background-color: #3B82F6; color: white; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">تاريخ الفاتورة</td>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; text-align: center; color: #4B5563;">{{ bill.invoiceDate | date:'yyyy/MM/dd' }}</td>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; background-color: #F9FAFB; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">Invoice Date</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; background-color: #3B82F6; color: white; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">رقم العقد</td>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; text-align: center; color: #4B5563;">{{ bill.contractNumber }}</td>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; background-color: #F9FAFB; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">Contract Number</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; background-color: #3B82F6; color: white; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">اسم المشروع</td>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; text-align: center; color: #4B5563;">{{ bill.projectName }}</td>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; background-color: #F9FAFB; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">Project Name</td>
+      </tr>
+    </table>
+
+    <!-- Amount Details (Horizontal Table) -->
+    <table dir="rtl" style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+      <thead>
+        <tr>
+          <th colspan="3" style="border: 1px solid #E5E7EB; padding: 12px; background-color: #3B82F6; color: white; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">
+            تفاصيل المبالغ / Amount Details
+          </th>
+        </tr>
+      </thead>
+      <tr>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; background-color: #3B82F6; color: white; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">إجمالي المبلغ <br /> Total Amount</td>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; background-color: #3B82F6; color: white; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">المدفوع <br /> Paid Amount</td>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; background-color: #3B82F6; color: white; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">المبلغ المتبقي <br /> Remaining Amount</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; text-align: center; color: #4B5563;">{{ bill.totalAmount | currency:bill.currency }}</td>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; text-align: center; color: #4B5563;">{{ bill.totalPaid | currency:bill.currency }}</td>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; text-align: center; color: #4B5563;">{{ bill.remainingAmount | currency:bill.currency }}</td>
+      </tr>
+    </table>
+
+    <!-- Contact Info -->
+    <table dir="rtl" style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+      <thead>
+        <tr>
+          <th colspan="3" style="border: 1px solid #E5E7EB; padding: 12px; background-color: #3B82F6; color: white; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">
+            معلومات الاتصال / Contact Info
+          </th>
+        </tr>
+      </thead>
+      <tr>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; background-color: #3B82F6; color: white; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">البريد الإلكتروني</td>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; text-align: center; color: #4B5563;">{{ bill.email }}</td>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; background-color: #F9FAFB; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">Email</td>
+      </tr>
+      <tr>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; background-color: #3B82F6; color: white; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">الهاتف</td>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; text-align: center; color: #4B5563;">{{ bill.phoneNumber }}</td>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; background-color: #F9FAFB; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">Phone Number</td>
+      </tr>
+      <ng-container *ngIf="bill.whatsAppNumber">
+        <tr>
+          <td style="border: 1px solid #E5E7EB; padding: 12px; background-color: #3B82F6; color: white; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">واتساب</td>
+          <td style="border: 1px solid #E5E7EB; padding: 12px; text-align: center; color: #4B5563;">{{ bill.whatsAppNumber }}</td>
+          <td style="border: 1px solid #E5E7EB; padding: 12px; background-color: #F9FAFB; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">WhatsApp</td>
+        </tr>
+      </ng-container>
+    </table>
+
+    <!-- Nots -->
+    <table dir="rtl" style="width: 100%; border-collapse: collapse; margin-bottom: 24px;">
+      <thead>
+        <tr>
+          <th colspan="3" style="border: 1px solid #E5E7EB; padding: 12px; background-color: #3B82F6; color: white; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">
+            شروط العقد / Contact notes
+          </th>
+        </tr>
+      </thead>
+      <tr>
+        <td style="border: 1px solid #E5E7EB; padding: 12px; background-color: #F9FAFB; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">{{bill.contractTerms}}</td>
+      </tr>
+    </table>
+
+    <!-- Stamp and Signature -->
+    <table dir="rtl" style="width: 100%; border-collapse: collapse;">
+      <thead>
+        <tr>
+          <th colspan="2" style="border: 1px solid #E5E7EB; padding: 12px; background-color: #3B82F6; color: white; font-weight: bold; text-align: center; -webkit-print-color-adjust: exact;">
+            التوقيع والختم / Stamp and Signature
+          </th>
+        </tr>
+      </thead>
+      <tr>
+        <!-- Customer Signature -->
+        <td style="text-align: center; vertical-align: top; width: 50%; padding: 16px;">
+          <p style="font-weight: bold; color: #4B5563; margin: 0 0 8px 0;">توقيع العميل</p>
+          <div style="height: 2px; width: 192px; border: 2px dashed #9CA3AF; margin: 24px auto;"></div>
+        </td>
+        <!-- Company Stamp -->
+        <ng-container *ngIf="bill.stampUrl">
+          <td style="text-align: center; vertical-align: top; width: 50%; padding: 16px;">
+            <p style="font-weight: bold; color: #4B5563; margin: 0 0 8px 0;">ختم الشركة</p>
+            <img [src]="bill.stampUrl" alt="Company Stamp" style="height: 64px; border-radius: 8px; margin: auto;" aria-label="Company Stamp">
+          </td>
+        </ng-container>
+      </tr>
+    </table>
+  </div>
+
+  <!-- Print Button -->
+  <div style="text-align: center; margin: 24px;">
+    <button style="padding: 12px 24px; background-color: #3B82F6; color: white; border-radius: 8px; box-shadow: 0px 2px 6px rgba(0, 0, 0, 0.1); transition: background-color 0.3s; cursor: pointer;" ngxPrint printSectionId="bill-content">
+      طباعة الفاتورة
+    </button>
+  </div>
+</div>

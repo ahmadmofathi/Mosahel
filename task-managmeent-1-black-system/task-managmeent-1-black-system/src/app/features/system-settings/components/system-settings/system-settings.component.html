@@ -1,0 +1,236 @@
+<form
+  [formGroup]="systemSettingsForm"
+  (ngSubmit)="onSubmit()"
+  class="font-arabic space-y-6"
+>
+  <!-- Header -->
+  <div class="my-6 flex gap-5 items-center">
+    <!-- Header Title -->
+    <h2 class="text-primary font-bold text-2xl">إعدادات النظام</h2>
+
+    <!-- Submit Button -->
+    <div class="flex justify-end">
+      <button
+        type="submit"
+        [disabled]="loading || systemSettingsForm.invalid"
+        class="flex items-center gap-2 px-4 py-2 rounded-tl-[9px] border border-black/40 bg-white shadow-md"
+      >
+        <!-- Show "حفظ المعلومات" text when not loading -->
+        <span *ngIf="!loading" class="text-sm font-semibold">حفظ المعلومات</span>
+
+        <!-- Show spinner when loading -->
+        <mat-spinner *ngIf="loading" diameter="20" strokeWidth="3"></mat-spinner>
+
+        <!-- Thumbs-up icon (hidden when loading) -->
+        <i
+          *ngIf="!loading"
+          class="fa fa-thumbs-up bg-white p-2 rounded-full border border-gray-300 text-primary"
+          style="font-size: 20px;"
+        ></i>
+      </button>
+    </div>
+  </div>
+
+  <!-- File Uploads -->
+  <div class="mb-3">
+    <!-- Company Logo Upload -->
+    <label for="logoUrl" class="block text-gray-700 font-medium mb-2">
+      شعار الشركة
+    </label>
+    <app-file-upload-handler
+      [isFile]="true"
+      [imagePreview]="companyLogoUrl"
+      (fileSelected)="handleFileSelected($event, 'logoUrl')"
+      (cancelClicked)="handleCancelClicked('logoUrl')"
+      [idInput]="'logoUrl'"
+    ></app-file-upload-handler>
+    <input type="hidden" formControlName="logoUrl" />
+    <!-- Display server error for logoUrl -->
+    <div *ngIf="serverErrors['logoUrl']" class="text-red-500 text-sm mt-1">
+      {{ serverErrors['logoUrl'] }}
+    </div>
+
+    <!-- Company Stamp Upload -->
+    <label for="stampUrl" class="block text-gray-700 font-medium mb-2 mt-6">
+      ختم الشركة
+    </label>
+    <app-file-upload-handler
+      [isFile]="true"
+      [imagePreview]="companyStampUrl"
+      (fileSelected)="handleFileSelected($event, 'stampUrl')"
+      (cancelClicked)="handleCancelClicked('stampUrl')"
+      [idInput]="'stampUrl'"
+    ></app-file-upload-handler>
+    <input type="hidden" formControlName="stampUrl" />
+    <!-- Display server error for stampUrl -->
+    <div *ngIf="serverErrors['stampUrl']" class="text-red-500 text-sm mt-1">
+      {{ serverErrors['stampUrl'] }}
+    </div>
+  </div>
+
+  <!-- Company Information -->
+  <h2 class="text-xl font-semibold text-gray-800 mt-8">بيانات الشركة</h2>
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <!-- Company Name -->
+    <div>
+      <label for="companyName" class="block text-gray-700 font-medium mb-2">
+        اسم الشركة
+      </label>
+      <input
+        id="companyName"
+        formControlName="companyName"
+        type="text"
+        class="w-full border border-gray-300 rounded px-4 py-2"
+      />
+      <!-- Display server error for companyName -->
+      <div *ngIf="serverErrors['companyName']" class="text-red-500 text-sm mt-1">
+        {{ serverErrors['companyName'] }}
+      </div>
+    </div>
+
+    <!-- Company Address -->
+    <div>
+      <label for="CompanyTitle" class="block text-gray-700 font-medium mb-2">
+        عنوان الشركة
+      </label>
+      <input
+        id="CompanyTitle"
+        formControlName="CompanyTitle"
+        type="text"
+        class="w-full border border-gray-300 rounded px-4 py-2"
+      />
+      <!-- Display server error for companyAddress -->
+      <div *ngIf="serverErrors['CompanyTitle']" class="text-red-500 text-sm mt-1">
+        {{ serverErrors['CompanyTitle'] }}
+      </div>
+    </div>
+  </div>
+
+  <!-- email & Phone Number -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <div>
+      <label for="email" class="block text-gray-700 font-medium mb-2">
+        البريد الإلكتروني
+      </label>
+      <input
+        id="email"
+        formControlName="email"
+        type="email"
+        class="w-full border border-gray-300 rounded px-4 py-2"
+      />
+      <!-- Display server error for email -->
+      <div *ngIf="serverErrors['email']" class="text-red-500 text-sm mt-1">
+        {{ serverErrors['email'] }}
+      </div>
+    </div>
+
+    <div>
+      <label for="phoneNumber" class="block text-gray-700 font-medium mb-2">
+        رقم الهاتف
+      </label>
+      <input
+        id="phoneNumber"
+        formControlName="phoneNumber"
+        type="text"
+        class="w-full border border-gray-300 rounded px-4 py-2"
+      />
+      <!-- Display server error for phoneNumber -->
+      <div *ngIf="serverErrors['phoneNumber']" class="text-red-500 text-sm mt-1">
+        {{ serverErrors['phoneNumber'] }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Tax Information -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <div>
+      <label for="TaxNumber" class="block text-gray-700 font-medium mb-2">
+        رقم الضريبة
+      </label>
+      <input
+        id="TaxNumber"
+        formControlName="TaxNumber"
+        type="text"
+        class="w-full border border-gray-300 rounded px-4 py-2"
+      />
+      <!-- Display server error for TaxNumber -->
+      <div *ngIf="serverErrors['TaxNumber']" class="text-red-500 text-sm mt-1">
+        {{ serverErrors['TaxNumber'] }}
+      </div>
+    </div>
+
+    <div>
+      <label
+        for="commercialRecord"
+        class="block text-gray-700 font-medium mb-2"
+      >
+        السجل التجاري
+      </label>
+      <input
+        id="commercialRegister"
+        formControlName="commercialRegister"
+        type="text"
+        class="w-full border border-gray-300 rounded px-4 py-2"
+      />
+      <!-- Display server error for commercialRegister -->
+      <div *ngIf="serverErrors['commercialRegister']" class="text-red-500 text-sm mt-1">
+        {{ serverErrors['commercialRegister'] }}
+      </div>
+    </div>
+  </div>
+
+  <!-- currency and WhatsApp -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+    <div>
+      <label for="currency" class="block text-gray-700 font-medium mb-2">
+        العملة
+      </label>
+      <input
+        id="currency"
+        formControlName="currency"
+        type="text"
+        class="w-full border border-gray-300 rounded px-4 py-2"
+      />
+      <!-- Display server error for currency -->
+      <div *ngIf="serverErrors['currency']" class="text-red-500 text-sm mt-1">
+        {{ serverErrors['currency'] }}
+      </div>
+    </div>
+
+    <div>
+      <label
+        for="whatsAppNumber"
+        class="block text-gray-700 font-medium mb-2"
+      >
+        رقم الواتساب
+      </label>
+      <input
+        id="whatsAppNumber"
+        formControlName="whatsAppNumber"
+        type="text"
+        class="w-full border border-gray-300 rounded px-4 py-2"
+      />
+      <!-- Display server error for whatsAppNumber -->
+      <div *ngIf="serverErrors['whatsAppNumber']" class="text-red-500 text-sm mt-1">
+        {{ serverErrors['whatsAppNumber'] }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Terms -->
+  <div>
+    <label for="contractTerms" class="block text-gray-700 font-medium mb-2">
+      شروط العقد
+    </label>
+    <textarea
+      id="contractTerms"
+      formControlName="contractTerms"
+      class="w-full border border-gray-300 rounded px-4 py-2"
+      rows="4"
+    ></textarea>
+    <!-- Display server error for contractTerms -->
+    <div *ngIf="serverErrors['contractTerms']" class="text-red-500 text-sm mt-1">
+      {{ serverErrors['contractTerms'] }}
+    </div>
+  </div>
+</form>

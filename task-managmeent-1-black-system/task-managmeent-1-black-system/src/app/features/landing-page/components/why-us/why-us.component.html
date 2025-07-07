@@ -1,0 +1,22 @@
+<div class="container mx-auto p-4">
+  <h1 class="border-b border-[#00000042] pb-3 text-4xl font-extrabold text-[#4D646C] mb-4">{{header}}</h1>
+
+  <mat-accordion dir="rtl" class="w-full">
+    <mat-expansion-panel *ngFor="let acc of accordions" class="border border-gray-300 rounded-lg overflow-hidden mb-2">
+
+      <!-- الهيدر -->
+      <mat-expansion-panel-header class="bg-[#e9e7e8] text-primary font-bold p-4 flex justify-between items-center">
+        <span>{{ acc.header }}</span>
+      </mat-expansion-panel-header>
+
+      <!-- المحتوى الداخلي -->
+      <div class="p-4">
+        <div *ngFor="let item of acc.items" class="flex justify-start items-center text-right text-gray-600 mb-2">
+          <img [src]="arrowLeft" alt="arrow" class="w-4 h-4">
+          <span>{{ item }}</span>
+        </div>
+      </div>
+
+    </mat-expansion-panel>
+  </mat-accordion>
+</div>

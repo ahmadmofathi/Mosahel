@@ -1,0 +1,140 @@
+<div style="height: 100vh; overflow-y: auto;">
+  <form [formGroup]="employeeForm" (ngSubmit)="onSubmit()" class="p-6 max-w-3xl mx-auto">
+    <!-- Header -->
+    <h2 class="text-center text-primary font-bold text-xl mb-6">
+      {{ isEditMode ? "تعديل بيانات الموظف" : "إضافة موظف" }}
+    </h2>
+
+    <!-- Form Inputs -->
+    <!-- Name -->
+    <div class="mb-4">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>اسم الموظف</mat-label>
+        <input matInput formControlName="fullName" placeholder="قم بكتابة اسم الموظف" />
+        <mat-error *ngIf="employeeForm.get('fullName')?.hasError('required')">
+          اسم الموظف مطلوب
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Employee Number -->
+    <div class="mb-4">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>الرقم الوظيفي</mat-label>
+        <input matInput formControlName="jobNumber" placeholder="قم بكتابة الرقم الوظيفي" />
+        <mat-error *ngIf="employeeForm.get('jobNumber')?.hasError('required')">
+          الرقم الوظيفي مطلوب
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="flex gap-5 mb-4">
+      <!-- Phone -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>رقم الهاتف</mat-label>
+        <input matInput formControlName="phoneNumber" placeholder="قم بكتابة رقم الهاتف" />
+        <mat-error *ngIf="employeeForm.get('phoneNumber')?.hasError('required')">
+          رقم الهاتف مطلوب
+        </mat-error>
+      </mat-form-field>
+
+      <!-- ID Number -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>رقم الهوية</mat-label>
+        <input matInput formControlName="identityNumber" placeholder="قم بكتابة رقم الهوية" />
+        <mat-error *ngIf="employeeForm.get('identityNumber')?.hasError('required')">
+          رقم الهوية مطلوب
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="flex gap-5 mb-4">
+      <!-- Job Title -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>المسمى الوظيفي</mat-label>
+        <input matInput formControlName="jobTitle" placeholder="قم بكتابة المسمى الوظيفي" />
+        <mat-error *ngIf="employeeForm.get('jobTitle')?.hasError('required')">
+          المسمى الوظيفي مطلوب
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Email -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>البريد الإلكتروني</mat-label>
+        <input matInput formControlName="email" placeholder="قم بكتابة البريد الإلكتروني" />
+        <mat-error *ngIf="employeeForm.get('email')?.hasError('required')">
+          البريد الإلكتروني مطلوب
+        </mat-error>
+        <mat-error *ngIf="employeeForm.get('email')?.hasError('email')">
+          البريد الإلكتروني غير صالح
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Password -->
+    <div class="flex gap-5 mb-4">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>كلمة المرور</mat-label>
+        <input matInput type="password" formControlName="password" placeholder="قم بكتابة كلمة المرور" />
+        <mat-error *ngIf="employeeForm.get('password')?.hasError('required')">
+          كلمة المرور مطلوبة
+        </mat-error>
+        <mat-error *ngIf="employeeForm.get('password')?.hasError('minlength')">
+          كلمة المرور يجب أن تكون على الأقل 6 أحرف
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Confirm Password -->
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>تأكيد كلمة المرور</mat-label>
+        <input
+          matInput
+          type="password"
+          formControlName="confirmPassword"
+          placeholder="قم بكتابة تأكيد كلمة المرور"
+        />
+        <mat-error *ngIf="employeeForm.get('confirmPassword')?.hasError('required')">
+          تأكيد كلمة المرور مطلوب
+        </mat-error>
+        <mat-error *ngIf="employeeForm.hasError('passwordMismatch')">
+          تأكيد كلمة المرور لا يطابق كلمة المرور
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Validity -->
+    <div class="mb-4">
+      <mat-form-field appearance="outline" class="w-full">
+        <mat-label>الصلاحية</mat-label>
+        <mat-select formControlName="roles">
+          <mat-option value="OperationsManager">مدير التشغيل</mat-option>
+          <mat-option value="HRSpecialist">أخصائي موارد بشرية</mat-option>
+          <mat-option value="SalesSpecialist">أخصائي مبيعات</mat-option>
+        </mat-select>
+        <mat-error *ngIf="employeeForm.get('roles')?.hasError('required')">
+          الصلاحية مطلوبة
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <!-- Form Actions -->
+    <div class="flex justify-evenly mt-6">
+      <button
+        mat-raised-button
+        type="submit"
+        class="bg-primary text-white px-6 py-2 rounded-md"
+        [disabled]="employeeForm.invalid"
+      >
+        إضافة
+      </button>
+      <button
+        mat-flat-button
+        type="button"
+        class="bg-gray-200 text-primary px-6 py-2 rounded-md"
+        (click)="onCancel()"
+      >
+        إلغاء
+      </button>
+    </div>
+  </form>
+</div>

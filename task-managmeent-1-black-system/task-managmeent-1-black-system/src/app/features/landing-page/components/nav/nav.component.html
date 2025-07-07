@@ -1,0 +1,48 @@
+<header class="text-white py-4">
+  <nav class="">
+    <!-- Top Section (Email, Phone, Social Links) -->
+    <div class="container mx-auto flex flex-wrap justify-between max-md:justify-center max-md:gap-3 items-center py-2 text-sm">
+      <div class="flex items-center gap-6">
+        <span class="flex items-center gap-2">
+          <a [href]="'mailto:' + email" target="_blank"><i class="fas fa-envelope"></i> {{ email }}</a>
+        </span>
+        <span class="flex items-center gap-2">
+          <a href="http://wa.me/+966500612332" target="_blank" rel="noopener noreferrer"><i class="fas fa-phone"></i> {{ phone }}</a>
+        </span>
+      </div>
+      <div class="flex gap-4">
+        <a *ngFor="let item of links" [href]="item.link" target="_blank" rel="noopener noreferrer"><i [class]="item.icon + ' text-lg hover:text-[#4FB8EE] transition-colors duration-300 cursor-pointer'"></i></a>
+      </div>
+    </div>
+
+    <!-- Main Navigation (Logo and Nav Items) -->
+    <div class="border-b border-white container mx-auto flex justify-between items-center py-4">
+      <!-- Logo -->
+      <div class="flex-1">
+        <img [src]="logo" alt="الوثق" class="h-14 aspect-auto">
+      </div>
+
+      <!-- Navigation Items -->
+      <ul class="gap-6 max-md:hidden flex">
+        <li *ngFor="let item of navItems" class="relative text-white font-medium text-lg cursor-pointer transition-all group duration-300 hover:text-[#4FB8EE]">
+          <a [href]="item.link"><span>{{item.label}}</span></a>
+          <span class="absolute left-0 -bottom-1 w-0 h-[2px] bg-[#4FB8EE] transition-all duration-300 group-hover:w-full"></span>
+        </li>
+      </ul>
+
+      <!-- زر الحث على الإجراء -->
+      <button 
+        class="relative text-base font-normal py-3 px-5 ms-6 text-white border-2 
+              rounded-lg border-white transition-all duration-500 ease-in-out overflow-hidden 
+              hover:text-black hover:shadow-lg">
+        
+        <!-- تأثير البوردر المتحرك -->
+        <span class="absolute inset-0 w-full h-full border-2 border-transparent 
+                      rounded-lg hover:animate-border-glow"></span>
+
+        <!-- نص الزر -->
+        <span class="relative z-10">{{ callToAction }}</span>
+      </button>
+    </div>
+  </nav>
+</header>

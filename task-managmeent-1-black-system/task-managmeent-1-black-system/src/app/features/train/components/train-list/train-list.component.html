@@ -1,0 +1,128 @@
+<app-list-header header="عدد الدورات" [count]="totalCount">
+  <button
+    class="custom-button"
+    (click)="newRecord()"
+    *appHasRole="['SuperAdmin', 'Admin', 'HRSpecialist', 'OperationsManager']"
+  >
+    اضافة دوره
+  </button>
+  <!-- <button class="custom-button">تصدير pdf</button>
+  <button class="custom-button">تصدير Excel</button> -->
+</app-list-header>
+<app-filter-list
+  [isFilter]="false"
+  header="الدورات"
+  (searchChange)="updateSearch($event)"
+>
+  <div class="flex gap-6 mb-4 flex-wrap items-center">
+    <mat-form-field>
+      <mat-label class="font-arabic">تاريخ البدء</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [(ngModel)]="filters.startDate"
+      />
+
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label class="font-arabic">تاريخ الانتهاء</mat-label>
+      <input matInput [matDatepicker]="picker2" [(ngModel)]="filters.endDate" />
+
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker2"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+    <div class="flex gap-3">
+      <button class="btn-outline" (click)="filterHandler()">بحث</button>
+      <button class="btn-outline" (click)="filterHandler(true)">إلغاء</button>
+    </div>
+  </div>
+</app-filter-list>
+
+@if (loading) {
+<div class="flex items-center justify-center h-full">
+  جـــاري التــحـــمـــيل ......
+</div>
+}@else {
+<div class="container mx-auto px-4 py-5 flex flex-col gap-6">
+  @for (item of dataSource; track item) {
+  <!-- Main Card -->
+  <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+    <!-- Header -->
+    <div class="bg-gradient-to-r bg-primary p-6">
+      <h1 class="text-3xl font-bold text-white">
+        {{ item.title }}
+      </h1>
+    </div>
+
+    <!-- Content Section -->
+    <div class="p-6">
+      <!-- Image and Text Grid -->
+      <div class="grid md:grid-cols-2 gap-8 items-center">
+        <!-- Image Section -->
+        <div class="rounded-lg overflow-hidden shadow-md h-64">
+          <img
+            [src]="domain + '/' + item.imageUrl"
+            alt="Training Session"
+            class="w-full h-auto object-cover"
+          />
+        </div>
+
+        <!-- Text Content -->
+        <div class="space-y-4">
+          <!-- Course Details -->
+          <div class="bg-gray-50 p-4 rounded-lg">
+            <p class="text-gray-700 text-lg leading-relaxed">
+              {{ item.description }}
+            </p>
+          </div>
+          <div class="mt-8 flex justify-between items-center">
+            <a
+              [href]="item.link"
+              class="inline-block bg-blue-600 text-white px-6 py-2 rounded-full hover:bg-blue-700 transition duration-300"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              رابط الدورة
+            </a>
+
+            <div *appHasRole="['Employee']">
+              <i
+                class="fa-regular fa-thumbs-up text-3xl mx-2 cursor-pointer"
+                (click)="react(item.id)"
+              ></i>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Course Link -->
+    </div>
+  </div>
+
+  }@empty {
+  <p class="flex justify-center items-center py-10 text-l font-semibold">
+    لا توجد دورات حاليا
+  </p>
+  }
+</div>
+}
+
+<mat-paginator
+  [length]="totalCount"
+  [pageSizeOptions]="[5, 10, 100]"
+  aria-label="Select page"
+  (page)="onPageChange($event)"
+>
+</mat-paginator>
+<p-menu #menu [model]="items" [popup]="true" />
+<p-confirmDialog [rtl]="true" />
+<p-toast />

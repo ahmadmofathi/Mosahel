@@ -1,0 +1,55 @@
+<div class="inset-0 bg-[#1B4961] text-white">
+  <div class="container mx-auto mt-5 py-5 px-4 sm:px-6 lg:px-8">
+    <h3 class="text-base font-bold text-start mb-3 md:mb-4">{{title}}</h3>
+    <div class="flex flex-col md:flex-row flex-wrap justify-between gap-8 md:gap-4">
+      <!-- company data -->
+      <div class="w-full md:w-[48%] lg:w-[22%] mb-4 md:mb-0">
+        <img [src]="logo" alt="company logo" class="w-auto h-12 mb-4 object-contain">
+        <p class="text-base font-light mb-4">{{description}}</p>
+        <div class="flex gap-4 flex-wrap">
+          <a *ngFor="let link of socialIcons" [href]="link.link"><i [class]="link.icon + ' text-2xl hover:text-[#4FB8EE] transition-colors'"></i></a>
+        </div>
+      </div>
+
+      <!-- Nav links -->
+      <div class="w-full md:w-[48%] lg:w-[22%]">
+        <h4 class="text-base font-medium mb-2">{{links.title}}</h4>
+        <img [src]="border" alt="border" class="mb-4 w-20 h-px">
+        <ul class="flex flex-col gap-3">
+          <li *ngFor="let link of links.items" class="flex items-start gap-2 hover:text-[#4FB8EE] transition-colors">
+            <span class="w-3 h-3 text-[#4FB8EE] mt-1">></span>
+            <a [href]="link.link"><span class="text-base font-normal flex-1">{{link.label}}</span></a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Get contact -->
+      <div class="w-full md:w-[48%] lg:w-[22%]">
+        <h4 class="text-base font-medium mb-2">{{getContact.title}}</h4>
+        <img [src]="border" alt="border" class="mb-4 w-20 h-px">
+        <ul class="flex flex-col gap-3">
+          <li *ngFor="let link of getContact.items" class="flex items-start gap-2 hover:text-[#4FB8EE] transition-colors">
+            <a [href]="link.link">
+              <i [class]="link.icon" class="w-4 h-4 text-[#4FB8EE] mt-1"></i>
+              <span class="text-base font-normal flex-1">{{link.text}}</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <!-- Map -->
+      <div class="w-full md:w-[48%] lg:w-[22%]">
+        <h4 class="text-base font-medium mb-2">{{location.title}}</h4>
+        <!-- هنا بنضيف الـ iframe لعرض الخريطة -->
+        <div class="bg-primary w-full aspect-video rounded-lg shadow-lg">
+          <iframe
+            class="w-full h-full rounded-lg"
+            [src]="location.src"
+            style="border:0;" allowfullscreen="" loading="lazy"></iframe>
+        </div>
+      </div>
+
+    </div>
+    <p class="text-base md:text-xl font-medium text-center mt-8 md:mt-12">{{copyRight}}</p>
+  </div>
+</div>

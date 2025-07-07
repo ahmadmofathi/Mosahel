@@ -1,0 +1,43 @@
+<div class="flex flex-row-reverse gap-4 max-h-96">
+  <!-- Employee Selection and Total Tasks Card -->
+  <div class="shadow-lg p-4 rounded-lg flex flex-col flex-grow min-w-[250px]">
+    <div class="h-1/2 flex flex-col gap-2 justify-center">
+      <label for="employeeId">اسم الموظف</label>
+      <p-dropdown
+        id="employeeId"
+        [options]="employees"
+        optionLabel="name"
+        optionValue="id"
+        [(ngModel)]="employeeId"
+        (onChange)="updateFilters($event)"
+      ></p-dropdown>
+    </div>
+    <div
+      class="bg-primary rounded-md gap-6 flex-grow h-1/2 text-white flex flex-col justify-center items-center"
+    >
+      <div class="text-2xl font-semibold">مجموع المهام</div>
+      <div
+        class="font-semibold w-10 h-10 rounded-full bg-red-300 flex flex-col justify-center items-center"
+      >
+        {{ allTask }}
+      </div>
+    </div>
+  </div>
+
+  <!-- Chart Section -->
+  <div class="shadow-lg p-4 rounded-lg flex-grow">
+    <canvas id="canvasEmployees">{{ chart }}</canvas>
+  </div>
+
+  <!-- Completion Percentage Knob -->
+  <div
+    class="shadow-lg p-6 py-8 rounded-lg flex justify-center flex-col items-center gap-6 min-w-[250px]"
+  >
+    <p-knob
+      size="150"
+      [disabled]="true"
+      [(ngModel)]="completionPercent"
+      [valueTemplate]="(completionPercent | number : '1.2-2') + '%'"
+    />
+  </div>
+</div>

@@ -1,0 +1,342 @@
+<app-list-header header="CRM" [count]="totalCount">
+  <button
+    class="custom-button text-sm text-gray-500 flex justify-between items-center gap-2"
+    *appHasRole="['SuperAdmin','SalesSpecialist', 'OperationsManager']"
+    (click)="navigateToForm()"
+  >
+    إضافة عميل
+    <i class="fa fa-plus"></i>
+  </button>
+</app-list-header>
+
+<app-filter-list header="CRM" (searchChange)="updateSearch($event)">
+  <div class="flex gap-6 mb-4 flex-wrap items-center">
+    <mat-form-field class="w-48">
+      <mat-label>تاريخ البدء</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [(ngModel)]="filters.StartDate"
+      />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field class="w-48">
+      <mat-label>تاريخ الانتهاء</mat-label>
+      <input matInput [matDatepicker]="picker2" [(ngModel)]="filters.EndDate" />
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker2"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+    <div class="flex gap-3">
+      <button
+        class="btn-outline bg-gray-100 px-4 py-2 rounded hover:bg-gray-200"
+        (click)="filterHandler()"
+      >
+        بحث
+      </button>
+      <button
+        class="btn-outline bg-gray-100 px-4 py-2 rounded hover:bg-gray-200"
+        (click)="filterHandler(true)"
+      >
+        إلغاء
+      </button>
+    </div>
+  </div>
+</app-filter-list>
+
+<div *ngIf="dataSource.length > 0" class="px-2 bg-white rounded-lg shadow-md">
+  <div class="flex flex-col gap-6">
+  <ul>
+    <li>
+      <span *ngIf="chatService.onlineUsers.includes(dataSource[0]?.createdByUserName); else offline">
+        {{ dataSource[0]?.createdByUserName }} 
+        <i class="fa-solid fa-circle m-1" style="color: #38ff45;"></i> متصل
+      </span>
+      <ng-template #offline>
+        {{ dataSource[0]?.createdByUserName }} 
+        <i class="fa-solid fa-circle m-1" style="color: #ff3838;"></i> غير متصل
+      </ng-template>
+    </li>
+  </ul>
+
+    <!-- Name and pagination  -->
+    <div class="flex justify-between items-center">
+      <div class="flex gap-4 items-center">
+        <h2 class="text-2xl font-bold text-gray-800">
+          {{ dataSource[0]?.companyName || dataSource[0]?.phoneNumber || 'لا يوجد اسم للشركة' }}
+        </h2>
+        <!-- <span class="text-sm text-gray-500">{{
+          dataSource[0]?.responsiblePosition
+        }}</span> -->
+        <button (click)="openCallDialog()" class="m-1">
+          <i class="fa-solid fa-phone"></i>
+        </button>
+
+        <ng-template #phoneDialog>
+          <h2 mat-dialog-title class="text-center text-lg font-bold">بيانات الاتصال</h2>
+          <mat-dialog-content class="px-4 py-2">
+            <div class="flex flex-col gap-4 text-center">
+              <div class="p-4 rounded-lg bg-gray-100 shadow-sm">
+                <div class="text-sm text-gray-500">رقم الهاتف</div>
+                <div class="text-base font-semibold text-gray-800">
+                  {{ dataSource[0]?.phoneNumber || 'غير متوفر' }}
+                </div>
+              </div>
+
+              <div class="p-4 rounded-lg bg-gray-100 shadow-sm">
+                <div class="text-sm text-gray-500">رقم الجوال</div>
+                <div class="text-base font-semibold text-gray-800">
+                  {{ dataSource[0]?.mobileNumber || 'غير متوفر' }}
+                </div>
+              </div>
+            </div>
+          </mat-dialog-content>
+
+          <!-- <mat-dialog-actions align="center">
+            <button mat-button mat-dialog-close class="text-red-600">إغلاق</button>
+          </mat-dialog-actions> -->
+        </ng-template>
+
+
+        <button (click)="openEmailDialog()" class="m-1">
+          <i class="fa-solid fa-envelope-open-text"></i>
+        </button>
+
+        <ng-template #emailDialog>
+          <h2 mat-dialog-title class="text-center text-lg font-bold">بيانات البريد الالكتروني</h2>
+          <mat-dialog-content class="px-4 py-2">
+            <div class="flex flex-col gap-4 text-center">
+              <div class="p-4 rounded-lg bg-gray-100 shadow-sm">
+                <div class="text-sm text-gray-500">البريد الالكتروني </div>
+                <div class="text-base font-semibold text-gray-800">
+                  {{ dataSource[0]?.email || 'غير متوفر' }}
+                </div>
+              </div>
+            </div>
+          </mat-dialog-content>
+
+          <!-- <mat-dialog-actions align="center">
+            <button mat-button mat-dialog-close class="text-red-600">إغلاق</button>
+          </mat-dialog-actions> -->
+        </ng-template>
+
+        <!-- Show and edit buttons -->
+        <button
+          class=" flex justify-between items-center gap-2 z-50"
+          *appHasRole="['SuperAdmin','SalesSpecialist', 'OperationsManager']"
+          (click)="show(dataSource[0])"
+        >
+          <!-- عرض تفاصيل -->
+          <!-- <i class="fa fa-eye"></i> -->
+          <i class="fa-solid fa-circle-question"></i>
+        </button>
+
+        <button
+          class="custom-button text-sm flex justify-between items-center gap-2 z-50"
+          *appHasRole="['SuperAdmin', 'SalesSpecialist', 'OperationsManager']"
+          (click)="editRecord(dataSource[0].id)"
+        >
+          تعديل
+          <i class="fa fa-edit"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Data Tables -->
+    <div class="flex gap-8">
+      <!-- Right Tables -->
+      <div class="flex flex-col gap-4 w-1/2">
+        <div class="flex flex-col gap-1">
+  <table>
+    <tr>
+      <td class="py-2 font-medium text-center w-[120px]">
+        <div class="text-white bg-blue-500 rounded-lg py-1 m-1">
+          حالة العميل
+        </div>
+      </td>
+      <td class="text-center rounded-lg w-[180px] h-fit">
+        <select [(ngModel)]="selectedStatus" name="status" class="w-full border-blue-500 border p-2 rounded-sm">
+          <option value="1">فعلي</option>
+          <option value="2">محتمل</option>
+          <option value="3">متردد</option>
+          <option value="4">غير مهتم</option>
+        </select>
+      </td>
+      <td></td>
+    </tr>
+  </table>
+
+  <table>
+    <tr>
+      <td class="py-2 font-medium text-center w-[120px]">
+        <div class="text-white bg-blue-500 rounded-lg py-1 m-1">
+          الاجراء
+        </div>
+      </td>
+      <td class="text-center rounded-lg w-[180px]">
+        <select [(ngModel)]="selectedAction" name="action" class="w-full border-blue-500 border p-2 rounded-sm">
+          <option value="1">اتصال هاتفي</option>
+          <option value="2">اجتماع</option>
+          <option value="3">ترحيل للاسبوع القادم</option>
+          <option value="4">اسناد لموظف اخر</option>
+          <option value="5">ارسال العقد</option>
+          <option value="6">اغلاق الصفقه</option>
+        </select>
+        <select [(ngModel)]="this.dataSource[0].createdByUserName"  *ngIf="selectedAction == '4'" name="username" class="w-full border-blue-500 border p-2 rounded-sm">
+          <option *ngFor="let user of sales" [value]="user.fullName">{{user.fullName}}</option>
+        </select>
+      </td>
+      <td>
+        <!-- تحديث Button -->
+        <button
+          (click)="updateStatusAndAction()"
+          class="mt-2 bg-green-500 text-white px-4 py-1 rounded hover:bg-green-600"
+        >
+          تحديث
+        </button>
+      </td>
+    </tr>
+  </table>
+
+</div>
+
+        <!-- <table class="border border-black">
+          <tr class="border-b border-black">
+            <td
+              class="border-black border py-2 text-gray-600 font-medium text-center"
+            >
+              المستخدم المسؤل
+            </td>
+            <td class="border-black border py-2 text-center">
+              {{ dataSource[0]?.createdByUserName }}
+            </td>
+          </tr>
+        </table> -->
+      </div>
+    </div>
+    <div class="flex justify-start items-center">
+      <mat-paginator
+          [length]="totalCount"
+          [pageSize]="filters.PageSize"
+          (page)="onPageChange($event)"
+      ></mat-paginator>
+    </div>
+    
+    <!-- Notes  -->
+    <!-- <h3 class="py-2 text-gray-600 font-bold">الملاحظات</h3>
+    <td class="border-black border py-2 text-center">
+      {{ dataSource[0]?.notes || "لا يوجد" }}
+    </td> -->
+
+
+    <h3 class="text-gray-600 font-bold" *ngIf="hasAccessToChat(dataSource[0])">الأنشطة</h3>
+    <div class="loading" *ngIf="msgLoading">
+      <svg aria-hidden="true" class="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600" viewBox="0 0 100 101" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <path d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z" fill="currentColor"/>
+          <path d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z" fill="currentFill"/>
+      </svg>
+    </div>
+    <div *ngIf="hasAccessToChat(dataSource[0]) && !loading">
+
+      <!-- Inline confirmation dialog template -->
+      <ng-template #confirmDialog>
+        <h2 mat-dialog-title style="color: #f44336; font-weight: bold;padding: 12px;">
+          مسح جميع الرسائل
+        </h2>
+        
+        <mat-dialog-content style="font-size: 16px; padding: 10px; color: #424242;">
+          هل تريد حذف جميع الرسائل؟ <br />
+          <span style="color: #f44336; font-weight: 600;">
+            (يرجي العلم انه لن تستطيع استعادة الرسائل)
+          </span>
+        </mat-dialog-content>
+        
+        <mat-dialog-actions align="end">
+          <button mat-button
+          type="button"
+          [mat-dialog-close]="false" style="color: #616161;">
+          إلغاء
+        </button>
+        <button
+        type="button"
+        mat-raised-button
+        color="warn"
+        [mat-dialog-close]="true"
+        style="min-width: 80px; font-weight: 600;"
+        >
+        مسح
+      </button>
+    </mat-dialog-actions>
+    
+  </ng-template>
+      <div class="bg-gray-100 p-4 w-full">
+        <!-- <input class="flex items-center h-10 w-full rounded px-3 text-sm" type="text" placeholder="Type your message…"> -->
+        <input [(ngModel)]="message" placeholder="أكتب ملاحظة ..." class="form-control h-10 w-80 rounded px-3 text-sm" />
+        <button class="bg-blue-500 hover:bg-blue-700 text-white font-bold py-2 px-4 rounded" (click)="sendMessage(dataSource[0]?.responsibleName)">
+          أرسل
+        </button>
+        <button *ngIf="currentRole=='SuperAdmin'" mat-raised-button color="warn" class="mx-3" (click)="openConfirmDialog(dataSource[0]?.responsibleName)">
+          <i class="fa-solid fa-trash"></i>
+          حذف الملاحظات
+        </button>
+      </div>
+
+      <div class="flex flex-col flex-grow w-full border-blue-500 border bg-white shadow-xl rounded-lg overflow-hidden">
+      <div #scrollMe class="flex flex-col flex-grow h-[500px] p-4 overflow-auto" *ngIf="!msgLoading">
+			<div
+        *ngIf="chatService.messages.length === 0"
+        class="no-data text-center py-6 text-gray-500"
+      >
+        لا يوجد ملاحظات
+      </div>
+			<div
+        
+        class="flex flex-col items-start w-full mt-2 space-x-3 max-w-xs"
+        *ngFor="let msg of chatService.messages.slice().reverse()"
+      >
+  <div class="flex flex-row-reverse">
+    <span class="text-xs text-gray-500 leading-none mx-1">{{ msg.timestamp | date:'short' }}</span>
+    <span class="text-xs leading-none text-red-600 mx-1">{{ msg.userName }}</span>
+  </div>
+  <div
+    class="p-3"
+  >
+    <p class="text-sm"
+    >{{ msg.message }}</p>
+  </div>
+</div>
+
+			
+		</div>
+		
+	</div>
+	<!-- Component End  -->
+
+
+    <!-- <div class="messages">
+    <div *ngFor="let msg of chatService.messages" class="message">
+    <p class="message-content"><strong>{{ msg.userName }}</strong>: {{ msg.message }} <br> <small>{{ msg.timestamp | date:'short' }}</small></p>
+
+        <span >{{ msg }}</span>
+    </div>
+    </div> -->
+</div>
+
+  </div>
+</div>
+
+<div
+  *ngIf="dataSource.length === 0 && !loading"
+  class="no-data text-center py-6 text-gray-500"
+>
+  لا يوجد بيانات
+</div>
+
+<p-toast />

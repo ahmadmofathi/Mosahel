@@ -1,0 +1,18 @@
+<div class="mx-auto p-6 rounded-lg">
+  <!-- Label for problem details -->
+  <label class="block text-lg font-semibold text-primary mb-2">تفاصيل المشكلة</label>
+  <!-- Box for problem details -->
+  <div class="bg-gray-50 border border-gray-200 rounded-md p-4 mb-4">
+    <p class="text-sm text-gray-600">{{ data.problem }}</p>
+  </div>
+  <div class="flex justify-center gap-4 mt-6">
+    <button
+      mat-button
+      class="px-6 py-2 !bg-white !text-primary !border-primary !border !rounded-md"
+      type="button"
+      (click)="onCancel()"
+    >
+      الغاء
+    </button>
+  </div>
+</div>

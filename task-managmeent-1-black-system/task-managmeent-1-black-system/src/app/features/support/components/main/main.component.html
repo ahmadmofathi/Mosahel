@@ -1,0 +1,5 @@
+@if(['SuperAdmin', 'OperationsManager'].includes(currentRole)){
+<app-support-list></app-support-list>
+}@else {
+<app-support-form></app-support-form>
+}

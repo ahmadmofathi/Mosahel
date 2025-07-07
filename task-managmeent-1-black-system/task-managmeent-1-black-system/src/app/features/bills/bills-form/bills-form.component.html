@@ -1,0 +1,174 @@
+<form
+  [formGroup]="billForm"
+  (ngSubmit)="onSubmit()"
+  class="p-6 max-w-3xl mx-auto"
+  *ngIf="!isEditMode"
+>
+  <!-- Header -->
+  <h2 class="text-center text-primary font-bold text-xl mb-6">إصدار فاتورة</h2>
+
+  <!-- Form Inputs -->
+  <!-- tenantId Name -->
+  <div class="mb-4">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>اسم الشركة</mat-label>
+      <mat-select
+        formControlName="companyName"
+        #event
+        (valueChange)="getDealsByTenantId($event)"
+      >
+        <mat-option *ngFor="let tenant of tenants" [value]="tenant.id">
+          {{ tenant.tenantName }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="billForm.get('companyName')?.hasError('required')">
+        اسم الشركة مطلوب
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- Contract Number -->
+  <div class="mb-4">
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>العقد</mat-label>
+      <mat-select
+        formControlName="contractNumber"
+        (valueChange)="setByDeal($event)"
+      >
+        <mat-option *ngFor="let deal of deals" [value]="deal.id">
+          {{ deal.contractNumber }}
+        </mat-option>
+      </mat-select>
+      <mat-error *ngIf="billForm.get('contractNumber')?.hasError('required')">
+        العقد مطلوب
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="flex gap-5 mb-4">
+    <!-- Subscription Fees -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>رسوم الاشتراك</mat-label>
+      <input
+        [disabled]="true"
+        matInput
+        formControlName="contractValue"
+        placeholder="قم بكتابة رسوم الاشتراك"
+      />
+      <mat-error *ngIf="billForm.get('contractValue')?.hasError('required')">
+        رسوم الاشتراك مطلوب
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Amount Due -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>المستحق دفعه</mat-label>
+      <input
+        [disabled]="true"
+        matInput
+        formControlName="totalAmount"
+        placeholder="قم بكتابة المستحق دفعه"
+      />
+      <mat-error *ngIf="billForm.get('totalAmount')?.hasError('required')">
+        المستحق دفعه مطلوب
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <div class="flex gap-5 mb-4">
+    <!-- Amount Paid -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>المبلغ المدفوع</mat-label>
+      <input
+        matInput
+        formControlName="amountPaid"
+        (input)="onAmountPaidInput($event)"
+        placeholder="قم بكتابة المبلغ المدفوع"
+      />
+      <mat-error *ngIf="billForm.get('amountPaid')?.hasError('required')">
+        المبلغ المدفوع مطلوب
+      </mat-error>
+    </mat-form-field>
+
+    <!-- Remaining Amount -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>المبلغ المتبقي</mat-label>
+      <input
+        [disabled]="true"
+        matInput
+        formControlName="remainingAmount"
+        placeholder="قم بكتابة المبلغ المتبقي"
+      />
+      <mat-error *ngIf="billForm.get('remainingAmount')?.hasError('required')">
+        المبلغ المتبقي مطلوب
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- Form Actions -->
+  <div class="flex justify-evenly mt-6">
+    <p-button
+      type="submit"
+      label="إضافة"
+      styleClass="bg-primary text-white px-6 py-2 rounded-md"
+      [loading]="isLoading"
+      [disabled]="billForm.invalid"
+    ></p-button>
+    <button
+      mat-flat-button
+      type="button"
+      class="bg-gray-200 text-primary px-6 py-2 rounded-md"
+      (click)="onCancel()"
+    >
+      إلغاء
+    </button>
+  </div>
+</form>
+
+<form
+  [formGroup]="billUForm"
+  (ngSubmit)="inUSubmit()"
+  class="p-6 max-w-3xl mx-auto"
+  *ngIf="isEditMode"
+>
+  <!-- Header -->
+  <h2 class="text-center text-primary font-bold text-xl mb-6">
+    تعديل الفاتورة
+  </h2>
+
+  <!-- Form Inputs -->
+  <div class="flex gap-5 mb-4">
+    <!-- Amount Paid -->
+    <mat-form-field appearance="outline" class="w-full">
+      <mat-label>المبلغ المدفوع</mat-label>
+      <input
+        matInput
+        formControlName="amountPaid"
+        placeholder="قم بكتابة المبلغ المدفوع"
+      />
+      <mat-error *ngIf="billUForm.get('amountPaid')?.hasError('required')">
+        المبلغ المدفوع مطلوب
+      </mat-error>
+    </mat-form-field>
+  </div>
+
+  <!-- Form Actions -->
+  <div class="flex justify-evenly mt-6">
+    <p-button
+      type="submit"
+      label="تعديل"
+      styleClass="bg-primary text-white px-6 py-2 rounded-md"
+      [loading]="isLoading"
+      [disabled]="billUForm.invalid"
+    ></p-button>
+    <button
+      mat-flat-button
+      type="button"
+      class="bg-gray-200 text-primary px-6 py-2 rounded-md"
+      (click)="onCancel()"
+    >
+      إلغاء
+    </button>
+  </div>
+</form>
+<p-toast />

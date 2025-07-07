@@ -1,0 +1,55 @@
+<div
+  class="w-full overflow-y-auto max-h-screen bg-white p-6 rounded-xl shadow-lg text-right font-Tajawal"
+>
+  <h2
+    class="text-2xl font-bold text-gray-700 text-center border-b-2 border-blue-500 pb-2 mb-4"
+  >
+    📜 تفاصيل العقد
+  </h2>
+  <div class="space-y-3">
+    <div class="flex justify-between bg-gray-100 p-3 rounded-md">
+      <label class="font-semibold text-blue-600">اسم المشروع:</label>
+      <span class="text-gray-800">{{ data.deal.projectName }}</span>
+    </div>
+    <div class="flex justify-between bg-gray-100 p-3 rounded-md">
+      <label class="font-semibold text-blue-600">رقم العقد:</label>
+      <span class="text-gray-800">{{ data.deal.contractNumber }}</span>
+    </div>
+    <div class="flex justify-between bg-gray-100 p-3 rounded-md">
+      <label class="font-semibold text-blue-600">قيمة العقد:</label>
+      <span class="text-gray-800">{{ data.deal.contractValue }}</span>
+    </div>
+    <div class="flex justify-between bg-gray-100 p-3 rounded-md">
+      <label class="font-semibold text-blue-600">مدة العقد:</label>
+      <span class="text-gray-800">{{ data.deal.projectDuration }} شهر</span>
+    </div>
+    <div class="flex justify-between bg-gray-100 p-3 rounded-md">
+      <label class="font-semibold text-blue-600">تاريخ بداية العقد:</label>
+      <span class="text-gray-800">{{ data.deal.startDate | date }}</span>
+    </div>
+    <div class="flex justify-between bg-gray-100 p-3 rounded-md">
+      <label class="font-semibold text-blue-600">الموظفين المشتركين:</label>
+      <span class="text-gray-800">{{
+        data.deal.employeeNames.join(", ")
+      }}</span>
+    </div>
+    <div class="flex justify-between bg-gray-100 p-3 rounded-md">
+      <label class="font-semibold text-blue-600">المستخدم:</label>
+      <span class="text-gray-800">{{ data.deal.createdByUserName }}</span>
+    </div>
+    <div class="flex justify-between bg-gray-100 p-3 rounded-md">
+      <label class="font-semibold text-blue-600">تاريخ الإنشاء:</label>
+      <span class="text-gray-800">{{ data.deal.createdOn | date }}</span>
+    </div>
+    <div class="flex justify-between bg-gray-100 p-3 rounded-md">
+      <label class="font-semibold text-blue-600">الحالة:</label>
+      <span class="text-gray-800">{{ data.deal.status }}</span>
+    </div>
+  </div>
+  <button
+    class="w-full mt-5 bg-red-500 text-white font-semibold py-2 rounded-lg hover:bg-red-600 transition"
+    (click)="dialogRef.close()"
+  >
+    ❌ إغلاق
+  </button>
+</div>

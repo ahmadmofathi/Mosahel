@@ -1,0 +1,6 @@
+<div #statContainer class="bg-[#4FB8EE] container mx-auto px-5 py-3 rounded-2xl flex justify-evenly flex-wrap">
+  <div *ngFor="let item of data" class="flex items-center flex-col">
+    <span class="text-5xl font-bold text-white">+{{ item.current }}</span>
+    <span class="text-2xl font-medium text-white">{{ item.name }}</span>
+  </div>
+</div>

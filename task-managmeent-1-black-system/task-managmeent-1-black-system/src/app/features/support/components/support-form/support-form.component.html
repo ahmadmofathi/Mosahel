@@ -1,0 +1,59 @@
+<!-- Employee view -->
+<form [formGroup]="requestForm" (ngSubmit)="onSubmitReq()" class="mx-auto p-6 rounded-lg border border-primary m-5">
+  <!-- Label for problem details -->
+  <label class="block text-lg font-semibold text-primary mb-2">الابلاغ عن مشكلة</label>
+
+  <!-- Textarea for Name -->
+  <mat-form-field appearance="outline" class="w-full mb-4">
+    <textarea
+      matInput
+      placeholder="اكتب اسم بالكامل"
+      formControlName="fullName"
+      rows="1"
+    ></textarea>
+    <mat-error *ngIf="requestForm.get('email')?.hasError('required')">
+      الاسم مطلوب
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Textarea for email -->
+  <mat-form-field appearance="outline" class="w-full mb-4">
+    <textarea
+      matInput
+      placeholder="اكتب الايميل الخاص بك هنا"
+      formControlName="email"
+      rows="1"
+    ></textarea>
+    <mat-error *ngIf="requestForm.get('email')?.hasError('required')">
+      الايميل مطلوب
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Textarea for password -->
+  <mat-form-field appearance="outline" class="w-full mb-4">
+    <textarea
+      matInput
+      placeholder="قم بكتابة المشكله التي تواجهك"
+      formControlName="description"
+      rows="5"
+    ></textarea>
+    <mat-error *ngIf="requestForm.get('pass')?.hasError('required')">
+      نص المشكلةمطلوب
+    </mat-error>
+  </mat-form-field>
+
+  <!-- Buttons centered at the bottom -->
+  <div class="flex justify-center gap-4 mt-6">
+    <button
+      mat-raised-button
+      color="primary"
+      class="px-6 py-2 !bg-primary !text-white !rounded-md"
+      type="submit"
+      [disabled]="requestForm.invalid"
+    >
+      ارسال
+    </button>
+  </div>
+</form>
+
+<app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>

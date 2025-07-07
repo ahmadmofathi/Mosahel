@@ -1,0 +1,42 @@
+.upload-label {
+  width: 100%;
+  cursor: pointer;
+  display: inline-block;
+  position: relative;
+  background-color: #f0f4f7;
+  border-radius: 0.5rem;
+
+  .upload-placeholder {
+    display: flex;
+    padding: 15px 0;
+    flex-direction: column;
+    align-items: center;
+    border: 1px dashed #989797;
+    border-radius: 0.5rem;
+
+    .cancel-button {
+      display: flex;
+      align-items: center;
+      justify-items: center;
+      gap: 5px;
+      color: #665959;
+      font-weight: 500;
+      padding-top: 10px;
+    }
+  }
+}
+
+input[type='file'] {
+  display: none;
+}
+
+.vr-line {
+  align-self: end;
+  width: 1.15px;
+  height: 26px;
+  background-color: #9b9b9b;
+}
+
+.reguiredFile {
+  border: 1px dashed red !important;
+}

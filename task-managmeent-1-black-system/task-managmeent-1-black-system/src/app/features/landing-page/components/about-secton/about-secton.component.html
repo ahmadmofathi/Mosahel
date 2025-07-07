@@ -1,0 +1,21 @@
+<div class="relative flex flex-col justify-between bg-[#1B4961] items-start w-full overflow-y-hidden">
+  <!-- Navigation -->
+  <app-nav class="w-full"></app-nav>
+
+  <div class="container space-y-5 mx-auto text-white my-10 px-5">
+    <h1 class=" text-4xl font-bold">من نحن</h1>
+    <p class="text-base font-semibold"><a href="/" class="cursor-pointer">الرئيسية</a>/ من نحن</p>
+  </div>
+</div>
+<div class="container flex max-md:flex-col-reverse justify-between items-start my-10 mx-auto">
+  <img [src]="img" alt="about us image" class="max-w-[50%] mx-auto">
+  <div class="p-5 "> 
+    <ul class="flex items-center justify-start gap-5 mb-5">
+      <li *ngFor="let item of data; let I = index" (click)="setI(I)" class="text-[#1A485F] text-base font-black border-[#1A485F] pb-2 cursor-pointer" [class.border-b-2]="I === i">
+        {{item.title}}
+      </li>
+    </ul>
+    <hr class="my-5 bg-[#1A485F] h-1">
+    <p class="text-base font-medium text-[#00000082]">{{data[i].text}}</p>
+  </div>
+</div>

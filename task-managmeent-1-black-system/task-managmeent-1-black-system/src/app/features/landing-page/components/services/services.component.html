@@ -1,0 +1,52 @@
+<div id="services" class="container mx-auto my-7">
+  <div class="flex justify-center mb-5">
+    <h1 class="text-4xl font-bold text-[#4FB8EE]">{{title}}</h1>
+    <img [src]="titleImg" alt="vector" class="">
+  </div>
+
+  <p class="text-xl font-normal text-[#1B496191] text-center mb-5">{{description}}</p>
+
+  <ul class="container mx-auto flex flex-wrap justify-center gap-5">
+    <li *ngFor="let card of cards, let i = index" class="relative">
+      <mat-card 
+        (click)="updateContent(i)" 
+        [ngClass]="{
+          '!border !border-[#4FB8EE] rounded-lg p-4 w-32 h-36 flex flex-col items-center text-center shadow-md hover:shadow-lg transition-shadow duration-300 group cursor-pointer': true,
+          'hover:bg-[#4FB8EE]': selectedCard !== i,
+          '!bg-[#4FB8EE]': selectedCard === i
+          }"
+        class="">
+        
+        <!-- الرقم -->
+        <span class="absolute top-2 left-2 text-lg font-bold text-[#1E3A4C]">{{ i + 1 }}</span>
+
+        <!-- الأيقونة -->
+        <mat-card-header class="flex justify-center">
+          <img [src]="card.img" [alt]="card.title" class="w-12 h-12">
+        </mat-card-header>
+
+        <!-- النص -->
+        <mat-card-content>
+          <p class="text-[#1E3A4C] font-semibold text-sm leading-tight">{{ card.title }}</p>
+        </mat-card-content>
+      </mat-card>
+    </li>
+  </ul>
+
+  <div class="relative container mx-auto my-10 flex items-center min-h-[300px] px-10 py-16 rounded-lg">
+    
+    <!-- الخلفية كصورة مطلقة -->
+    <img [src]="selectedBgImg" alt="Background Image" class="absolute max-md:hidden left-0 top-1/2 transform -translate-y-1/2 w-1/3 h-auto">
+
+    <!-- المحتوى النصي -->
+    <div class="relative max-md:text-center max-md:mx-auto max-w-[50%] my-auto">
+      <h1 class="text-4xl font-bold text-[#4FB8EE] mb-5">{{ selectedTitle }}</h1>
+      <p class="text-lg font-bold text-[#949494] mb-5 leading-relaxed">
+        {{ selectedDescription }}
+      </p>
+      <button (click)="selectedCard == 1? navToAuth() : null" class="text-sm font-bold text-white bg-[#4FB8EE] px-6 py-3 rounded-lg shadow-lg hover:bg-[#25627E] transition-all duration-300 border border-[#4FB8EE]">
+        {{ selectedCallToAction }}
+      </button>
+    </div>
+  </div>
+</div>

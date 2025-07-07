@@ -1,0 +1,134 @@
+<!-- Header -->
+<app-list-header header="إدارة الصلاحيات" [count]="totalCount">
+  <button
+    class="custom-button"
+    *appHasRole="['SuperAdmin', 'OperationsManager']"
+    (click)="addEmployee()"
+  >
+    اضافة موظف
+    <i class="fa fa-plus"></i>
+  </button>
+</app-list-header>
+
+<!-- Filter -->
+<app-filter-list header="الصلاحيات" (searchChange)="updateSearch($event)">
+  <div class="flex gap-6 mb-4 flex-wrap items-center">
+    <mat-form-field>
+      <mat-label class="font-arabic">تاريخ البدء</mat-label>
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [(ngModel)]="filters.StartDate"
+      />
+      <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+
+    <mat-form-field>
+      <mat-label class="font-arabic">تاريخ الانتهاء</mat-label>
+      <input matInput [matDatepicker]="picker2" [(ngModel)]="filters.EndDate" />
+      <!-- <mat-hint>MM/DD/YYYY</mat-hint> -->
+      <mat-datepicker-toggle
+        matIconSuffix
+        [for]="picker2"
+      ></mat-datepicker-toggle>
+      <mat-datepicker #picker2></mat-datepicker>
+    </mat-form-field>
+    <div class="flex gap-3">
+      <button class="btn-outline" (click)="filterHandler()">بحث</button>
+      <button class="btn-outline" (click)="filterHandler(true)">إلغاء</button>
+    </div>
+  </div>
+</app-filter-list>
+
+<!-- Table -->
+<table mat-table [dataSource]="employees" class="mat-elevation-z8 my-table">
+  <!-- Column Definitions -->
+  <ng-container matColumnDef="fullName">
+    <th mat-header-cell *matHeaderCellDef>اسم الموظف</th>
+    <td mat-cell *matCellDef="let element">{{ element.fullName }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="jobNumber">
+    <th mat-header-cell *matHeaderCellDef>الرقم الوظيفي</th>
+    <td mat-cell *matCellDef="let element">{{ element.jobNumber }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="phoneNumber">
+    <th mat-header-cell *matHeaderCellDef>رقم الهاتف</th>
+    <td mat-cell *matCellDef="let element">{{ element.phoneNumber }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="identityNumber">
+    <th mat-header-cell *matHeaderCellDef>رقم الهوية</th>
+    <td mat-cell *matCellDef="let element">{{ element.identityNumber }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="jobTitle">
+    <th mat-header-cell *matHeaderCellDef>المسمى الوظيفي</th>
+    <td mat-cell *matCellDef="let element">{{ element.jobTitle }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="email">
+    <th mat-header-cell *matHeaderCellDef>البريد الاليكتروني</th>
+    <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="roles">
+    <th mat-header-cell *matHeaderCellDef>الصلاحيات</th>
+    <td mat-cell *matCellDef="let element">{{ element.roles }}</td>
+  </ng-container>
+
+  <ng-container matColumnDef="createdOn">
+    <th mat-header-cell *matHeaderCellDef>تاريخ الانشاء</th>
+    <td mat-cell *matCellDef="let element">{{ element.createdOn | date }}</td>
+  </ng-container>
+
+  <!-- Edit Action Column -->
+  <ng-container
+    matColumnDef="edit"
+    *appHasRole="['SuperAdmin', 'OperationsManager']"
+  >
+    <th mat-header-cell *matHeaderCellDef>إجراء</th>
+    <td mat-cell *matCellDef="let element">
+      <button
+        mat-button
+        color="primary"
+        (click)="menu.toggle($event); setSelectedBill(element)"
+      >
+        <i class="pi pi-ellipsis-v"></i>
+      </button>
+    </td>
+  </ng-container>
+
+  <!-- Header and Data Rows -->
+  <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+  <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+
+  <!-- No Data Row -->
+  <tr class="mat-row" *matNoDataRow>
+    <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+      <div class="flex justify-center items-center py-10 text-l font-semibold">
+        {{ loading ? "جـــاري التــحـــمـــيل ......" : "لا يوجد بيانات" }}
+      </div>
+    </td>
+  </tr>
+</table>
+
+<!-- Pagination -->
+<mat-paginator
+  [length]="totalCount"
+  [pageSizeOptions]="[5, 10, 100]"
+  aria-label="Select page"
+  (page)="onPageChange($event)"
+>
+</mat-paginator>
+
+<!-- Menu -->
+<p-menu #menu [model]="items" [popup]="true" />
+<p-confirmDialog [rtl]="true" />
+<p-toast />

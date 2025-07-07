@@ -1,0 +1,168 @@
+<form
+  [formGroup]="dealForm"
+  (ngSubmit)="onSubmit()"
+  class="p-6 max-w-3xl mx-auto"
+>
+  <h2 class="text-center text-primary font-bold text-xl mb-6">
+    {{ isEditMode ? "تعديل العقد" : "فتح عقد جديد" }}
+  </h2>
+
+  <!-- Form Grid -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <!-- Left Column -->
+    <div>
+      <!-- tenantId Name -->
+      <div class="mb-4">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>اسم الشركة</mat-label>
+          <mat-select
+            formControlName="tenantId"
+            (valueChange)="getEmployees($event)"
+          >
+            <mat-option *ngFor="let tenant of tentantsList" [value]="tenant.id">
+              {{ tenant.tenantName }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="dealForm.get('tenantId')?.hasError('required')">
+            اسم الشركة مطلوب
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Contract Number -->
+      <!--
+      <div class="mb-4">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>رقم العقد</mat-label>
+          <input matInput formControlName="contractNumber" placeholder="قم بكتابة رقم العقد" />
+          <mat-error *ngIf="dealForm.get('contractNumber')?.hasError('required')">
+            رقم العقد مطلوب
+          </mat-error>
+        </mat-form-field>
+      </div>
+      -->
+      <!-- Project Period -->
+      <div class="mb-4">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>مدة المشروع</mat-label>
+          <input
+            type="number"
+            min="0"
+            matInput
+            formControlName="projectDuration"
+            placeholder="قم بكتابة مدة المشروع"
+          />
+          <span matSuffix class="pe-2"> شهر </span>
+          <mat-error
+            *ngIf="dealForm.get('projectDuration')?.hasError('required')"
+          >
+            مدة المشروع مطلوبة
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Contract Value -->
+      <div>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>قيمة العقد</mat-label>
+          <input
+            matInput
+            formControlName="contractValue"
+            placeholder="قم بكتابة قيمة العقد"
+          />
+          <mat-error
+            *ngIf="dealForm.get('contractValue')?.hasError('required')"
+          >
+            قيمة العقد مطلوبة
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Right Column -->
+    <div>
+      <!-- Project Name -->
+      <div class="mb-4">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>اسم المشروع</mat-label>
+          <input
+            matInput
+            formControlName="projectName"
+            placeholder="قم بكتابة اسم المشروع"
+          />
+          <mat-error *ngIf="dealForm.get('projectName')?.hasError('required')">
+            اسم المشروع مطلوب
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Select Employees -->
+      <div class="mb-4">
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>اختر الموظفين</mat-label>
+          <mat-select formControlName="employeeIds" multiple="true">
+            <mat-option
+              *ngFor="let employee of employeesList"
+              [value]="employee.id"
+            >
+              {{ employee.fullName }}
+            </mat-option>
+          </mat-select>
+          <mat-error *ngIf="dealForm.get('employeeIds')?.hasError('required')">
+            الموظفين مطلوبون
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Start Date -->
+      <div>
+        <mat-form-field appearance="outline" class="w-full">
+          <mat-label>تاريخ بدء المشروع</mat-label>
+          <input
+            matInput
+            [matDatepicker]="startDatePicker"
+            formControlName="startDate"
+            placeholder="قم بوضع تاريخ"
+          />
+          <mat-datepicker-toggle
+            matIconSuffix
+            [for]="startDatePicker"
+          ></mat-datepicker-toggle>
+          <mat-datepicker #startDatePicker></mat-datepicker>
+          <mat-error *ngIf="dealForm.get('startDate')?.hasError('required')">
+            تاريخ بدء المشروع مطلوب
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+  </div>
+
+  <!-- Form Actions -->
+  <div class="flex justify-between mt-6">
+    <button
+      mat-flat-button
+      type="button"
+      class="bg-gray-200 text-primary px-6 py-2 rounded-md"
+      (click)="onCancel()"
+    >
+      إلغاء
+    </button>
+    <button
+      mat-raised-button
+      type="submit"
+      class="bg-primary text-white px-6 py-2 rounded-md"
+      [disabled]="dealForm.invalid || isLoading"
+    >
+      <span *ngIf="!isLoading" class="text-sm font-semibold">{{
+        isEditMode ? "تعديل" : "إضافه"
+      }}</span>
+      <mat-spinner
+        *ngIf="isLoading"
+        diameter="20"
+        strokeWidth="3"
+      ></mat-spinner>
+    </button>
+  </div>
+</form>
+<app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+<p-toast />

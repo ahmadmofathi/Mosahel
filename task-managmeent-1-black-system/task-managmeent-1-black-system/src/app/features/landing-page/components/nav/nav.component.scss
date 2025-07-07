@@ -1,0 +1,21 @@
+@keyframes border-glow {
+  0% {
+    box-shadow: 0 0 5px transparent;
+    border-color: white;
+  }
+  50% {
+    box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+    border-color: #4fb8ee;
+  }
+  100% {
+    box-shadow: 0 0 5px transparent;
+    border-color: white;
+  }
+}
+
+button:hover {
+  animation: border-glow 1.5s linear infinite;
+  border-width: 2px;
+  background-color: white;
+  color: #1a1a1a;
+}

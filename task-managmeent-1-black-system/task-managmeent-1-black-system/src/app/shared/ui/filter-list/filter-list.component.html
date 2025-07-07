@@ -1,0 +1,36 @@
+<div class="flex justify-between items-center my-6 px-1">
+  <div class="text-primary font-bold text-xl">{{ header }}</div>
+  <div class="flex gap-6 items-center">
+    <div class="w-full max-w-sm min-w-[200px]">
+      <input
+        class="custom-input w-64"
+        placeholder="بحث ..."
+        (input)="onSearchChange($event)"
+      />
+    </div>
+    @if (isFilter) {
+    <div class="cursor-pointer">
+      <i
+        (click)="isOpenFilter = !isOpenFilter"
+        [class]="
+          !isOpenFilter
+            ? 'fa-solid fa-filter'
+            : 'fa-solid fa-filter-circle-xmark'
+        "
+        style="font-size: 25px"
+      ></i>
+    </div>
+    }
+  </div>
+</div>
+@if (isFilter) {
+<div
+  [ngClass]="
+    !isOpenFilter
+      ? 'h-0 opacity-0 overflow-hidden'
+      : 'h-fit opacity-100 transition-all duration-600'
+  "
+>
+  <ng-content></ng-content>
+</div>
+}

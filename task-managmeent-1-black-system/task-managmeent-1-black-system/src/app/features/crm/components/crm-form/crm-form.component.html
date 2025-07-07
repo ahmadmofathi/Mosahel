@@ -1,0 +1,171 @@
+<app-loading-spinner [isLoading]="isLoading"></app-loading-spinner>
+<div class="p-5 my-5 overflow-y-auto max-h-[80vh]"> <!-- Add max height and overflow-y-auto -->
+  <h2 class="text-2xl font-bold text-gray-800 mb-6">
+    {{ isEditMode ? 'تعديل عميل' : 'إضافة عميل' }} <!-- Use isEditMode instead of data?.record -->
+  </h2>
+
+  <form [formGroup]="customerForm" (ngSubmit)="onSubmit()" class="flex flex-col gap-6">
+    <!-- Form Fields in a Table-like Structure -->
+    <div class="flex gap-5">
+      <!-- Responsible User -->
+      <mat-form-field>
+        <mat-label>اسم المسؤل</mat-label>
+        <input matInput formControlName="responsibleName" />
+        <mat-error *ngIf="customerForm.get('responsibleName')?.hasError('required')">
+          هذا الحقل مطلوب
+        </mat-error>
+      </mat-form-field>
+
+      <!-- Responsible User Role -->
+      <mat-form-field>
+        <mat-label>منصب المسؤل</mat-label>
+        <input matInput formControlName="responsiblePosition" />
+        <mat-error *ngIf="customerForm.get('responsiblePosition')?.hasError('required')">
+          هذا الحقل مطلوب
+        </mat-error>
+      </mat-form-field>
+    </div>
+
+    <div class="flex gap-5">
+      <!-- Left Column -->
+      <div class="w-1/2 flex flex-col gap-4">
+        <!-- Phone Number -->
+        <mat-form-field>
+          <mat-label>رقم الهاتف</mat-label>
+          <input matInput formControlName="phoneNumber" />
+          <mat-error *ngIf="customerForm.get('phoneNumber')?.hasError('required')">
+            هذا الحقل مطلوب
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Mobile Number -->
+        <mat-form-field>
+          <mat-label>رقم الجوال</mat-label>
+          <input matInput formControlName="mobileNumber" />
+          <mat-error *ngIf="customerForm.get('mobileNumber')?.hasError('required')">
+            هذا الحقل مطلوب
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Email -->
+        <mat-form-field>
+          <mat-label>البريد الإلكتروني</mat-label>
+          <input matInput formControlName="email" />
+          <mat-error *ngIf="customerForm.get('email')?.hasError('required')">
+            هذا الحقل مطلوب
+          </mat-error>
+          <mat-error *ngIf="customerForm.get('email')?.hasError('email')">
+            بريد إلكتروني غير صحيح
+          </mat-error>
+        </mat-form-field>
+      </div>
+
+      <!-- Right Column -->
+      <div class="w-1/2 flex flex-col gap-4">
+        <!-- Status -->
+        <mat-form-field>
+          <mat-label>حالة العميل</mat-label>
+          <mat-select  formControlName="status">
+            <mat-option value='Active'>فعلي</mat-option>
+            <mat-option value='Potential'>محتمل</mat-option>
+            <mat-option value='Hesitant'>متردد</mat-option>
+            <mat-option value='NotInterested'>غير مهتم</mat-option>
+          </mat-select>
+          <mat-error *ngIf="customerForm.get('status')?.hasError('required')">
+            هذا الحقل مطلوب
+          </mat-error>
+        </mat-form-field>
+
+        <!-- Action -->
+        <mat-form-field>
+          <mat-label>الاجراء</mat-label>
+          <mat-select formControlName="action">
+            <mat-option value='PhoneCall'>اتصال هاتفي</mat-option>
+            <mat-option value='Meeting'>اجتماع</mat-option>
+            <mat-option value='Postponed'>ترحيل للاسبوع القادم</mat-option>
+            <mat-option value='Assigned'>اسناد لموظف اخر</mat-option>
+            <mat-option value='ContractSent'>ارسال العقد</mat-option>
+            <mat-option value='DealClosed'>اغلاق الصفقه</mat-option>
+          </mat-select>
+          <mat-error *ngIf="customerForm.get('action')?.hasError('required')">
+            هذا الحقل مطلوب
+          </mat-error>
+        </mat-form-field>
+
+          <mat-form-field *ngIf="customerForm.get('action')?.value === 'Assigned'">
+          <mat-label>اختار المسؤول</mat-label>
+          <mat-select formControlName="createdByUserName">
+            <mat-option *ngFor="let user of sales" [value]="user.fullName">{{user.fullName}}</mat-option>
+          </mat-select>
+          <mat-error *ngIf="customerForm.get('action')?.hasError('required')">
+            هذا الحقل مطلوب
+          </mat-error>
+        </mat-form-field>
+      </div>
+    </div>
+
+    <div class="flex gap-5">
+      <!-- Left Column -->
+      <div class="w-1/2 flex flex-col gap-4">
+        <!-- Commercial Record -->
+        <mat-form-field>
+          <mat-label>السجل التجاري</mat-label>
+          <input matInput formControlName="taxRecord" />
+        </mat-form-field>
+
+        <!-- Tax Number -->
+        <mat-form-field>
+          <mat-label>الرقم الضريبي</mat-label>
+          <input matInput formControlName="taxNumber" />
+        </mat-form-field>
+      </div>
+
+      <!-- Right Column -->
+      <div class="w-1/2 flex flex-col gap-4">
+        <!-- Company Name -->
+        <mat-form-field>
+          <mat-label>اسم الشركة</mat-label>
+          <input matInput formControlName="companyName" />
+        </mat-form-field>
+
+        <!-- Company Number -->
+        <mat-form-field>
+          <mat-label>عنوان الشركة</mat-label>
+          <input matInput formControlName="companyAddress" />
+        </mat-form-field>
+
+        <!-- City -->
+        <mat-form-field>
+          <mat-label>المدينة</mat-label>
+          <input matInput formControlName="city" />
+        </mat-form-field>
+      </div>
+    </div>
+
+    <!-- Notes -->
+    <mat-form-field>
+      <mat-label>الملاحظات</mat-label>
+      <textarea matInput formControlName="notes" class="w-full"></textarea>
+    </mat-form-field>
+
+    <!-- Form Actions -->
+    <div class="flex justify-end gap-4 mt-6">
+      <button
+        mat-button
+        type="button"
+        class="bg-gray-100 text-gray-700 px-4 py-2 rounded hover:bg-gray-200"
+        (click)="onCancel()"
+      >
+        إلغاء
+      </button>
+      <button
+        mat-button
+        type="submit"
+        class="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        
+      >
+        {{ isEditMode ? 'تحديث' : 'إضافة' }} <!-- Use isEditMode instead of data?.record -->
+      </button>
+    </div>
+  </form>
+</div>

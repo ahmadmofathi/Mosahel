@@ -1,0 +1,106 @@
+<div class="relative flex flex-col justify-between items-start min-h-screen w-full overflow-y-hidden">
+  <!-- Background Video -->
+  <video
+    #videoPlayer
+    (canplay)="handleVideoLoaded()"
+    (waiting)="handleVideoLoading()"
+    (error)="handleVideoError()"
+    [poster]="poster"
+    preload="auto"
+    loop
+    muted
+    class="w-full h-full object-cover absolute -z-50 inset-0"
+    aria-label="Background video"
+  >
+    <source src="{{ bgVideo }}" type="video/mp4" />
+    متصفحك لا يدعم عنصر الفيديو.
+  </video>
+
+  <!-- زر لتشغيل الفيديو يدويًا -->
+  <button *ngIf="showPlayButton" (click)="playVideo()" class="absolute top-4 left-4 bg-white px-4 py-2 rounded shadow">
+    تشغيل الفيديو
+  </button>
+
+
+  
+  <!-- Navigation -->
+  <app-nav class="w-full"></app-nav>
+
+  <!-- Header Section -->
+  <div class="container mx-auto min-h-80 py-3 flex flex-col justify-center items-center relative w-[70%]">
+    <!-- Content Sections -->
+    <div class="transition-opacity duration-500 w-full text-center">
+
+      <!-- Section Header -->
+      <h1 class="font-bold text-3xl md:text-4xl text-white mb-3">
+        {{ contentSections[currentIndex].header }}
+      </h1>
+
+      <!-- Section Description -->
+      <p class="text-lg font-normal mb-5 text-gray-300 mx-auto max-w-2xl">
+        {{ contentSections[currentIndex].description }}
+      </p>
+
+      <!-- Call to Action Button -->
+      <a href="http://wa.me/+966500612332" 
+        target="_blank" 
+        rel="noopener noreferrer"
+        class="inline-block relative text-2xl font-semibold text-[#4FB8EE] border-2 border-[#4FB8EE] 
+                px-8 py-3 overflow-hidden transition-all duration-500 ease-in-out hover:text-white hover:bg-[#4FB8EE]">
+        
+        <!-- Animated Border -->
+        <span class="absolute inset-0 w-full h-full border-2 border-transparent 
+                      rounded-lg hover:animate-border-rotate"></span>
+
+        <!-- Button Text -->
+        <span class="relative z-10">{{ contentSections[currentIndex].callToAction }}</span>
+      </a>
+    </div>
+
+    <!-- Navigation Arrows -->
+    <button (click)="nextSlide()" 
+            class="absolute left-0 top-1/2 transform -translate-y-1/2 text-white text-3xl 
+                  hover:text-[#4FB8EE] transition-colors duration-300">
+      <i class="fas fa-chevron-left"></i>
+    </button>
+    <button (click)="prevSlide()" 
+            class="absolute right-0 top-1/2 transform -translate-y-1/2 text-white text-3xl 
+                  hover:text-[#4FB8EE] transition-colors duration-300">
+      <i class="fas fa-chevron-right"></i>
+    </button>
+
+    <!-- Indicator Dots -->
+    <div class="flex justify-center mt-8 gap-3">
+      <span *ngFor="let section of contentSections; let i = index" 
+            class="w-4 h-4 rounded-full cursor-pointer transition-all duration-300"
+            [ngClass]="{ 'bg-[#4FB8EE] w-6': i === currentIndex, 'bg-[#929292c7]': i !== currentIndex }"
+            (click)="setSlide(i)">
+      </span>
+    </div>
+  </div>
+
+  <!-- Cards Section -->
+  <div class="container mx-auto flex flex-wrap justify-center gap-6 -mb-5 w-full">
+    <mat-card *ngFor="let card of cards"
+      class="w-40 h-52 p-4 text-center group hover:-mt-6 border border-[#4FB8EE] rounded-lg shadow-md transition-all duration-300 hover:bg-[#25627E] hover:border-white hover:shadow-lg flex flex-col items-center justify-between">
+      
+      <!-- الرقم -->
+      <span class="absolute top-2 left-2 text-sm font-bold text-[#1E3A4C]">{{ card.num }}</span>
+
+      <!-- الأيقونة -->
+      <img [src]="card.logo" [alt]="card.header" class="w-12 h-12 mb-2 transition-all duration-300 group-hover:scale-110">
+
+      <!-- العنوان -->
+      <mat-card-header class="text-lg font-semibold text-[#1E3A4C] group-hover:text-white transition-all duration-300">
+        {{ card.header }}
+      </mat-card-header>
+
+      <!-- الوصف -->
+      <mat-card-content class="text-xs font-normal text-[#1B4961] group-hover:text-[#F0F0F0] transition-all duration-300 leading-tight">
+        {{ card.description }}
+      </mat-card-content>
+
+    </mat-card>
+  </div>
+
+</div>
