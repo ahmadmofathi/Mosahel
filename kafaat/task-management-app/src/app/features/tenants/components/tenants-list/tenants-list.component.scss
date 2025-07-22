@@ -1,0 +1,51 @@
+.active-status {
+  color: #4caf50;
+  //   font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: rgba(76, 175, 80, 0.1);
+}
+
+.inactive-status {
+  color: #f44336;
+  //   font-weight: bold;
+  padding: 4px 8px;
+  border-radius: 4px;
+  background-color: rgba(244, 67, 54, 0.1);
+}
+
+.custom-button{
+  background-color: rgba(187, 7, 1, 1);
+  color: white;
+}
+.my-table th{
+  color: rgba(187, 7, 1, 1);
+}
+.bg-primary{
+  background-color: rgba(187, 7, 1, 1);
+}
+
+mat-slide-toggle {
+  .mat-slide-toggle-bar {
+    background-color: #f0f0f0; // Default background color
+    .mat-slide-toggle-thumb {
+      background-color: white; // Thumb color
+    }
+  }
+
+  .mat-checked .mat-slide-toggle-bar {
+    background-color: green; // Background color when active
+  }
+
+  .mat-checked .mat-slide-toggle-thumb {
+    background-color: white; // Thumb color when active
+  }
+
+  .mat-unchecked .mat-slide-toggle-bar {
+    background-color: red; // Background color when inactive
+  }
+
+  .mat-unchecked .mat-slide-toggle-thumb {
+    background-color: white; // Thumb color when inactive
+  }
+}

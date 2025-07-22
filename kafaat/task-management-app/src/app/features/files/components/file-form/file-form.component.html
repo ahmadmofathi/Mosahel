@@ -1,0 +1,59 @@
+<h2 mat-dialog-title>{{ data ? "تعديل" : "اضافه" }}</h2>
+<mat-dialog-content class="mat-typography">
+  <form
+    id="myForm"
+    [formGroup]="taskForm"
+    (ngSubmit)="onSubmit()"
+    class="font-arabic"
+  >
+    <div class="mb-3">
+      <label for="tenantId">المهمه</label>
+      <p-dropdown
+        id="taskId"
+        formControlName="taskId"
+        [options]="empTasks"
+        optionLabel="description"
+        optionValue="id"
+      ></p-dropdown>
+      <app-form-error [control]="taskForm.get('taskId')"></app-form-error>
+    </div>
+    <div class="mb-3">
+      <label for="name">العنوان</label>
+      <input
+        type="text"
+        id="fileTitle"
+        pInputText
+        formControlName="fileTitle"
+      />
+      <app-form-error [control]="taskForm.get('fileTitle')"></app-form-error>
+    </div>
+
+    <div class="mb-3">
+      <label for="file"> الملف</label>
+      <app-file-upload-handler
+        [isFile]="true"
+        [imagePreview]="imagePreview"
+        (fileSelected)="handleFileSelected($event)"
+        (cancelClicked)="handleCancelClicked()"
+        [idInput]="'file'"
+      ></app-file-upload-handler>
+      <!-- [isRequired]="isFileRequired" -->
+      <input type="hidden" formControlName="file" />
+    </div>
+
+    <button type="submit" pButton label="إرسال" class="mt-3"></button>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close class="font-arabic">إلغاء</button>
+  <button
+    mat-button
+    cdkFocusInitial
+    type="submit"
+    form="myForm"
+    class="font-arabic"
+  >
+    <span *ngIf="!loading">{{ data ? "تعديل" : "اضافه" }}</span>
+    <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+  </button>
+</mat-dialog-actions>

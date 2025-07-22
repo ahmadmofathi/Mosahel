@@ -1,0 +1,29 @@
+<div
+  *ngIf="control?.invalid && (control?.dirty || control?.touched)"
+  class="text-red-500 text-sm"
+>
+  <div *ngIf="control?.errors?.['required']">هذا الحقل مطلوب</div>
+  <div *ngIf="control?.errors?.['email']">يرجى إدخال بريد إلكتروني صالح</div>
+  <div *ngIf="control?.errors?.['minlength']">
+    الحد الأدنى للطول هو
+    {{ control?.errors?.['minlength']?.requiredLength }} أحرف
+  </div>
+  <div *ngIf="control?.errors?.['passwordStrength']">
+    يجب أن تحتوي كلمة المرور على:
+    <ul class="list-disc list-inside">
+      <li *ngIf="!control?.errors?.['passwordStrength']?.hasUpperCase">
+        حرف كبير (A-Z)
+      </li>
+      <li *ngIf="!control?.errors?.['passwordStrength']?.hasLowerCase">
+        حرف صغير (a-z)
+      </li>
+      <li *ngIf="!control?.errors?.['passwordStrength']?.hasNumeric">
+        رقم (0-9)
+      </li>
+      <li *ngIf="!control?.errors?.['passwordStrength']?.hasSpecialChar">
+        رمز خاص (&#64;, #, $, ...)
+      </li>
+    </ul>
+  </div>
+  <div *ngIf="control?.errors?.['matching']">القيم غير متطابقة</div>
+</div>

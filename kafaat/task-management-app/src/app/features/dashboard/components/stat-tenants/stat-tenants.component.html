@@ -1,0 +1,53 @@
+<div class="flex flex-row-reverse gap-4">
+  <div class="shadow-lg p-4 rounded-lg flex flex-col flex-grow min-w-[250px]">
+    <div class="h-1/2 flex flex-col gap-2 justify-center">
+      <label for="tenantId">اسم الشركه</label>
+      <p-dropdown
+        id="tenantId"
+        [options]="tenants"
+        optionLabel="tenantName"
+        optionValue="id"
+        [(ngModel)]="tenantId"
+        [panelStyle]="{ 'max-width': '100%' }"
+        (onChange)="fillEmployees();updateFilters($event,'t')"
+      ></p-dropdown>
+      <div class="mb-3">
+        <p-dropdown
+          id="tenantEmployeeId"
+          [(ngModel)]="employeeId"
+          [options]="tenantsEmployees"
+          placeholder="اسم الموظف"
+          optionLabel="fullName"
+          optionValue="id"
+          (onChange)="updateFilters($event,'e');"
+          [panelStyle]="{ 'max-width': '100%' }"
+          ></p-dropdown>
+      </div>
+    </div>
+    <div
+      class="bg-primary rounded-md gap-6 flex-grow h-1/2 text-white flex flex-col justify-center items-center"
+    >
+      <div class="text-2xl font-semibold">مجموع المهام</div>
+      <div
+        class="font-semibold w-10 h-10 rounded-full bg-white text-primary flex flex-col justify-center items-center"
+      >
+        {{ allTask }}
+      </div>
+    </div>
+  </div>
+  <div class="shadow-lg p-4 rounded-lg flex-grow">
+    <canvas id="canvasTenants">{{ chart }}</canvas>
+  </div>
+  <div
+    class="shadow-lg p-6 py-8 rounded-lg flex justify-center flex-col items-center gap-6 min-w-[250px]"
+  >
+    <!-- <h3>اجمالي المهام / المهام المكتمله</h3> -->
+    <p-knob
+      size="150"
+      [disabled]="true"
+      [(ngModel)]="completionPercent"
+      [valueTemplate]="(completionPercent | number : '1.2-2') + '%'"
+      valueColor="#210559"
+    />
+  </div>
+</div>

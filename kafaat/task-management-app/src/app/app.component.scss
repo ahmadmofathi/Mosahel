@@ -1,0 +1,32 @@
+:host ::ng-deep .p-inputtext::placeholder {
+    line-height: 1.5;
+}
+
+:host ::ng-deep td {
+    max-width: 150px; /* Fixed width */
+    overflow: hidden;
+    white-space: nowrap;
+    text-overflow: ellipsis;
+    word-wrap: break-word;
+    padding: 5px;
+    
+    /* Set initial height constraint */
+    max-height: 30px;
+    
+    /* Enable smooth animation */
+    transition: max-height 0.8s ease-in-out, padding 0.8s ease-in-out;
+}
+
+/* On hover, increase height to show text */
+:host ::ng-deep td:hover {
+    white-space: normal; /* Allow text wrapping */
+    text-overflow: unset;
+    overflow: visible;
+
+    /* Increase max-height for animation */
+    max-height: 100px; /* Adjust based on expected text height */
+
+    /* Optional: Add background effect */
+    padding: 8px; /* Smooth padding expansion */
+}
+

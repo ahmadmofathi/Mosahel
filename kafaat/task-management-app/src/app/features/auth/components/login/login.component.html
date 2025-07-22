@@ -1,0 +1,91 @@
+<div class="min-h-screen grad-bg flex items-center justify-center p-4">
+  <div
+    class="grid grid-cols-1 p-10 md:grid-cols-2 bg-semi-transparent rounded-lg shadow-lg w-full max-w-5xl overflow-hidden"
+  >
+    <!-- Left side with image -->
+    <div class="hidden md:block relativ p-8">
+      <div class="absolute inset-0 opacity-10"></div>
+      <div class="relative z-10">
+        <img src="images/login-logo.png" alt="كفاءات الأعمال العالي للتدريب">
+
+        <div class="title text-3xl font-bold my-3">
+          مرحبا بعودتك
+        </div>
+        <span class="line my-1"></span>
+        <p class="text-gr">
+          هذه المنصه هي منصه متخصصة في ادارة المهام وقياس نسبة عملهم وهي ايضا منصة موثقة من قبل وزارة الموارد البشرية
+        </p>
+      </div>
+    </div>
+    
+    <!-- Right side with form -->
+    <div class="p-8 bg-white">
+      <div class="mb-4 text-center">
+        <h2 class="text-2xl  font-bold text-redo">تسجيل الدخول</h2>
+      </div>
+      <form [formGroup]="loginForm" (ngSubmit)="onLogin()">
+        <div class="flex justify-center items-center">
+          
+          <!-- Radio button group -->
+          <div class="flex w-1/2 mb-4 bg-gray-300 rounded-xl p-1">
+            @for (type of userTypes; track $index) {
+            <div class="flex-1 relative">
+              <div class="hidden">
+                <p-radioButton
+                  [inputId]="type.value"
+                  [value]="type.value"
+                  formControlName="adminOrEmployee"
+                ></p-radioButton>
+              </div>
+              <label
+                [for]="type.value"
+                class="block text-center font-bold py-2 px-4 cursor-pointer text-sm transition-all duration-200 rounded-md"
+                [class.bg-white]="
+                  loginForm.get('adminOrEmployee')?.value === type.value
+                "
+                [class.bg-gray]="loginForm.get('adminOrEmployee')?.value !== type.value"
+              >
+                {{ type.label }}
+              </label>
+            </div>
+            }
+          </div>
+        </div>
+
+        <div class="space-y-6">
+          <div class="space-y-2">
+            <label class="block font-bold text-gray-700">البريد الالكتروني</label>
+            <input
+              pInputText
+              formControlName="email"
+              class="w-full p-3 border rounded-md focus:ring-2 focus:ring-red-600"
+              placeholder="قم بكتابة البريد الالكتروني"
+              dir="rtl"
+            />
+          </div>
+
+          <div class="space-y-2">
+            <label class="block font-bold text-gray-700">كلمة السر</label>
+            <p-password
+              formControlName="password"
+              [feedback]="false"
+              [toggleMask]="true"
+              placeholder="قم بكتابة كلمة السر"
+              styleClass="w-full"
+              inputStyleClass="w-full"
+              dir="rtl"
+            ></p-password>
+          </div>
+          <div>
+            <p-button
+              type="submit"
+              label="تسجيل الدخول"
+              styleClass="w-full custom-btn"
+              [loading]="isLoading"
+            ></p-button>
+          </div>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>
