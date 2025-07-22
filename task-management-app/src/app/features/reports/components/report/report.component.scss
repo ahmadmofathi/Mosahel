@@ -1,0 +1,198 @@
+.custom-button{
+    color: #210559;
+}
+.my-table th{
+    color: #210559;
+}
+.bg-primary{
+    background-color: #EF9779;
+}
+
+
+
+.mat-table {
+    width: 100%;
+    border-radius: 15px;
+}
+// th,td{
+//     border: 1px solid #b4b4b4;
+// }
+// th{
+//     border-bottom: 4px solid #b4b4b4;
+// }
+// td{
+//     font-weight: 500;
+// }
+.mat-header-cell, .mat-cell {
+    padding: 10px;
+    font-size: 14px;
+    font-weight: normal;
+}
+
+.mat-column-task {
+    font-weight: bold;
+}
+
+.mat-progress-bar {
+    margin: 0 0 5px 0;
+}
+
+button {
+    margin: 5px;
+    background-color: #2196f3;
+    color: white;
+}
+
+.mat-header-cell {
+    background-color: #f5f5f5;
+    font-weight: bold;
+}
+
+.mat-cell {
+    background-color: #fff;
+}
+
+.mat-row:hover {
+    background-color: #f1f1f1;
+}
+.mat-mdc-row:nth-child(odd) {
+    background-color: #fff; // Light gray for even rows
+}
+.mat-mdc-row:nth-child(even) {
+    background-color: #e4e4ec; // White for odd rows
+}
+
+i{
+    color: #b4b4b4;
+    padding: 5px 0px;
+}
+
+// Stripe colors
+.name-odd{
+    background-color: #f1e6fe;
+}
+.name-even{
+    background-color: #e9dff5;
+}
+
+.mat-mdc-row:nth-child(odd) .email{
+    background-color: #cce3ff;
+}
+.mat-mdc-row:nth-child(even) .email{
+    background-color: #c4daf7;
+}
+
+.mat-mdc-row:nth-child(odd) .id{
+    background-color: #e7fcf9;
+}
+.mat-mdc-row:nth-child(even) .id{
+    background-color: #def4f0;
+}
+
+.mat-mdc-row:nth-child(odd) .dates{
+    background-color: #fdf5f0;
+}
+.mat-mdc-row:nth-child(even) .dates{
+    background-color: #f5ede8;
+}
+
+
+
+/* Column 1: Name */
+.data-cells:nth-child(odd) .pdf-cell:nth-child(1) {
+    background-color: #f1e6fe; /* name-odd */
+}
+.data-cells:nth-child(even) .pdf-cell:nth-child(1) {
+    background-color: #e9dff5; /* name-even */
+}
+
+/* Column 2: Email */
+.data-cells:nth-child(odd) .pdf-cell:nth-child(2) {
+    background-color: #cce3ff; /* email odd */
+}
+.data-cells:nth-child(even) .pdf-cell:nth-child(2) {
+    background-color: #c4daf7; /* email even */
+}
+
+/* Column 3: ID */
+.data-cells:nth-child(odd) .pdf-cell:nth-child(3) {
+    background-color: #e7fcf9; /* id odd */
+}
+.data-cells:nth-child(even) .pdf-cell:nth-child(3) {
+    background-color: #def4f0; /* id even */
+}
+
+/* Column 4: Dates */
+.data-cells:nth-child(odd) .pdf-cell:nth-child(4) {
+    background-color: #fdf5f0; /* dates odd */
+}
+.data-cells:nth-child(even) .pdf-cell:nth-child(4) {
+    background-color: #f5ede8; /* dates even */
+}
+
+
+.task-chip {
+    width: fit-content;
+    border: 2px solid #0775fc;
+    background-color: #dde8f6;
+    border-radius: 30px;
+    border-radius: 30px;
+    padding: 8px;
+    margin: 5px;
+    font-size: 12px;
+    display: inline-flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+}
+
+
+
+.time{
+    color: #509b6f;
+    background-color: #e9ffee;
+    text-align: center;
+    width: fit-content;
+    margin: 0 auto;
+    padding: 4px;
+    border-radius: 30px;
+}
+.time i{
+    color: #509b6f;
+}
+
+
+#pdf-content{
+    font-family: "IBM Plex Sans Arabic", sans-serif;
+}
+
+.pdf-cell {
+    // display: flex;
+    // justify-content: center;
+    // align-items: center;
+    border-right: 0.5px solid #ccc;
+    border-left: 0.5px solid #ccc;
+    padding: 10px;
+    word-wrap: break-word;
+    white-space: wrap;
+}
+.table-data .flex{
+    border-bottom: 0.5px solid #ccc;
+}
+.pdf-header-item{
+    padding: 8px;
+    border-right: 0.5px solid #ccc;
+    border-left: 0.5px solid #ccc;
+    border-top: 0.5px solid #ccc;
+}
+
+
+.custom-button{
+    color: #210559;
+    background-color: white;
+}
+
+
+.btn-outline {
+    @apply bg-transparent hover:bg-primary text-primary font-semibold hover:text-white py-2 px-4 border border-primary hover:border-transparent rounded-full px-6;
+}

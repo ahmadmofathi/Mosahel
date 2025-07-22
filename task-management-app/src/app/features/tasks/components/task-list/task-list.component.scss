@@ -1,0 +1,44 @@
+.custom-button{
+    color: #210559;
+}
+.my-table th{
+    color: #210559;
+}
+.bg-primary{
+    background-color: #EF9779;
+}
+.employee-name-chip {
+    background-color: #EF9779;
+    color: #fff;
+    padding: 4px 8px;
+    border-radius: 12px;
+    margin-right: 4px;
+    display: inline-block;
+    margin: 2px;
+}
+
+
+mat-slide-toggle {
+    .mat-slide-toggle-bar {
+    background-color: #f0f0f0; // Default background color
+    .mat-slide-toggle-thumb {
+        background-color: white; // Thumb color
+    }
+    }
+
+    .mat-checked .mat-slide-toggle-bar {
+    background-color: green; // Background color when active
+    }
+
+    .mat-checked .mat-slide-toggle-thumb {
+    background-color: white; // Thumb color when active
+    }
+
+    .mat-unchecked .mat-slide-toggle-bar {
+    background-color: red; // Background color when inactive
+    }
+
+    .mat-unchecked .mat-slide-toggle-thumb {
+    background-color: white; // Thumb color when inactive
+    }
+}

@@ -1,0 +1,15 @@
+:host {
+  display: block;
+}
+.bg-primary{
+  background-color: white;
+  color: #210559;
+}
+// .grid{
+//   width: 70%;
+// }
+@media (max-width: 768px) {
+  .grid-cols-4 {
+    grid-template-columns: repeat(1, minmax(0, 1fr));
+  }
+}

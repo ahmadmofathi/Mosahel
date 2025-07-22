@@ -1,0 +1,273 @@
+<div class="flex flex-col gap-5 px-3 mt-5">
+  <div class="p-4 mb-4 text-lg text-red-800 rounded-lg bg-red-50" role="alert" *ngIf="expiration?.message && currentRole=='Admin'">
+    <span class="font-medium"> {{ expiration.message }} </span>
+  </div>
+  <!-- <div class="p-4 mb-4 text-lg text-yellow-800 rounded-lg bg-yellow-50" role="alert" *ngIf="subscriptionLeft<30&&subscriptionLeft>=15">
+    متبقي علي الاشتراك <span class="font-medium"> {{ subscriptionLeft }} يوم</span>
+  </div> -->
+  <!-- Header remains the same -->
+  <!--<div class="flex flex-row-reverse">
+    <div class="flex flex-col gap-1" *appHasRole="['SuperAdmin']">
+      <label for="startDate"> فلتر بالتاريخ</label> 
+      <p-datepicker
+        [style]="{ width: '100%' }"
+        [selectionMode]="'range'"
+        [(ngModel)]="date"
+        [iconDisplay]="'input'"
+        [showIcon]="true"
+        dateFormat="dd-mm-yy"
+        [maxDate]="today"
+        appendTo="body"
+        placeholder="ادخل تاريخ البدايه والنهايه ..."
+        inputId="icondisplay"
+      />
+    </div>
+  </div>-->
+  <!-- Show preloader while loading -->
+  @if(isLoadingAttendance){
+    <div class="text-center py-8" *HasRole="['Employee']">
+      <i class="pi pi-spinner pi-spin text-4xl text-gray-500"></i>
+      <p class="mt-2 text-gray-600">جاري تحميل بيانات الحضور...</p>
+    </div>
+  }
+  @else{
+  @if(currentAttendance?.checkIn &&currentAttendance?.lastCheckOut && currentAttendance?.isCurrentCheckedInOrOut == 2){
+  <div class="flex justify-between">
+      <button
+      (click)="checkIn()"
+      class="bg-green-500 hover:bg-green-400   font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded"
+      >
+      تسجيل حضور آخر
+      </button>
+    <div class="text-gray-600">
+      <span>تاريخ الحضور</span>:
+      {{ currentAttendance?.checkIn | date : "dd-MM-yyyy - HH:mm" }}
+    </div>
+    <div class="text-gray-600">
+      <span>تاريخ الانصراف</span>:
+      {{ currentAttendance?.lastCheckOut | date : "dd-MM-yyyy - HH:mm" }}
+    </div>
+  </div>
+  }@else {
+  <div
+    *appHasRole="['Employee']"
+    class="bg-white rounded-lg shadow mb-4 p-4 flex justify-between items-center"
+  >
+    @if (currentAttendance?.checkIn) {
+    <div class="text-gray-600" dir="ltr">
+      {{ currentAttendance?.checkIn | date : "dd-MM-yyyy - HH:mm" }} :تاريخ
+      اليوم
+    </div>
+    } 
+    @if ( currentAttendance?.isCurrentCheckedInOrOut == 2 || currentAttendance?.checkIn==null) {
+    <button
+      (click)="checkIn()"
+      class="bg-green-500 hover:bg-green-400   font-bold py-2 px-4 border-b-4 border-green-700 hover:border-green-500 rounded"
+    >
+      تسجيل الحضور
+    </button>
+
+    }@else {
+    <button
+      (click)="checkOut(currentAttendance?.id,$event)"
+      class="bg-red-500 hover:bg-red-400   font-bold py-2 px-4 border-b-4 border-red-700 hover:border-red-500 rounded"
+    >
+      تسجيل الانصراف
+    </button>
+    }
+  </div>
+}
+}
+  <!-- Stats Grid -->
+  <div class="grid grid-cols-5 gap-4 mb-4" *appHasRole="['Employee', 'Admin']">
+    <!-- Total Tasks -->
+    <div
+      *appHasRole="['Admin']"
+      class="bg-primary rounded-lg shadow p-8 flex justify-between items-center"
+    >
+      <div class=" ">
+        <div class="text-2xl font-bold">
+          {{ currentStat?.numberOfEmployees }}
+        </div>
+        <div class="text-sm">عدد الموظفين</div>
+      </div>
+      <i class="fas fa-dollar-sign   text-3xl"></i>
+    </div>
+    <div
+      *appHasRole="['Employee']"
+      class="bg-primary rounded-lg shadow p-8 flex justify-between items-center"
+    >
+      <div class=" ">
+        <div class="text-2xl font-bold">
+          {{ currentStat?.totalTasks }}
+        </div>
+        <div class="text-sm">إجمالي المهام</div>
+      </div>
+      <i class="fas fa-dollar-sign   text-3xl"></i>
+    </div>
+
+    <!-- Completed Tasks -->
+    <div
+      class="bg-primary rounded-lg shadow p-8 flex justify-between items-center"
+    >
+      <div class=" ">
+        <div class="text-2xl font-bold">
+          {{ currentStat?.completedTasks }}
+        </div>
+        <div class="text-sm">مهام مكتملة</div>
+      </div>
+      <i class="fas fa-bell   text-3xl"></i>
+    </div>
+
+    <!-- Active Tasks -->
+    <div
+      class="bg-primary rounded-lg shadow p-8 flex justify-between items-center"
+    >
+      <div class=" ">
+        <div class="text-2xl font-bold">
+          {{ currentStat?.continuedTasks }}
+        </div>
+        <div class="text-sm">مهام فعالة</div>
+      </div>
+      <i class="fas fa-th-large   text-3xl"></i>
+    </div>
+
+    <!-- New Tasks -->
+    <div
+      class="bg-primary rounded-lg shadow p-8 flex justify-between items-center"
+    >
+      <div class=" ">
+        <div class="text-2xl font-bold">
+          {{ currentStat?.newTasks }}
+        </div>
+        <div class="text-sm">مهام جديدة</div>
+      </div>
+      <i class="fas fa-comments   text-3xl"></i>
+    </div>
+  </div>
+
+  <div class="grid grid-cols-5 gap-4 mb-4" *appHasRole="['SuperAdmin']">
+    <!-- Total Tasks -->
+    <div
+      class="bg-primary rounded-lg shadow p-8 flex justify-between items-center"
+    >
+      <div>
+        <div class="text-2xl font-bold">
+          {{ superCount?.Overdue }}
+        </div>
+        <div class="text-sm">مجموع المتأخره</div>
+      </div>
+      <i class="fas fa-solid fa-clock   text-3xl"></i>
+    </div>
+    <div
+      class="bg-primary rounded-lg shadow p-8 flex justify-between items-center"
+    >
+      <div class=" ">
+        <div class="text-2xl font-bold">
+          {{ superCount?.Completed }}
+        </div>
+        <div class="text-sm">مجموع المكتملة</div>
+      </div>
+      <i class="fas fa-solid fa-list-check   text-3xl"></i>
+    </div>
+
+    <!-- Completed Tasks -->
+    <div
+      class="bg-primary rounded-lg shadow p-8 flex justify-between items-center"
+    >
+      <div class=" ">
+        <div class="text-2xl font-bold">
+          {{ superCount?.InProgress }}
+        </div>
+        <div class="text-sm">مجموع جاري العمل</div>
+      </div>
+      <i class="fas fa-solid fa-circle-half-stroke   text-3xl"></i>
+    </div>
+
+    <!-- Active Tasks -->
+    <div
+      class="bg-primary rounded-lg shadow p-8 flex justify-between items-center"
+    >
+      <div class=" ">
+        <div class="text-2xl font-bold">
+          {{ superCount?.New }}
+        </div>
+        <div class="text-sm">مجموع المهام الجديدة</div>
+      </div>
+      <i class="fas fa-th-large   text-3xl"></i>
+    </div>
+
+    <!-- New Tasks -->
+    <div
+      class="bg-primary rounded-lg shadow p-8 flex justify-between items-center"
+    >
+      <div class=" ">
+        <div class="text-2xl font-bold">
+          {{ superCount?.All }}
+        </div>
+        <div class="text-sm">كافة المهام</div>
+      </div>
+      <i class="fas fa-comments   text-3xl"></i>
+    </div>
+  </div>
+
+  <!-- Last Design Section -->
+  @if (currentNoti) {
+  <div
+    class="bg-white rounded-lg drop-shadow-lg p-4"
+    *appHasRole="['Employee', 'Admin']"
+  >
+    <div class="flex items-center justify-between mb-4">
+      <div class="flex items-center">
+        <!-- <i class="fas fa-image text-gray-600 mr-2 text-xl"></i> -->
+        <h2 class="text-lg font-semibold text-gray-800">
+          {{ currentNoti?.title }}
+        </h2>
+        @if (currentNoti?.likes==0 && !isLiked) {
+        <!-- <i
+          class="fa-regular fa-thumbs-up text-2xl mx-2 cursor-pointer"
+          (click)="react()"
+        ></i> -->
+        }@else {
+        <i class="fa-solid fa-thumbs-up text-2xl mx-2 cursor-pointer"></i>
+        }
+      </div>
+      <div class="text-gray-600 text-sm">
+        {{ currentNoti?.createdOn | date : "dd-MM-yyyy - HH:mm" }}
+      </div>
+    </div>
+    <p class="text-gray-600 text-right">
+      {{ currentNoti?.message }}
+    </p>
+  </div>
+  }
+
+  <div class="grid grid-cols-5 gap-4" *appHasRole="['SuperAdmin']">
+    <div class="col-span-3">
+      <app-tasks-classification></app-tasks-classification>
+    </div>
+    <div class="col-span-2 col-start-4" *appHasRole="['SuperAdmin']">
+      <app-all-tasks [(date)]="date"></app-all-tasks>
+    </div>
+  </div>
+  <div class="flex gap-4" *appHasRole="['Employee', 'Admin']">
+    <div
+      class="shadow-lg p-6 py-8 rounded-lg flex justify-center flex-col items-center gap-6 min-w-[350px]"
+    >
+      <h3>اجمالي المهام / المهام المكتمله</h3>
+      <p-knob
+        size="150"
+        [disabled]="true"
+        [(ngModel)]="completionPercent"
+        [valueTemplate]="(completionPercent | number : '1.2-2') + '%'"
+      />
+    </div>
+    <div class="flex-grow">
+      <app-tasks-days></app-tasks-days>
+    </div>
+  </div>
+  <div *appHasRole="['SuperAdmin']">
+    <app-stat-tenants (subscriptionLeftChange)="updateSubscriptionLeft($event)"></app-stat-tenants>
+  </div>
+  <p-confirmDialog [rtl]="true" />
+</div>

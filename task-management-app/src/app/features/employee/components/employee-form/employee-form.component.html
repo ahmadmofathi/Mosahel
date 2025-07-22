@@ -1,0 +1,107 @@
+<h2 mat-dialog-title>{{ data ? "تعديل" : "اضافه" }}</h2>
+<mat-dialog-content class="mat-typography">
+  <form
+    id="myForm"
+    [formGroup]="taskForm"
+    (ngSubmit)="onSubmit()"
+    class="font-arabic"
+  >
+    <div class="mb-3" *ngIf="data">
+      <label for="fullName">اسم الشركة</label>
+      <input type="text" id="fullName" pInputText [value]="data.tenantName || data.company" disabled/>
+    </div>
+    <div class="mb-3">
+      <label for="fullName">الاسم</label>
+      <input type="text" id="fullName" pInputText formControlName="fullName" />
+      <app-form-error [control]="taskForm.get('fullName')"></app-form-error>
+    </div>
+    <div class="mb-3" *ngIf="!data">
+      <label for="email">البريد الالكتروني</label>
+      <input type="text" id="email" pInputText formControlName="email" />
+      <app-form-error [control]="taskForm.get('email')"></app-form-error>
+    </div>
+    <div class="mb-3"  *ngIf="!data">
+      <label for="password">كلمه المرور</label>
+      <input type="text" id="password" pInputText formControlName="password" />
+      <app-form-error [control]="taskForm.get('password')"></app-form-error>
+    </div>
+    <div class="mb-3">
+      <label for="phoneNumber">رقم الهاتف</label>
+      <input
+        type="text"
+        id="phoneNumber"
+        pInputText
+        formControlName="phoneNumber"
+      />
+      <app-form-error [control]="taskForm.get('phoneNumber')"></app-form-error>
+    </div>
+    <div class="mb-3">
+      <label for="jobNumber">رقم الوظيفة</label>
+      <input
+        type="text"
+        id="jobNumber"
+        pInputText
+        formControlName="jobNumber"
+      />
+      <app-form-error [control]="taskForm.get('jobNumber')"></app-form-error>
+    </div>
+    <div class="mb-3">
+      <label for="identityNumber">رقم الهوية</label>
+      <input
+        type="text"
+        id="identityNumber"
+        type="number"
+        pInputText
+        formControlName="identityNumber"
+      />
+      <app-form-error
+        [control]="taskForm.get('identityNumber')"
+      ></app-form-error>
+    </div>
+    @if (!data?.id) {
+    <div class="mb-3" *appHasRole="['SuperAdmin']">
+      <label for="tenantId">اسم الشركه</label>
+      <p-dropdown
+        id="tenantId"
+        formControlName="tenantId"
+        [options]="tenants"
+        optionLabel="tenantName"
+        optionValue="id"
+        [panelStyle]="{ 'max-width': '100%' }"
+      ></p-dropdown>
+      <app-form-error [control]="taskForm.get('tenantId')"></app-form-error>
+    </div>
+    }
+    <div class="mb-3">
+      <label for="jobTitle">المسمى الوظيفي</label>
+      <input type="text" id="jobTitle" pInputText formControlName="jobTitle" />
+      <app-form-error [control]="taskForm.get('jobTitle')"></app-form-error>
+    </div>
+    <div class="mb-3">
+      <label for="nationality">الجنسية</label>
+      <input
+        type="text"
+        id="nationality"
+        pInputText
+        formControlName="nationality"
+      />
+      <app-form-error [control]="taskForm.get('nationality')"></app-form-error>
+    </div>
+
+    <button type="submit" pButton label="إرسال" class="mt-3"></button>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close class="font-arabic">إلغاء</button>
+  <button
+    mat-button
+    cdkFocusInitial
+    type="submit"
+    form="myForm"
+    class="font-arabic"
+    [disabled]="taskForm.invalid"
+  >
+    <span *ngIf="!loading">{{ data ? "تعديل" : "اضافه" }}</span>
+    <mat-spinner *ngIf="loading" diameter="20"></mat-spinner>
+  </button>
+</mat-dialog-actions>

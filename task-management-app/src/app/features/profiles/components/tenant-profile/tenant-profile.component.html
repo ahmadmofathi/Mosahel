@@ -1,0 +1,35 @@
+<div class="container">
+    <div class="profile-header">
+        <div class="profile-image-container">
+            <img
+            [src]="profilePicture"
+            alt="Profile Picture"
+            class="profile-image"
+            />
+            <!-- Camera Icon Button -->
+            <button class="camera-icon" (click)="triggerFileInput()">
+            <i class="fa fa-camera"></i>
+            </button>
+            <!-- Hidden File Input -->
+            <input
+            type="file"
+            #fileInput
+            (change)="onFileSelected($event)"
+            accept="image/*"
+            hidden
+            />
+        </div>
+        <h2 class="employee-name">{{ tenant.tenantName }}</h2>
+        <hr />
+    </div>
+    <div class="employee-info row">
+        @for (field of fields; track $index) {
+            <div class="info-row col-6">
+                <label [for]="field.id">{{ field.label }}</label>
+                <input type="text" [id]="field.id" [value]="tenant[field.property]||'غير محدد'" disabled>
+            </div>
+        }
+    </div>
+</div>
+
+
