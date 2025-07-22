@@ -1,0 +1,31 @@
+<h2 mat-dialog-title class="font-arabic">تعديل الحضور والانصراف</h2>
+<mat-dialog-content>
+  <div class="flex flex-col gap-4 p-4">
+    <!-- Check In Section -->
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label class="font-arabic">تاريخ الحضور</mat-label>
+        <input matInput [value]="checkInDate" disabled>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label class="font-arabic">وقت الحضور</mat-label>
+        <input matInput type="time" [(ngModel)]="checkInTime">
+      </mat-form-field>
+    </div>
+    <!-- Last Check Out Section -->
+    <div>
+      <mat-form-field appearance="fill">
+        <mat-label class="font-arabic">تاريخ الانصراف</mat-label>
+        <input matInput [value]="lastCheckOutDate" disabled>
+      </mat-form-field>
+      <mat-form-field appearance="fill">
+        <mat-label class="font-arabic">وقت الانصراف</mat-label>
+        <input matInput type="time" [(ngModel)]="lastCheckOutTime">
+      </mat-form-field>
+    </div>
+  </div>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button (click)="onCancel()">إلغاء</button>
+  <button mat-button (click)="onSave()">حفظ</button>
+</mat-dialog-actions>

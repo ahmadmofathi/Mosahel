@@ -1,0 +1,75 @@
+:host ::ng-deep {
+  .title{
+    color:rgba(63, 63, 63, 1);
+  }
+  .line{
+    display: inline-block;
+    background-color: rgba(63, 63, 63, 1);
+    border: none;
+    height: 4px;
+    width: 75px;
+  }
+  .text-gr{
+    color: rgba(106, 106, 106, 1);
+    width: 95%;
+  }
+  .left-screen {
+    width: 50%; /* Forces the container to always be 50% wide */
+    display: flex;
+    justify-content: flex-end;
+    overflow: hidden; /* Ensures no overflow if the image is larger */
+  }
+  .screen-image {
+    width: 100%;   /* The image fills the container width */
+    height: 100vh; /* Adjust as needed */
+    object-fit: cover; /* Keeps the image's aspect ratio */
+  }
+  .p-100{
+    padding: 100px;
+  }
+  .login-toggle{
+    background-color: #24383F4A;
+    color: white;
+    position: relative;
+  }
+  .center{
+    display: flex;
+    justify-content: center;
+  }
+  .login-btn{
+    display: inline-flex;
+    background-color: rgba(128, 181, 199, 1) !important;
+    padding: 10px;
+  }
+  // .login-btn::after{
+  //   position: absolute;
+  //   content: url('../../../../../../public/images/arrow.svg');
+  //   right: 12%;
+  //   top: 20%;
+  // }
+  .employee-color{
+    background-color:rgba(128, 181, 199, 1);
+  }
+  .p-password {
+    width: 100%;
+  }
+  .p-password-input {
+    width: 100%;
+    padding: 0.75rem;
+    border-radius: 0.375rem;
+  }
+
+  .p-icon-wrapper {
+    inset-inline-end: 12px;
+  }
+
+  .p-button {
+    background-color: rgb(128 181 199 / var(--tw-bg-opacity, 1));
+    border: none;
+    border-radius: 0.375rem;
+
+    &:hover {
+      background-color: rgb(2 132 199);
+    }
+  }
+}

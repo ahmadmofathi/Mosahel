@@ -1,0 +1,170 @@
+<div class="px-3">
+  <app-list-header header="عدد الشركات" [count]="totalCount">
+    <button class="custom-button" (click)="newRecord()">اضافة شركه</button>
+    <!-- You can enable export buttons if needed -->
+    <!-- <button class="custom-button">تصدير pdf</button>
+         <button class="custom-button">تصدير Excel</button> -->
+  </app-list-header>
+
+  <app-filter-list [isFilter]="true" [searchPlaceholder]="'البحث باسم الشركة ...'" header="الشركات" (searchChange)="updateSearch($event)">
+    <div class="flex gap-6 mb-4 flex-wrap items-center">
+      <mat-form-field>
+        <mat-label class="font-arabic">تاريخ البدء</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [(ngModel)]="filters.startDate"
+          (ngModelChange)="validateDates()"
+        />
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        <mat-hint *ngIf="showError2" class="error-message" style="color:red">يجب اختيار تاريخ البدء</mat-hint>
+      </mat-form-field>
+      
+      <mat-form-field>
+        <mat-label class="font-arabic">تاريخ الانتهاء</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          [(ngModel)]="filters.endDate"
+          (ngModelChange)="validateDates()"
+        />
+        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+        <mat-hint *ngIf="showError" class="error-message" style="color:red">يجب اختيار تاريخ الانتهاء</mat-hint>
+      </mat-form-field>
+      <div class="flex gap-3">
+        <button class="btn-outline" [disabled]="(filters.startDate && !filters.endDate) || (!filters.startDate && filters.endDate)" (click)="filterHandler()">بحث</button>
+        <button class="btn-outline" (click)="filterHandler(true)">إلغاء</button>
+      </div>
+
+      <!-- Column Selection -->
+      <div class="mb-3">
+        <p-multiSelect
+          [options]="allColumns"
+          [(ngModel)]="selectedColumns"
+          optionLabel="label"
+          selectedItemsLabel="{0} أعمدة مختارة"
+          [style]="{'minWidth': '200px'}"
+          placeholder="اختر الأعمدة"
+          (onChange)="onColumnSelectionChange($event)"
+        ></p-multiSelect>
+      </div>
+    </div>
+  </app-filter-list>
+
+  <!-- Table with sorting -->
+  <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSort($event)" class="mat-elevation-z8 my-table">
+    <!-- Tenant Name Column -->
+<!-- Tenant Name Column -->
+<ng-container matColumnDef="tenantName">
+  <th mat-header-cell *matHeaderCellDef mat-sort-header>الاسم</th>
+  <td mat-cell *matCellDef="let element" class="max-width">
+    <span>
+      {{ element.tenantName }}
+    </span>
+  </td>
+</ng-container>
+
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>البريد الالكتروني</th>
+      <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+    <!-- Password Column (initially hidden) -->
+    <ng-container matColumnDef="password">
+      <th mat-header-cell *matHeaderCellDef>الرقم السري</th>
+      <td mat-cell *matCellDef="let element">{{ element.password }}</td>
+    </ng-container>
+
+    <!-- Subscription Fee Column -->
+    <ng-container matColumnDef="subscriptionFee">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>قيمة الاشتراك</th>
+      <td mat-cell *matCellDef="let element">{{ element.subscriptionFee }}</td>
+    </ng-container>
+
+    <!-- Phone Number Column -->
+    <ng-container matColumnDef="phoneNumber">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>رقم الهاتف</th>
+      <td mat-cell *matCellDef="let element">{{ element.phoneNumber }}</td>
+    </ng-container>
+
+    <!-- Start Date Column -->
+    <ng-container matColumnDef="startDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>تاريخ الانشاء</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.startDate | date: "dd-MM-yyyy" }}
+      </td>
+    </ng-container>
+
+    <!-- End Date Column -->
+    <ng-container matColumnDef="endDate">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>تاريخ الانتهاء</th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.expirationDate | date: "dd-MM-yyyy" }}
+      </td>
+    </ng-container>
+
+    <!-- Notes Column -->
+    <ng-container matColumnDef="notes">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>ملاحظات</th>
+      <td mat-cell *matCellDef="let element" class="max-width">{{ element.notes }}</td>
+    </ng-container>
+
+    <!-- Status Column -->
+    <ng-container matColumnDef="status">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>الحاله</th>
+      <td mat-cell *matCellDef="let element">
+        <!-- <span class="p-1">{{ element.isActive ? 'مفعل' : 'معطل' }}</span> -->
+        <mat-slide-toggle
+          [checked] = "element.isActive"
+          (change)="onToggleChange($event,element.id)">
+        </mat-slide-toggle>
+        <!-- <span [ngClass]="{
+          'active-status': getStatus(element.expirationDate) === 'قيد العمل',
+          'inactive-status': getStatus(element.expirationDate) === 'منتهي'
+        }">
+          {{ getStatus(element.expirationDate) }}
+        </span> -->
+      </td>
+    </ng-container>
+
+    <!-- Edit Action Column (for SuperAdmin) -->
+    <ng-container matColumnDef="edit">
+      <th mat-header-cell *matHeaderCellDef>إجراء</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-button class="m-1" (click)="editTask(element); items[0].command(element)">
+          <svg width="20" height="18" viewBox="0 0 26 25" fill="none"
+              xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.0486 8.63281L16.5486 3.13281M22.0486 8.63281L15.1757 15.5057C14.2701 16.4113 13.1708 17.1264 11.9086 17.3441C10.6343 17.5638 9.05279 17.637 8.29861 16.8828C7.54444 16.1286 7.61758 14.5471 7.83737 13.2728C8.05506 12.0106 8.7701 10.9113 9.67574 10.0057L16.5486 3.13281M22.0486 8.63281C22.0486 8.63281 26.1736 4.50781 23.4236 1.75781C20.6736 -0.992188 16.5486 3.13281 16.5486 3.13281M24.1875 12.5C24.1875 21.4375 21.4375 24.1875 12.5 24.1875C3.5625 24.1875 0.8125 21.4375 0.8125 12.5C0.8125 3.5625 3.5625 0.8125 12.5 0.8125"
+                  stroke="#179717" stroke-width="1.5" stroke-linecap="round"
+                  stroke-linejoin="round"/>
+          </svg>
+        </button>
+        <button mat-button class="m-1" (click)="items[1].command(element)">
+          <svg width="20" height="18" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M15.25 10.0625C15.25 10.0625 15.9375 11.4375 15.9375 14.1875C15.9375 16.9375 15.25 18.3125 15.25 18.3125M9.75 10.0625C9.75 10.0625 9.0625 11.4375 9.0625 14.1875C9.0625 16.9375 9.75 18.3125 9.75 18.3125M4.24999 5.25C4.24999 13.3057 2.36771 24.5 12.5 24.5C22.6323 24.5 20.75 13.3057 20.75 5.25M1.5 5.25H23.5M16.625 5.25V3.875C16.625 1.43432 14.3737 1.125 12.5 1.125C10.6263 1.125 8.375 1.43432 8.375 3.875V5.25" stroke="#D50000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </td>
+    </ng-container>
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+        <div class="flex justify-center items-center py-10 text-l font-semibold">
+          {{ loading ? "جـــاري التــحـــمـــيل ......" : "لا يوجد بيانات" }}
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <mat-paginator [length]="totalCount" [pageSizeOptions]="[5, 10, 100]" aria-label="Select page" (page)="onPageChange($event)">
+  </mat-paginator>
+  <p-menu #menu [model]="items" [popup]="true"></p-menu>
+  <p-confirmDialog [rtl]="true"></p-confirmDialog>
+  <p-toast></p-toast>
+</div>

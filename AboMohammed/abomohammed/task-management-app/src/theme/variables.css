@@ -1,0 +1,20 @@
+:root {
+  --text_500: #bf874a;
+  --text_200: rgba(28, 120, 123, 0.1);
+  --text_100: rgba(28, 120, 123, 0.05);
+
+  --primary-50: #dfc3a4;
+  --primary-100: #d8b792;
+  --primary-200: #d2ab80;
+  --primary-300: #cb9f6e;
+  --primary-400: #c5935c;
+  --primary-500: #bf874a;
+  --primary-600: #ab7942;
+  --primary-700: #986c3b;
+  --primary-800: #855e33;
+  --primary-900: #72512c;
+
+  --card_badge_color: var(--primary-600);
+  --gradient_bg: linear-gradient(to left, var(--primary-200), var(--primary-600));
+  --primary-color: var(--primary-500);
+}
