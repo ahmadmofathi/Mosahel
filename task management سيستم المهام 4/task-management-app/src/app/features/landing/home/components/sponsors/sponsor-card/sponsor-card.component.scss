@@ -1,0 +1,86 @@
+.sponsor-card {
+  cursor: pointer;
+  // &:hover {
+  //   .icon-box {
+  //     visibility: visible;
+  //     opacity: 1;
+  //   }
+
+  //   .icon-external {
+  //     visibility: visible;
+  //     opacity: 1;
+  //     transform: scale(1.1);
+  //     transition: all 0.7s;
+  //   }
+
+  //   .arrow-external {
+  //     animation: rocket-animation 1s infinite ease-in-out;
+  //   }
+
+  //   .image-sponor {
+  //     transform: scale(1.2);
+  //   }
+  // }
+
+  .icon-external {
+    visibility: hidden;
+    opacity: 0;
+    transform: scale(1);
+    transition: visibility 0.2s, opacity 0.3s 0.2s, transform 0.4s 0.3s;
+  }
+
+  .icon-size {
+    font-size: 0.875rem !important;
+  }
+
+  .image-sponor {
+    width: 200px;
+    height: 200px;
+    object-fit: contain;
+    transition: transform 0.5s;
+  }
+  .image-sponor-hr {
+    padding-top: 25px;
+    width: 250px;
+    height: 250px;
+    object-fit: contain;
+    transition: transform 0.5s;
+  }
+  .icon-external {
+    i {
+      color: #002929;
+    }
+  }
+  .icon-box {
+    background-color: #f4f4f4;
+    transition: background-color 0.2s;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s;
+    i {
+      color: #002929;
+      transition: color 0.2s;
+    }
+    &:hover {
+      background-color: #002929;
+      i {
+        color: #fff;
+      }
+    }
+  }
+}
+
+.arrow-external {
+  top: 10px;
+  right: 10px;
+}
+
+@keyframes rocket-animation {
+  0%,
+  100% {
+    transform: rotate(0deg) translateY(0);
+  }
+  50% {
+    transform: translateX(10px) translateY(-10px);
+  }
+}

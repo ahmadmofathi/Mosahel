@@ -1,0 +1,104 @@
+<div class="px-3">
+    <app-list-header header="مجموع طلبات التوظيف" [count]="totalCount">
+        <!-- <button class="custom-button">تصدير Excel</button> -->
+    </app-list-header>
+
+    <app-filter-list [isFilter]="true" header="التوظيف" (searchChange)="updateSearch($event)">
+    <div class="flex gap-6 mb-4 flex-wrap items-center">
+        <!-- <mat-form-field>
+        <mat-label class="font-arabic">تاريخ البدء</mat-label>
+        <input matInput [matDatepicker]="picker" [(ngModel)]="filters.startDate" />
+        <mat-datepicker-toggle matIconSuffix [for]="picker"></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+        </mat-form-field>
+
+        <mat-form-field>
+        <mat-label class="font-arabic">تاريخ الانتهاء</mat-label>
+        <input matInput [matDatepicker]="picker2" [(ngModel)]="filters.endDate" />
+        <mat-datepicker-toggle matIconSuffix [for]="picker2"></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+        </mat-form-field>
+
+        <div class="flex gap-3">
+        <button class="btn-outline" (click)="filterHandler()">بحث</button>
+        <button class="btn-outline" (click)="filterHandler(true)">إلغاء</button>
+        </div> -->
+
+        <!-- Column Selection -->
+        <div class="mb-3">
+        <p-multiSelect
+            [options]="allColumns"
+            [(ngModel)]="selectedColumns"
+            optionLabel="label"
+            selectedItemsLabel="{0} أعمدة مختارة"
+            [style]="{'minWidth': '200px'}"
+            placeholder="اختر الأعمدة"
+            (onChange)="onColumnSelectionChange($event)"
+        ></p-multiSelect>
+        </div>
+    </div>
+    </app-filter-list>
+
+    <!-- Table with sorting -->
+    <table mat-table [dataSource]="dataSource" matSort (matSortChange)="onSort($event)" class="mat-elevation-z8 my-table" id="pdfTable">
+    <!-- Tenant Name Column -->
+    <ng-container matColumnDef="tenantName">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>الاسم</th>
+        <td mat-cell *matCellDef="let element">{{ element.name }}</td>
+    </ng-container>
+
+    <!-- Email Column -->
+    <ng-container matColumnDef="email">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>البريد الالكتروني</th>
+        <td mat-cell *matCellDef="let element">{{ element.email }}</td>
+    </ng-container>
+
+
+    <!-- Phone Number Column -->
+    <ng-container matColumnDef="phoneNumber">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>رقم الهاتف</th>
+        <td mat-cell *matCellDef="let element">{{ element.phoneNumber }}</td>
+    </ng-container>
+
+    <!-- Start Date Column -->
+    <ng-container matColumnDef="startDate">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>تاريخ الانشاء</th>
+        <td mat-cell *matCellDef="let element">
+        {{ element.createdOn | date: "dd-MM-yyyy" }}
+        </td>
+    </ng-container>
+
+
+    <!-- Notes Column -->
+    <ng-container matColumnDef="attachment">
+        <th mat-header-cell *matHeaderCellDef mat-sort-header>مرفقات</th>
+        <td mat-cell *matCellDef="let element">
+        <a *ngIf="element?.attachmentUrl; else noAttachment" [href]="element.attachmentUrl" target="_blank">
+            <svg width="30" height="30" viewBox="0 0 41 42" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path fill-rule="evenodd" clip-rule="evenodd" d="M20.4993 0.166687V13.7084C20.4993 14.5372 20.901 15.332 21.616 15.9181C22.331 16.5041 23.3007 16.8334 24.3118 16.8334H40.8327V37.6667C40.8327 38.7718 40.2971 39.8316 39.3438 40.613C38.3905 41.3944 37.0975 41.8334 35.7493 41.8334H5.24935C3.90116 41.8334 2.6082 41.3944 1.65489 40.613C0.701579 39.8316 0.166016 38.7718 0.166016 37.6667V4.33335C0.166016 3.22829 0.701579 2.16848 1.65489 1.38708C2.6082 0.605674 3.90116 0.166687 5.24935 0.166687H20.4993ZM17.9856 20.6834C17.3772 23.8564 15.3528 26.7311 12.305 28.75C10.0506 30.2417 12.1118 33.1688 14.8162 32.3167C18.4732 31.1622 22.523 31.1622 26.18 32.3167C28.8843 33.1709 30.9456 30.2438 28.6911 28.75C25.6434 26.7311 23.6189 23.8564 23.0105 20.6834C22.5606 18.3375 18.4355 18.3354 17.9856 20.6834ZM20.4993 25.7979L22.5479 28.7021H18.4558L20.4993 25.7979ZM25.5827 0.25627C26.5457 0.423677 27.4286 0.81667 28.1243 1.38752L39.3433 10.5834C40.0397 11.1536 40.5192 11.8774 40.7234 12.6667H25.5827V0.25627Z" fill="#210559"/>
+            </svg>
+        </a>
+        <ng-template #noAttachment>
+            <span>لا يوجد مرفق</span>
+        </ng-template>
+        </td>
+    </ng-container>
+
+
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr class="mat-row" *matNoDataRow>
+        <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+        <div class="flex justify-center items-center py-10 text-l font-semibold">
+            {{ loading ? "جـــاري التــحـــمـــيل ......" : "لا يوجد بيانات" }}
+        </div>
+        </td>
+    </tr>
+    </table>
+
+    <mat-paginator [length]="totalCount" [pageSizeOptions]="[5, 10, 100]" aria-label="Select page" (page)="onPageChange($event)">
+    </mat-paginator>
+    <p-menu #menu [model]="items" [popup]="true"></p-menu>
+    <p-confirmDialog [rtl]="true"></p-confirmDialog>
+    <p-toast></p-toast>
+</div>

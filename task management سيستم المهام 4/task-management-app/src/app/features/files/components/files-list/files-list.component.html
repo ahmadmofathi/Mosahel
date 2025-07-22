@@ -1,0 +1,183 @@
+<div class="px-3">
+  <app-list-header header="عدد الملفات" [count]="totalCount">
+    <button
+      class="custom-button"
+      (click)="newRecord()"
+      *appHasRole="['Employee']"
+      >
+      اضافة ملف
+    </button>
+  </app-list-header>
+
+  <app-filter-list
+    [isFilter]="true"
+    header="الملفات"
+    (searchChange)="updateSearch($event)"
+  >
+    <div class="flex gap-6 mb-4 flex-wrap items-center">
+      <!-- <mat-form-field>
+        <mat-label class="font-arabic">تاريخ البدء</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [(ngModel)]="filters.startDate"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label class="font-arabic">تاريخ الانتهاء</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          [(ngModel)]="filters.endDate"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+
+      <div class="flex gap-3">
+        <button class="btn-outline" (click)="filterHandler()">بحث</button>
+        <button class="btn-outline" (click)="filterHandler(true)">إلغاء</button>
+      </div> -->
+
+      <!-- Column Selection -->
+      <div class="mb-3">
+        <p-multiSelect
+          [options]="allColumns"
+          [(ngModel)]="selectedColumns"
+          optionLabel="label"
+          selectedItemsLabel="{0} أعمدة مختارة"
+          [style]="{'minWidth': '200px'}"
+          placeholder="اختر الأعمدة"
+          (onChange)="onColumnSelectionChange($event)"
+        ></p-multiSelect>
+      </div>
+    </div>
+  </app-filter-list>
+
+  <!-- Add matSort and listen to sort changes -->
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="onSort($event)"
+    class="mat-elevation-z8 my-table"
+  >
+    <!-- Employee Name Column -->
+    <ng-container matColumnDef="employeeName">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        اسم الموظف
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.employeeName }}
+      </td>
+    </ng-container>
+
+    <!-- File Name Column -->
+    <ng-container matColumnDef="fileName">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        عنوان الملف
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.fileName }}
+      </td>
+    </ng-container>
+
+    <!-- Task Item Name Column -->
+    <ng-container matColumnDef="taskItemName">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        المهمه المتعلقه بالملف
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.taskItemName }}
+      </td>
+    </ng-container>
+
+    <!-- File URL Column (not sorted) -->
+    <ng-container matColumnDef="fileUrl">
+      <th mat-header-cell *matHeaderCellDef>مرفقات</th>
+      <td mat-cell *matCellDef="let element">
+        <a
+          download="file"
+          class="download-link"
+          (click)="handleFile(element.fileUrl)"
+        >
+          <i class="fas fa-download"></i>
+          <span class="link-text">تحميل</span>
+        </a>
+      </td>
+    </ng-container>
+
+    <!-- Created On Column -->
+    <ng-container matColumnDef="createdOn">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        تاريخ الانشاء
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.createdOn | date: "dd-MM-yyyy" }}
+      </td>
+    </ng-container>
+
+    <!-- Tenant Name Column (only for SuperAdmin) -->
+    <ng-container matColumnDef="tenantName" *appHasRole="['SuperAdmin']">
+      <th
+        mat-header-cell
+        *matHeaderCellDef
+        mat-sort-header
+      >
+        اسم الشركة
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.tenantName }}
+      </td>
+    </ng-container>
+
+    <!-- Table header and row definitions -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr
+      mat-row
+      *matRowDef="let row; columns: displayedColumns"
+    ></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+        <div class="flex justify-center items-center py-10 text-l font-semibold">
+          {{ loading ? "جـــاري التــحـــمـــيل ......" : "لا يوجد بيانات" }}
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <mat-paginator
+    [length]="totalCount"
+    [pageSizeOptions]="[5, 10, 100]"
+    aria-label="Select page"
+    (page)="onPageChange($event)"
+  ></mat-paginator>
+  <p-menu #menu [model]="items" [popup]="true"></p-menu>
+  <p-confirmDialog [rtl]="true"></p-confirmDialog>
+  <p-toast></p-toast>
+</div>

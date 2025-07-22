@@ -1,0 +1,38 @@
+<div
+  class="h-screen w-64 bg-purple text-white py-4 flex flex-col sticky top-0"
+>
+  <div class="logo">
+    <img src="images/logo.png" alt="Shm Logo">
+  </div>
+  <!-- Menu Items -->
+  <div class="flex flex-col space-y-2 py-3 text-color">
+    @for (item of menuItems; track item) { @if (item.visible) {
+      @if(item['route']=='/tenants') {<div  class="px-3 margin-companies"><hr></div>}
+    <a
+      [routerLink]="item.route"
+      routerLinkActive="bg-white text-primary"
+      [routerLinkActiveOptions]="{ exact: true }"
+      class=" flex items-center gap-2 space-x-3 px-4 py-3 transition-colors cursor-pointer"
+    >
+      <i [class]="item.icon"></i>
+      <span class="text-sm font-medium">{{ item.label }}</span> </a
+    >} }
+  </div>
+
+  <!-- Settings Section at Bottom -->
+  <!-- <div class="mt-auto">
+    <div class="border-t border-gray-700 pt-4">
+      @for (item of settingsItems; track item) {
+      <a
+        [routerLink]="item.route"
+        routerLinkActive="bg-white text-primary"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="flex items-center gap-2 space-x-3 px-4 py-3 rounded-lg hover:bg-gray-800 hover:text-gray-200 transition-colors cursor-pointer"
+      >
+        <i [class]="item.icon" class="text-gray-400"></i>
+        <span class="text-sm font-medium">{{ item.label }}</span>
+      </a>
+      }
+    </div>
+  </div> -->
+</div>

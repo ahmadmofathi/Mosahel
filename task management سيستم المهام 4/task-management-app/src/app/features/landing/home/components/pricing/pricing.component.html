@@ -1,0 +1,121 @@
+<div class="text-center pt-5" id="packages">
+  <div class="text-[#222751] text-3xl font-bold">
+    {{ "home.pricing.title" | translate }}
+  </div>
+  <div class="text-xl font-semibold pt-4 px-6 text-[#637381]">
+    {{ "home.pricing.subTitle" | translate }}
+  </div>
+</div>
+<div class="flex justify-center max-sm:flex-wrap items-center gap-6 py-10 px-4">
+  <div
+    *ngFor="let plan of plans; let i = index"
+    class="w-1/4 max-sm:min-w-[310px] p-6 border rounded-xl transition-all duration-300 shadow-lg cursor-pointer"
+    [ngClass]="{
+      'bg-[#222751] text-white': plan.hovered,
+      'bg-white text-gray-800': !plan.hovered
+    }"
+    (click)="openFeaturePopup(plan)"
+    (mouseenter)="setHover(i, true)"
+    (mouseleave)="setHover(i, false)"
+  >
+    <h3
+      [ngClass]="{
+        'text-blue-950': i == 0,
+        'text-gray-400': i == 1,
+        'text-[#d2b27b]': i == 2
+      }"
+      class="text-2xl font-bold text-center"
+    >
+      {{ plan.name | translate }}
+    </h3>
+
+    <h2 class="text-6xl font-extrabold text-center mt-4">{{ plan.price }}</h2>
+    <p
+      class="text-center text-gray-500 mb-4"
+      [ngClass]="{ 'text-gray-300': plan.hovered }"
+    >
+      {{ plan.type | translate }}
+    </p>
+    <p
+      class="text-center mb-4 text-xl"
+      [ngClass]="{ 'text-gray-300': plan.hovered }"
+    >
+      {{ plan.title | translate }}
+    </p>
+    <div>
+      <ul class="text-sm space-y-2">
+        <li
+          *ngFor="let feature of plan.features | slice : 0 : 4"
+          class="flex items-center gap-3 text-lg"
+        >
+          <span class="text-yellow-400">✔</span> {{ feature | translate }}
+        </li>
+      </ul>
+      <div class="mt-3 flex items-center justify-center">
+        <span
+          [ngClass]="{ 'text-white': plan.hovered }"
+          class="pi pi-plus"
+        ></span>
+      </div>
+    </div>
+    <button
+      class="mt-6 w-full py-2 rounded-lg font-bold transition-all"
+      [ngClass]="{
+        'bg-white text-[#222751]': plan.hovered,
+        'bg-[#222751] text-white': !plan.hovered
+      }"
+    >
+      {{ "contactUs" | translate }}
+    </button>
+  </div>
+</div>
+
+<!-- Feature Popup Modal -->
+<div
+  *ngIf="showPopup"
+  (click)="closePopup()"
+  class="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50"
+>
+  <div
+    (click)="stopPropagation($event)"
+    class="bg-white rounded-xl p-8 max-w-2xl w-full mx-4 relative max-h-[95vh] overflow-y-auto scroll-custome"
+  >
+    <button
+      (click)="closePopup()"
+      class="absolute top-4 right-4 text-gray-500 hover:text-gray-800 p-3"
+    >
+      <span class="text-2xl">&times;</span>
+    </button>
+
+    <div class="flex items-center justify-center mb-6">
+      <div class="bg-white shadow-lg rounded-full p-4">
+        <img [src]="selectedPlan?.img" alt="Star" class="w-16 h-16" />
+      </div>
+    </div>
+
+    <h2 class="text-2xl font-bold text-center mb-2">
+      {{ selectedPlan?.name | translate }}
+    </h2>
+    <p class="text-center text-gray-500 mb-6">
+      ({{ selectedPlan?.type | translate }})
+    </p>
+
+    <ul class="space-y-4">
+      <li
+        *ngFor="let feature of selectedPlan?.features"
+        class="flex items-start gap-3"
+      >
+        <span class="text-yellow-400 mt-1">✔</span>
+        <span class="text-lg">{{ feature | translate }}</span>
+      </li>
+    </ul>
+
+    <div class="text-center mt-8">
+      <button
+        class="bg-[#222751] text-white py-3 px-8 rounded-lg font-bold hover:bg-[#1a1f3f] transition-all"
+      >
+        {{ "home.subscribeNow" | translate }}
+      </button>
+    </div>
+  </div>
+</div>

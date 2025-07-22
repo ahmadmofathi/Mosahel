@@ -1,0 +1,59 @@
+:host ::ng-deep {
+  .sponsor-container {
+    overflow: hidden;
+    white-space: nowrap;
+    position: relative;
+    width: 100%;
+    background: #fff;
+  }
+
+  .sponsor-list {
+    display: inline-block;
+    animation: scroll-left 10s linear infinite;
+    &:dir(rtl) {
+      animation: scroll-right 10s linear infinite;
+    }
+    // animation-play-state: paused;
+  }
+
+  .sponsor-list .sponsor_card {
+    display: inline-block;
+    margin: 0 10px;
+    width: 300px;
+    height: auto;
+    object-fit: contain;
+    cursor: pointer;
+
+    a {
+      user-select: none;
+      -webkit-user-drag: none;
+    }
+  }
+
+  /* Pause on hover */
+  // .sponsor-list:hover {
+  //   animation-play-state: paused;
+  // }
+
+  /* Animation for LTR */
+  @keyframes scroll-left {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(
+        -50%
+      ); /* Scroll by half the width to create a loop */
+    }
+  }
+
+  /* Animation for RTL */
+  @keyframes scroll-right {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(50%);
+    }
+  }
+}

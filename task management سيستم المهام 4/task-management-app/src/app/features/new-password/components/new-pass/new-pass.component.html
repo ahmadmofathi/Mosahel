@@ -1,0 +1,104 @@
+<app-list-header header="تغيير كلمة السر"> </app-list-header>
+<div class="min-h-[60vh] flex flex-col justify-center py-12 sm:px-6 lg:px-8">
+  <div class="sm:mx-auto sm:w-full sm:max-w-md">
+    <div class="bg-white py-8 px-4 shadow sm:rounded-lg sm:px-10">
+      <form
+        [formGroup]="passwordForm"
+        (ngSubmit)="onSubmit()"
+        class="space-y-6"
+      >
+        <!-- Old Password -->
+        <div>
+          <label
+            for="currentPassword"
+            class="block text-sm font-medium text-right text-gray-700"
+          >
+            كلمة السر القديمة
+          </label>
+          <div class="mt-1">
+            <p-password
+              formControlName="currentPassword"
+              [feedback]="false"
+              [toggleMask]="true"
+              placeholder="ادخل كلمة السر القديمة"
+              styleClass="w-full"
+              inputStyleClass="w-full"
+              dir="rtl"
+            ></p-password>
+            <div
+              *ngIf="passwordForm.get('currentPassword')?.touched && passwordForm.get('currentPassword')?.errors?.['required']"
+              class="mt-1 text-red-500 text-xs text-right"
+            >
+              كلمة السر القديمة مطلوبة
+            </div>
+          </div>
+        </div>
+
+        <!-- New Password -->
+        <div>
+          <label
+            for="newPassword"
+            class="block text-sm font-medium text-right text-gray-700"
+          >
+            كلمة السر الجديدة
+          </label>
+          <div class="mt-1">
+            <p-password
+              formControlName="newPassword"
+              [feedback]="false"
+              [toggleMask]="true"
+              placeholder="ادخل كلمة السر الجديدة"
+              styleClass="w-full"
+              inputStyleClass="w-full"
+              dir="rtl"
+            ></p-password>
+            <div
+              *ngIf="passwordForm.get('newPassword')?.touched && passwordForm.get('newPassword')?.errors?.['required']"
+              class="mt-1 text-red-500 text-xs text-right"
+            >
+              كلمة السر الجديدة مطلوبة
+            </div>
+          </div>
+        </div>
+
+        <!-- Confirm Password -->
+        <div>
+          <label
+            for="confirmNewPassword"
+            class="block text-sm font-medium text-right text-gray-700"
+          >
+            تأكيد كلمة السر
+          </label>
+          <div class="mt-1">
+            <p-password
+              formControlName="confirmNewPassword"
+              [feedback]="false"
+              [toggleMask]="true"
+              placeholder="تأكيد كلمة السر الجديدة"
+              styleClass="w-full"
+              inputStyleClass="w-full"
+              dir="rtl"
+            ></p-password>
+            <div
+              *ngIf="passwordForm.get('confirmNewPassword')?.touched && passwordForm.errors?.['passwordMismatch']"
+              class="mt-1 text-red-500 text-xs text-right"
+            >
+              كلمة السر غير متطابقة
+            </div>
+          </div>
+        </div>
+
+        <!-- Submit Button -->
+        <div>
+          <p-button
+            type="submit"
+            styleClass="disabled:bg-gray-400 disabled:cursor-not-allowed"
+            [disabled]="!passwordForm.valid"
+            [loading]="loading"
+            label="حفظ التغيير"
+          ></p-button>
+        </div>
+      </form>
+    </div>
+  </div>
+</div>

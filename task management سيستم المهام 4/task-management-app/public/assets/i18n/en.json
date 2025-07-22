@@ -1,0 +1,160 @@
+{
+  "contactUs": "Contact Us Now",
+  "loadingSend": "Sending ...",
+  "myHome": "Home",
+  "provider": "Certified telework provider",
+  "about": "About Us",
+  "whyUs": "Training",
+  "services": "Request",
+  "packages": "Subscriptions",
+  "employment": "Jobs",
+  "requestService": "Request Service",
+  "danatPlatform": "Danat Platform",
+  "partners": "Danat Partners",
+  "optional": "Optional",
+  "home": {
+    "title": "Certified by Ministry of Humen resource as Service Provider for Telework",
+    "heroSubTitle": "Your partner  to train , recruit and helping you to comply with regulations.",
+    "startFreeTrial": "Start Your Free Trial",
+    "subscribeNow": "Subscribe Now",
+    "improve": {
+      "preTitle": "Improve Performance Levels in Your Organization",
+      "postTitle": "Immediately",
+      "subTitle": "This text is an example of placeholder text that can be replaced within the same space. It has been generated initially.",
+      "1main": "Training, Follow-Up, and Performance Measurement",
+      "2main": "Register your employees on teleworks platform",
+      "3main": "Helping your organization to obtain the right people"
+    },
+    "choose": {
+      "postTitle": "Training",
+      "subTitle": "Danat Is approved teleworks service provider offers a wide range of services to enhance quality and improve the efficiency of organizations in the Kingdom of Saudi Arabia through help to recruit  and train your employees",
+      "1main": "Online Training",
+      "2main": "In-Person Training",
+      "3main": "Diplomas",
+      "1sub": "Through certified institutes by TVTC for remote training up to 12 months",
+      "2sub": "Through specialized and approved institutes by the Technical and Vocational Training Corporation",
+      "3sub": "Through a strategic partnership with certified academies and training centers that provide courses and diplomas for your employees"
+    },
+    "services": {
+      "title": "Danat Offers to your organization",
+      "list1": "E-learning and Training",
+      "list2": "Danat Platform to track attendance, and performance for your employees",
+      "list3": "Consulting Services and Human Resources Solutions",
+      "list4": "Registering your employees on Teleworks platform",
+      "list5": "Making sure to make Nitaqat level stable",
+      "list6": "Ensure targeted reach of activity and stability of Saudis in domains"
+    },
+    "pricing": {
+      "title": "Danat Subscriptions ",
+      "subTitle": "Choose the subscription that suits you from Danat's remote work platform subscriptions. Whether your company is small, medium, or large, you will find the suitable subscription to meet your business needs and budget.",
+      "PLANS": {
+        "BASIC": {
+          "NAME": "Basic Danat",
+          "TYPE": "SAR / Monthly",
+          "title": "Subscription with limited features, suitable for small business needs",
+          "FEATURES": {
+            "FEATURE1": "Time tracking and productivity monitoring",
+            "FEATURE2": "Sending periodic electronic reports",
+            "FEATURE3": "Employee registration in the Ministry of Human Resources and Social Development remote work portal",
+            "FEATURE4": "Employment services",
+            "FEATURE5": "Training",
+            "FEATURE6": "Works on all operating systems and devices"
+          }
+        },
+        "SILVER": {
+          "NAME": "Silver Danat",
+          "TYPE": "SAR / Monthly",
+          "title": "Subscription that meets the basic needs of small and medium businesses",
+          "FEATURES": {
+            "FEATURE1": "Basic Danat features",
+            "FEATURE2": "Full management of the recruitment process",
+            "FEATURE3": "Selecting remote workers who meet the required criteria",
+            "FEATURE4": "One-week self-training for employees and managers in the organization",
+            "FEATURE5": "Complete management of the recruitment process, including selection of remote workers who meet recruitment criteria, conducting interviews, scheduling and managing personal interviews, managing resumes, evaluation, classification, and shortlisting for employment contracts",
+            "FEATURE6": "Assistance in registering remote workers in the Ministry of Human Resources and Social Development remote work portal (through authorizing Danat Sharjah to complete and follow up on all registration procedures)",
+            "FEATURE7": "Providing organizational, technical, systems, and applications capabilities for the organization to communicate with remote workers for tasks that need measurable performance",
+            "FEATURE8": "Providing backup for all data",
+            "FEATURE9": "Managing all operations for maintenance, operations, protection of systems, programs, tools, and utilizing the outcomes of technology",
+            "FEATURE10": "Automated integration with the Ministry of Human Resources and Social Development's sector systems",
+            "FEATURE11": "Continuous updates with no additional cost for the organization",
+            "FEATURE12": "Completing and finalizing recruitment processes within a maximum of 10 working days"
+          }
+        },
+        "PLATINUM_REMOTE": {
+          "NAME": "Platinum Danat",
+          "TYPE": "SAR / Monthly",
+          "title": "Subscription that meets the professional needs of large businesses and organizations requiring professional services",
+          "FEATURES": {
+            "FEATURE1": "Silver subscription features",
+            "FEATURE2": "Comprehensive training for 3 months",
+            "FEATURE3": "Replacing remote workers once every 6 months without charges",
+            "FEATURE4": "Continuous productivity monitoring with monthly performance reports",
+            "FEATURE5": "Providing and implementing remote work plans for the organization by profession",
+            "FEATURE6": "Assisting in classifying jobs that can be done remotely and providing job classification",
+            "FEATURE7": "Supervising remote workers during the first 3 months with providing training and development programs",
+            "FEATURE8": "Sending monthly reports to the project management system and remote employee performance monitoring",
+            "FEATURE9": "Providing any reports needed for direct financial support from the Human Resources Development Fund",
+            "FEATURE10": "Technical, administrative, and consulting support 24/7",
+            "FEATURE11": "Comprehensive solutions for managing remote work through a set of services for managing a remote work environment",
+            "FEATURE12": "Visiting the service implementation team at the organization’s location once a month to complete the implementation process and enhance service benefits",
+            "FEATURE13": "Providing a suitable alternative for remote workers during resignation with a recruitment process"
+          }
+        }
+      }
+    }
+  },
+  "employmentPage": {
+    "send": "Send Request Now",
+    "delete": "Delete",
+    "thanks": "Thank you for contacting us,",
+    "workingOnRequest": "Your request is being reviewed, and the coordinator will contact you as soon as possible",
+    "reUpload": "Re-upload",
+    "browse": "Upload CV *",
+    "dragDrop": "Drag and drop files here",
+    "applyJob": {
+      "preTitle": "Submit Your Resume",
+      "postTitle": "DANAT",
+      "subTitle": "Please attach your resume",
+      "fullName": "Full Name",
+      "fullNamePlaceHolder": "Enter your name",
+      "required": "This field is required",
+      "email": "Email",
+      "emailPlaceHolder": "Enter your email",
+      "emailError": "Enter a valid email",
+      "phone": "Phone Number",
+      "phoneError": "Enter a valid number starting with 5",
+      "resume": "Resume"
+    }
+  },
+  "servicePage": {
+    "send": "Send Request Now",
+    "delete": "Delete",
+    "thanks": "Thank you for contacting us,",
+    "workingOnRequest": "Your request is being reviewed, and the coordinator will contact you as soon as possible",
+    "reUpload": "Re-upload",
+    "browse": "Browse Files",
+    "dragDrop": "Drag and drop files here",
+    "requestService": {
+      "preTitle": "Request Your Service Now",
+      "postTitle": "DANAT",
+      "subTitle": "This text is an example of placeholder text that can be replaced within the same space. It has been generated initially.",
+      "fullName": "Full Name",
+      "fullNamePlaceHolder": "Enter the company name here",
+      "required": "This field is required",
+      "email": "Email",
+      "emailPlaceHolder": "Enter your email",
+      "emailError": "Enter a valid email",
+      "phone": "Phone Number",
+      "phoneError": "Enter a valid number starting with 5",
+      "inquiryDetails": "Inquiry Details"
+    }
+  },
+  "footer": {
+    "contactUs": "Contact Us",
+    "address": "Al Khobar - Eastern Region - Saudi Arabia",
+    "links": "Links",
+    "rightsReserved": "All rights reserved to ",
+    "rightsReservedPost": "Danat Company",
+    "aboutInfo": "Your partner  to train , recruit and helping you to comply with regulations"
+  }
+}

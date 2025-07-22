@@ -1,0 +1,104 @@
+<h2 mat-dialog-title>{{ data ? "تعديل" : "اضافه" }}</h2>
+<mat-dialog-content class="mat-typography">
+  <form
+    id="myForm"
+    [formGroup]="taskForm"
+    (ngSubmit)="onSubmit()"
+    class="font-arabic"
+  >
+    <div class="mb-3">
+      <label for="description">موضوع المهمة</label>
+      <input
+        type="text"
+        id="description"
+        pInputText
+        formControlName="description"
+      />
+      <app-form-error [control]="taskForm.get('description')"></app-form-error>
+    </div>
+    <div class="mb-3" *appHasRole="['SuperAdmin']">
+      <label for="tenantId">اسم الشركة</label>
+      <!-- <input type="text" id="company" pInputText formControlName="company" /> -->
+      <p-dropdown
+        (onChange)="getListEmployees($event)"
+        id="tenantId"
+        formControlName="tenantId"
+        [options]="tenants"
+        optionLabel="tenantName"
+        optionValue="id"
+      ></p-dropdown>
+      <app-form-error [control]="taskForm.get('tenantId')"></app-form-error>
+    </div>
+    <div class="mb-3">
+      <label for="employeeIds">اسم الموظف</label>
+      <!-- <input type="text" id="company" pInputText formControlName="company" /> -->
+      <p-dropdown
+        id="employeeIds"
+        formControlName="employeeIds"
+        [options]="employees"
+        optionLabel="fullName"
+        optionValue="id"
+      ></p-dropdown>
+      <app-form-error [control]="taskForm.get('employeeIds')"></app-form-error>
+    </div>
+    <div class="mb-3">
+      <label for="notes">وصف المهمه</label>
+      <textarea
+        class="p-textarea p-inputtext"
+        formControlName="notes"
+        rows="3"
+        id="notes"
+        pInputTextarea
+      ></textarea>
+      <app-form-error [control]="taskForm.get('notes')"></app-form-error>
+    </div>
+
+    <div class="flex gap-5">
+      <div class="flex flex-col gap-1 w-full">
+        <label for="startDate">تاريخ الانشاء</label>
+        <p-datepicker
+          [style]="{ width: '100%' }"
+          formControlName="startDate"
+          dateFormat="dd-mm-yy"
+          [iconDisplay]="'input'"
+          [showIcon]="true"
+          appendTo="body"
+          inputId="icondisplay"
+        />
+        <app-form-error [control]="taskForm.get('startDate')"></app-form-error>
+      </div>
+      <div class="flex flex-col gap-1 w-full">
+        <label for="endDate">تاريخ الانتهاء</label>
+        <p-datepicker
+          [style]="{ width: '100%' }"
+          dateFormat="dd-mm-yy"
+          formControlName="endDate"
+          [iconDisplay]="'input'"
+          [showIcon]="true"
+          appendTo="body"
+          inputId="icondisplay"
+        />
+
+        <app-form-error [control]="taskForm.get('endDate')"></app-form-error>
+      </div>
+    </div>
+  </form>
+</mat-dialog-content>
+<mat-dialog-actions align="end">
+  <button mat-button mat-dialog-close class="font-arabic">إلغاء</button>
+
+  <button
+    mat-button
+    cdkFocusInitial
+    type="submit"
+    form="myForm"
+    class="font-arabic"
+  >
+    @if(loading){
+    <mat-spinner diameter="20"></mat-spinner>
+    }@else{
+
+    <span>{{ data ? "تعديل" : "اضافه" }}</span>
+    }
+  </button>
+</mat-dialog-actions>

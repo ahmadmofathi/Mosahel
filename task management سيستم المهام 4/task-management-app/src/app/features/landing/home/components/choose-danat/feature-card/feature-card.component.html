@@ -1,0 +1,21 @@
+<article
+  class="grow text-start shrink min-h-[300px] p-6 rounded-lg min-w-60 w-full lg:w-[360px] max-md:px-5"
+  [ngClass]="isDark ? 'bg-blue-950 text-orange-50 shadow-xl' : 'text-blue-950'"
+>
+  <header class="flex flex-col w-full text-2xl font-semibold leading-8">
+    <div
+      class="flex self-end justify-center items-center rounded h-[52px] min-h-[52px] w-[52px]"
+      [ngClass]="isDark ? 'bg-indigo-900' : 'bg-blue-950'"
+    >
+      @if (!isDark) {
+      <img [src]="icon" />
+      }@else {
+      <i [class]="icon + ' text-white'"></i>
+      }
+    </div>
+    <h3 class="mt-6 font-bold text-3xl">{{ title }}</h3>
+  </header>
+  <p class="mt-6 tracking-normal leading-7 text-xl">
+    {{ description }}
+  </p>
+</article>

@@ -1,0 +1,183 @@
+<div class="px-3">
+  <app-list-header header="الحضور والانصراف" [count]="totalCount">
+    <ng-container *appHasRole="['SuperAdmin', 'Admin']">
+      <!-- <button class="custom-button" (click)="downloadPDF()">تصدير pdf</button> -->
+      <button class="custom-button" (click)="exportExcel()">تصدير Excel</button>
+      <button
+      class="custom-button"
+      (click)="exportPDF()"
+    >
+      تصدير PDF
+    </button>
+    </ng-container>
+  </app-list-header>
+
+  <app-filter-list header="الحضور والانصراف" (searchChange)="updateSearch($event)">
+    <div class="flex gap-6 mb-4 flex-wrap items-center">
+      <!-- Date filters -->
+      <mat-form-field>
+        <mat-label class="font-arabic">تاريخ البدء</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [(ngModel)]="filters.startDate"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label class="font-arabic">تاريخ الانتهاء</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker2"
+          [(ngModel)]="filters.endDate"
+        />
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+
+      <!-- Tenant filter (only for SuperAdmin) -->
+      <div class="mb-3" *appHasRole="['SuperAdmin']">
+        <p-dropdown
+          id="tenantId"
+          [(ngModel)]="filters.tenantId"
+          [options]="tenants"
+          placeholder="اسم الشركه"
+          optionLabel="tenantName"
+          optionValue="id"
+          (onChange)="fillEmployees()"
+        ></p-dropdown>
+      </div>
+      <div class="mb-3" *appHasRole="['SuperAdmin']">
+        <p-dropdown
+          id="tenantEmployeeId"
+          [(ngModel)]="filters.employeeId"
+          [options]="tenantsEmployees"
+          placeholder="اسم الموظف"
+          optionLabel="fullName"
+          optionValue="id"
+        ></p-dropdown>
+      </div>
+
+      
+      <div class="flex gap-3">
+        <button class="btn-outline" (click)="filterHandler()">بحث</button>
+        <button class="btn-outline" (click)="filterHandler(true)">إلغاء</button>
+      </div>
+      <!-- Column Selection -->
+      <div class="mb-3">
+        <p-multiSelect
+          [options]="allColumns"
+          [(ngModel)]="selectedColumns"
+          optionLabel="label"
+          selectedItemsLabel="{0} أعمدة مختارة"
+          [style]="{'minWidth': '200px'}"
+          placeholder="اختر الأعمدة"
+          (onChange)="onColumnSelectionChange($event)"
+        ></p-multiSelect>
+      </div>
+    </div>
+  </app-filter-list>
+
+  <!-- Table with sorting -->
+  <table
+    mat-table
+    [dataSource]="dataSource"
+    matSort
+    (matSortChange)="onSort($event)"
+    class="mat-elevation-z8 my-table"
+    id="pdfTable"
+  >
+  <!-- Employee Name Column (for Admin and SuperAdmin) -->
+  <ng-container matColumnDef="employeeName" *appHasRole="['Admin', 'SuperAdmin']">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      اسم الموظف
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.employeeName }}
+    </td>
+  </ng-container>
+  <!-- Tenant Name Column (for SuperAdmin) -->
+  <ng-container matColumnDef="tenantName" *appHasRole="['SuperAdmin']">
+    <th mat-header-cell *matHeaderCellDef mat-sort-header>
+      الشركة
+    </th>
+    <td mat-cell *matCellDef="let element">
+      {{ element.tenantName }}
+    </td>
+  </ng-container>
+
+    <!-- Check In Column -->
+    <ng-container matColumnDef="checkIn">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        اول وقت حضور
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.checkIn | date : "hh:mm a" }}
+      </td>
+    </ng-container>
+
+    <!-- Check Out Column -->
+    <ng-container matColumnDef="checkOut">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        آخر وقت انصراف
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.lastCheckOut | date : "hh:mm a" }}
+      </td>
+    </ng-container>
+
+    <!-- Date Column -->
+    <ng-container matColumnDef="date">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        التاريخ
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.checkIn | date : "dd-MM-yyyy" }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="workHours">
+      <th mat-header-cell *matHeaderCellDef mat-sort-header>
+        ساعات العمل
+      </th>
+      <td mat-cell *matCellDef="let element">
+        {{ element.workHours | number:'1.2-2' }}
+      </td>
+    </ng-container>
+    <ng-container matColumnDef="actions" *appHasRole="['SuperAdmin', 'Admin']">
+      <th mat-header-cell *matHeaderCellDef>الإجراءات</th>
+      <td mat-cell *matCellDef="let element">
+        <button mat-icon-button (click)="openEditDialog(element)">
+          <svg width="20" height="18" viewBox="0 0 26 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M22.0486 8.63281L16.5486 3.13281M22.0486 8.63281L15.1757 15.5057C14.2701 16.4113 13.1708 17.1264 11.9086 17.3441C10.6343 17.5638 9.05279 17.637 8.29861 16.8828C7.54444 16.1286 7.61758 14.5471 7.83737 13.2728C8.05506 12.0106 8.7701 10.9113 9.67574 10.0057L16.5486 3.13281M22.0486 8.63281C22.0486 8.63281 26.1736 4.50781 23.4236 1.75781C20.6736 -0.992188 16.5486 3.13281 16.5486 3.13281M24.1875 12.5C24.1875 21.4375 21.4375 24.1875 12.5 24.1875C3.5625 24.1875 0.8125 21.4375 0.8125 12.5C0.8125 3.5625 3.5625 0.8125 12.5 0.8125" stroke="#179717" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+          </svg>
+        </button>
+      </td>
+    </ng-container>
+
+    <!-- Header and Row Definitions -->
+    <tr mat-header-row *matHeaderRowDef="displayedColumns"></tr>
+    <tr mat-row *matRowDef="let row; columns: displayedColumns"></tr>
+    <tr class="mat-row" *matNoDataRow>
+      <td class="mat-cell" [attr.colspan]="displayedColumns.length">
+        <div class="flex justify-center items-center py-10 text-l font-semibold">
+          {{ loading ? "جـــاري التــحـــمـــيل ......" : "لا يوجد بيانات" }}
+        </div>
+      </td>
+    </tr>
+  </table>
+
+  <mat-paginator
+    [length]="totalCount"
+    [pageSizeOptions]="[5, 10, 100]"
+    aria-label="Select page"
+    (page)="onPageChange($event)"
+  ></mat-paginator>
+</div>

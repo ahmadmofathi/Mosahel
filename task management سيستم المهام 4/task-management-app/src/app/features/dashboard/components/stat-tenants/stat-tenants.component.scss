@@ -1,0 +1,43 @@
+canvas {
+  width: 100% !important;
+  height: 450px !important;
+}
+
+.bg-primary{
+  background-color: rgba(33, 5, 89, 0.84);
+}
+p-dropdown {
+  max-width: 260px;
+}
+
+.num-cards{
+  width: 100%;
+}
+.card-design1{
+  background-color: rgba(6, 194, 6, 0.12);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.card-design1 .title{
+  background-color: rgba(109, 201, 109, 1);
+  color: white;
+  padding: 5px;
+}
+.card-design2{
+  background-color: rgba(15, 130, 164, 0.11);
+  border-radius: 8px;
+  cursor: pointer;
+}
+.card-design2 .title{
+  background-color: rgba(83, 169, 193, 1);
+  color: white;
+  padding: 5px;
+}
+.num{
+  padding: 10px;
+}
+.number{
+  font-size: 25px;
+  color: rgba(33, 5, 89, 1);
+  font-weight: 700;
+}

@@ -1,0 +1,80 @@
+<div class="flex flex-row-reverse gap-4">
+  <div class="shadow-lg p-4 rounded-lg flex flex-col flex-grow min-w-[250px]">
+    <div class="h-1/2 flex flex-col gap-2 justify-center">
+      <label for="tenantId">اسم الشركه</label>
+      <p-dropdown
+        id="tenantId"
+        [options]="tenants"
+        optionLabel="tenantName"
+        optionValue="id"
+        [(ngModel)]="tenantId"
+        (onChange)="fillEmployees();updateFilters($event,'t')"
+      ></p-dropdown>
+      <div class="mb-3">
+        <p-dropdown
+          id="tenantEmployeeId"
+          [(ngModel)]="employeeId"
+          [options]="tenantsEmployees"
+          placeholder="اسم الموظف"
+          optionLabel="fullName"
+          optionValue="id"
+          (onChange)="updateFilters($event,'e');"
+        ></p-dropdown>
+      </div>
+    </div>
+    <div
+      class="bg-primary rounded-md gap-6 flex-grow h-1/2 text-white flex flex-col justify-center items-center"
+    >
+      <div class="text-2xl font-semibold">مجموع المهام</div>
+      <div
+        class="font-semibold w-10 h-10 rounded-full bg-red-300 flex flex-col justify-center items-center"
+      >
+        {{ allTask }}
+      </div>
+    </div>
+  </div>
+  <div class="shadow-lg p-4 rounded-lg flex-grow">
+    <canvas id="canvasTenants">{{ chart }}</canvas>
+  </div>
+  <div
+    class="shadow-lg p-6 py-8 rounded-lg flex justify-center flex-col items-center gap-6 min-w-[250px]"
+  >
+    <!-- <h3>اجمالي المهام / المهام المكتمله</h3> -->
+    <p-knob
+      size="150"
+      [disabled]="true"
+      [(ngModel)]="completionPercent"
+      [valueTemplate]="(completionPercent | number : '1.2-2') + '%'"
+      valueColor="#210559"
+    />
+
+    <div class="num-cards">
+      <div class="card-design1 my-2" (click)="employment()">
+        <div class="title">طلبات توظيف جديده</div>
+        <div class="num flex justify-between items-center">
+          <div class="number">
+            {{ employmentNum }}
+          </div>
+          <div class="icon">
+            <svg width="40" height="40" viewBox="0 0 49 49" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M16.3749 46.9922C7.5357 45.6287 3.37124 41.4643 2.00781 32.625M46.992 32.625C45.6286 41.4643 41.4642 45.6287 32.6249 46.9921M32.6249 2.00793C41.4641 3.37136 45.6286 7.53583 46.992 16.375M2.00781 16.375C3.37124 7.53583 7.5357 3.37136 16.3749 2.00793M25.8541 21.7917V25.8542L23.1458 27.2084M32.6249 13.6667V19.0834M16.3749 13.6667V19.0834M16.3749 35.3334C16.3749 35.3334 19.0833 38.0417 24.4999 38.0417C29.9166 38.0417 32.6249 35.3334 32.6249 35.3334" stroke="#210559" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+      <div class="card-design2 my-2" (click)="serviceRequest()">
+        <div class="title">طلبات خدمة جديده</div>
+        <div class="num flex justify-between items-center">
+          <div class="number">
+            {{ serviceRequestNum }}
+          </div>
+          <div class="icon">
+            <svg width="40" height="42" viewBox="0 0 47 50" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path d="M23.5002 31.9167V26.5M23.5002 31.9167V37.3333M23.5002 31.9167C12.6668 31.9167 1.83351 29.2083 1.99944 23.7917M23.5002 31.9167C34.3335 31.9167 45.1668 29.2083 45.0009 23.7917M1.99944 23.7917C1.89326 25.5061 1.8335 27.3311 1.8335 29.2083C1.8335 37.6343 3.0372 45.0069 4.2409 46.0602C5.44461 47.1134 13.8705 48.1667 23.5002 48.1667C33.1298 48.1667 41.5557 47.1134 42.7594 46.0602C43.9631 45.0069 45.1668 37.6343 45.1668 29.2083C45.1668 27.3311 45.1071 25.5061 45.0009 23.7917M1.99944 23.7917C2.36986 17.8109 3.30538 13.1751 4.2409 12.3565C5.44461 11.3032 15.3752 10.5025 15.3752 10.5025M45.0009 23.7917C44.6305 17.8109 43.6949 13.1751 42.7594 12.3565C41.5557 11.3032 31.6252 10.5025 31.6252 10.5025M15.3752 10.5025C17.8707 10.3434 20.632 10.25 23.5002 10.25C26.3683 10.25 29.1296 10.3434 31.6252 10.5025M15.3752 10.5025V7.54167C15.3752 2.73427 19.8095 2.125 23.5002 2.125C27.1908 2.125 31.6252 2.73427 31.6252 7.54167V10.5025" stroke="#210559" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+            </svg>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

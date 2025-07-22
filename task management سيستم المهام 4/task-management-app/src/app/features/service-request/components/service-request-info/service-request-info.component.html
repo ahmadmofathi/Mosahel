@@ -1,0 +1,59 @@
+<div class="header mx-5 p-3 flex justify-center items-center">
+    <h1>تفاصيل طلب الخدمة</h1>
+    <svg width="35" height="35" viewBox="0 0 56 56" fill="none" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink">
+        <rect width="56" height="56" fill="url(#pattern0_186_10628)"/>
+        <defs>
+        <pattern id="pattern0_186_10628" patternContentUnits="objectBoundingBox" width="1" height="1">
+        <use xlink:href="#image0_186_10628" transform="scale(0.025641)"/>
+        </pattern>
+        <image id="image0_186_10628" width="39" height="39" preserveAspectRatio="none" xlink:href="data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAACcAAAAnCAYAAACMo1E1AAAAAXNSR0IArs4c6QAAAARnQU1BAACxjwv8YQUAAAAJcEhZcwAADsMAAA7DAcdvqGQAAAJbSURBVFhH7ZddSFNhGMe3satRJIyhlCUrk9KQxLWgqYMxCIouAy+8EfJWb4XBYReD3ezjQtfNITYsBg4ENzMXomnkxQjLNPuQ6GLQaLCwsI/Lx+3xndnOu533vLTjLs4ffrfP/8d5z3M4rw4aOJocbzQ53mhyvKkql0qlwO12g8lkAp1Ox41erweHwwHRaJRMZg9VzuPx4GCDQQ+d51vh1oAdBuw9XPTZrsKpkydwns1mg0KhQFrkI5HL5/NFKQO0n22BhYgAH2Yni0Tg3XwM/rx/wcXe1gqMDQ+ioM/nI03ykciJoohDJsZHiNhf9jaXqeWsnGm24NNjjUTO6/WiXNeFc2C/cvEfMjMPqKWs3OjtBovFQprkI5ETBAHlaCw9ug8/t55BZkqg8vFxhCpVpv9aD5jNZtIkH+pCVCYQCBzK0UpZ0eR4qbtcrXeuGp+fHixS3eV+bz+Hr2szithdX1BH7ugxKaWhjvX1tF9duaNlSqm73K+3q/ixZSW7/FA9OaULUXg5p55cuYiHhlqIMqp95yqfhhKOZSF25tmkj2Uh8kVoMpXURS4cDv+3YzUajeB0OpFEIkEa6FEktzg1KSn8sbEI31+lZfmyNgtDd1z4R33Z2orzQqEQaaCHSS4ej+Mw0e+RyH16IkruGnL4R4dwXiwWIw30MMnlcjm8kXVfaofdjaVDsW+ZOWp5Ld4kwtDRdhqPN5vNkgZ6mORKKR9t6QZ1s/863Lt7W3IBYqHF3IRzgsEgmVw9zHKlJJNJsFqtOJwXl8sF6XSaTKwdRXJqR5PjjSbHF4B9C4fo5zC33RoAAAAASUVORK5CYII="/>
+        </defs>
+    </svg>
+</div>
+
+<div class="flex mx-5 my-3 flex-col justify-center items-center">
+    <div class="box flex justify-between items-center">
+        <div class="category ">
+            اسم الشركة
+        </div>
+        <div class="value">
+            {{ this.data.record.name }}
+        </div>
+    </div>
+    <div class="box flex justify-between items-center">
+        <div class="category ">
+            الايميل
+        </div>
+        <div class="value">
+            {{ this.data.record.email }}
+        </div>
+    </div>
+    <div class="box flex justify-between items-center">
+        <div class="category ">
+            رقم الجوال
+        </div>
+        <div class="value">
+            {{ this.data.record.mobileNumber }}
+        </div>
+    </div>
+    <div class="box flex justify-between items-center">
+        <div class="category ">
+            تاريخ الانشاء
+        </div>
+        <div class="value">
+            {{ this.data.record.createdOn | date:'yyyy-MM-dd' }}
+        </div>
+    </div>
+    <div class="box flex justify-between items-center">
+        {{ this.data.record.details }}
+        <!-- <div class="category ">
+            اسم الشركة
+        </div>
+        <div class="value">
+            علي للمنتجات
+        </div> -->
+    </div>
+    <button class="close-btn" (click)="close()">
+        اغلاق
+    </button>
+</div>

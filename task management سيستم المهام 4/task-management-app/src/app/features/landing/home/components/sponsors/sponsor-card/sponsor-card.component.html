@@ -1,0 +1,28 @@
+<div
+  draggable="false"
+  class="flex flex-column align-items-center justify-content-center gap-3 no-underline relative sponsor-card"
+>
+  <div class="image-wrapper block">
+    @if (sponsor()?.img =='images/hr3.png') {
+    <img
+      draggable="false"
+      [src]="sponsor()?.img"
+      alt="coop"
+      class="image-sponor-hr"
+    />
+    }@else {
+    <img
+      draggable="false"
+      [src]="sponsor()?.img"
+      alt="coop"
+      class="image-sponor"
+    />
+    }
+  </div>
+
+  <!-- @if(sponsor()?.companyField){
+  <h3 class="capitalize text-gray-500 font-light text-sm">
+    {{ sponsor()?.companyField }}
+  </h3>
+  } -->
+</div>

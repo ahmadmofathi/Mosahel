@@ -1,0 +1,149 @@
+<div class="md:w-[65%] shadow-lg mx-auto bg-white rounded-lg my-8">
+  @if (!isSubmited) {
+  <header class="flex flex-col items-center py-6">
+    <div class="mb-2 flex gap-3 items-center">
+      <h1 class="text-4xl font-bold text-center max-sm:text-3xl">
+        <span class="text-indigo-950">
+          {{ "servicePage.requestService.preTitle" | translate }}
+        </span>
+      </h1>
+      <div class="">
+        <svg
+          width="35"
+          height="36"
+          viewBox="0 0 35 36"
+          fill="none"
+          xmlns="http://www.w3.org/2000/svg"
+          class="star"
+        >
+          <path
+            d="M10.5 3.70831L11.6667 7.93748M7.43751 12.1666L3.20834 11M20.4167 6.47915L17.5 9.24998M8.75001 18L5.97918 20.9166M13.125 13.625L20.4167 31.125L23.0417 23.5416L30.625 20.9166L13.125 13.625Z"
+            stroke="#DF8317"
+            stroke-width="2"
+            stroke-linecap="round"
+            stroke-linejoin="round"
+          ></path>
+        </svg>
+      </div>
+    </div>
+    <!-- <p
+      class="mx-auto my-0 text-xl text-center max-w-[678px] text-slate-500 max-sm:px-5 max-sm:py-0 max-sm:text-base"
+    >
+      {{ "servicePage.requestService.subTitle" | translate }}
+    </p> -->
+  </header>
+  }
+  <div class="max-w-2xl mx-auto mt-10 p-6">
+    @if (isSubmited) {
+    <div
+      class="text-center flex flex-col justify-center items-center text-3xl font-bold"
+    >
+      <div class="w-32 py-6">
+        <img src="images/logo-blue.png" />
+      </div>
+      <h3 class="text-[#DF8317] pb-4">
+        {{ "servicePage.thanks" | translate }}
+      </h3>
+      <h4 class="text-[#000000] leading-10">
+        {{ "servicePage.workingOnRequest" | translate }}
+      </h4>
+    </div>
+    }@else {
+    <form [formGroup]="form" (ngSubmit)="submitForm()">
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2"
+          >{{ "servicePage.requestService.fullName" | translate }} *</label
+        >
+        <input
+          type="text"
+          formControlName="name"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          [placeholder]="
+            'servicePage.requestService.fullNamePlaceHolder' | translate
+          "
+        />
+        @if (form.controls['name'].invalid && form.controls['name'].touched) {
+        <p class="text-red-500 text-sm">
+          {{ "servicePage.requestService.required" | translate }}
+        </p>
+        }
+      </div>
+
+      <!-- البريد الإلكتروني -->
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2"
+          >{{ "servicePage.requestService.email" | translate }} *</label
+        >
+        <input
+          type="email"
+          formControlName="email"
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          [placeholder]="
+            'servicePage.requestService.emailPlaceHolder' | translate
+          "
+        />
+        @if (form.controls['email'].invalid && form.controls['email'].touched) {
+        <p class="text-red-500 text-sm">
+          {{ "servicePage.requestService.emailError" | translate }}
+        </p>
+        }
+      </div>
+
+      <!-- رقم الجوال -->
+      <div class="mb-4">
+        <label class="block text-gray-700 font-bold mb-2"
+          >{{ "servicePage.requestService.phone" | translate }} *</label
+        >
+        <div class="flex items-center border rounded-lg overflow-hidden">
+          <span class="bg-green-600 text-white px-3 py-2">+966</span>
+          <input
+            type="text"
+            formControlName="mobileNumber"
+            class="w-full px-3 py-2 focus:outline-none"
+            placeholder="5X XXX XXXX"
+          />
+        </div>
+        @if (form.controls['mobileNumber'].invalid &&
+        form.controls['mobileNumber'].touched) {
+        <p class="text-red-500 text-sm">
+          {{ "servicePage.requestService.phoneError" | translate }}
+        </p>
+        }
+      </div>
+
+      <div class="mb-4">
+        <label for="indetailsqury" class="block text-gray-700 font-bold mb-2"
+          >{{
+            "servicePage.requestService.inquiryDetails" | translate
+          }}
+          *</label
+        >
+        <textarea
+          class="w-full px-3 py-2 border rounded-lg focus:outline-none focus:ring-2 focus:ring-blue-400"
+          formControlName="details"
+          rows="5"
+        ></textarea>
+        @if (form.controls['details'].invalid &&
+        form.controls['details'].touched) {
+        <p class="text-red-500 text-sm">
+          {{ "servicePage.requestService.required" | translate }}
+        </p>
+        }
+      </div>
+
+      <!-- زر الإرسال -->
+      <button
+        type="submit"
+        class="w-full cursor-pointer bg-[#111C55] text-white font-bold py-2 rounded-lg mt-4 hover:bg-[#0a1b72] disabled:opacity-10 disabled:cursor-not-allowed"
+        [disabled]="form.invalid || loading"
+      >
+        {{
+          loading
+            ? ("loadingSend" | translate)
+            : ("servicePage.send" | translate)
+        }}
+      </button>
+    </form>
+    }
+  </div>
+</div>

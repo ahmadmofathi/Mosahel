@@ -1,0 +1,143 @@
+<div class="px-3">
+
+  <app-list-header header="عدد الدورات" [count]="totalCount">
+    <button
+      class="custom-button"
+      (click)="newRecord()"
+      *appHasRole="['SuperAdmin', 'Admin']"
+    >
+      اضافة دوره
+    </button>
+    <!-- <button class="custom-button">تصدير pdf</button>
+    <button class="custom-button">تصدير Excel</button> -->
+  </app-list-header>
+  <app-filter-list
+    [isFilter]="false"
+    header="الدورات"
+    (searchChange)="updateSearch($event)"
+  >
+    <div class="flex gap-6 mb-4 flex-wrap items-center">
+      <mat-form-field>
+        <mat-label class="font-arabic">تاريخ البدء</mat-label>
+        <input
+          matInput
+          [matDatepicker]="picker"
+          [(ngModel)]="filters.startDate"
+        />
+
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker></mat-datepicker>
+      </mat-form-field>
+
+      <mat-form-field>
+        <mat-label class="font-arabic">تاريخ الانتهاء</mat-label>
+        <input matInput [matDatepicker]="picker2" [(ngModel)]="filters.endDate" />
+
+        <mat-datepicker-toggle
+          matIconSuffix
+          [for]="picker2"
+        ></mat-datepicker-toggle>
+        <mat-datepicker #picker2></mat-datepicker>
+      </mat-form-field>
+      <div class="flex gap-3">
+        <button class="btn-outline" (click)="filterHandler()">بحث</button>
+        <button class="btn-outline" (click)="filterHandler(true)">إلغاء</button>
+      </div>
+    </div>
+  </app-filter-list>
+
+  @if (loading) {
+  <div class="flex items-center justify-center h-full">
+    جـــاري التــحـــمـــيل ......
+  </div>
+  }@else {
+  <div class="container mx-auto px-4 py-5 flex flex-col gap-6">
+    @for (item of dataSource; track item) {
+    <!-- Main Card -->
+    <div class="bg-white rounded-lg shadow-lg overflow-hidden">
+      <!-- Header -->
+      <div class="bg-gradient-to-r bg-primary p-6">
+        <h1 class="text-3xl font-bold text-white">
+          {{ item.title }}
+        </h1>
+      </div>
+
+      <!-- Content Section -->
+      <div class="p-6">
+        <!-- Image and Text Grid -->
+        <div class="grid md:grid-cols-2 gap-8 items-center">
+          <!-- Image Section -->
+          <div class="rounded-lg overflow-hidden shadow-md h-64">
+            <img
+              [src]="domain + '/' + item.imageUrl"
+              alt="Training Session"
+              class="w-full h-auto object-cover"
+            />
+          </div>
+
+          <!-- Text Content -->
+          <div class="space-y-4">
+            <!-- Course Details -->
+            <div class="bg-gray-50 p-4 rounded-lg">
+              <p class="text-gray-700 text-lg leading-relaxed">
+                {{ item.description }}
+              </p>
+            </div>
+            <div class="mt-8 flex justify-between items-center">
+              <a
+                [href]="item.link"
+                class="inline-block bg-gray-700 text-white px-6 py-2 rounded-full hover:bg-white hover:text-gray-700 transition duration-300"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                رابط الدورة
+              </a>
+
+              <div *appHasRole="['Employee']">
+                <i
+                  class="fa-regular fa-thumbs-up text-3xl mx-2 cursor-pointer"
+                  (click)="react(item.id)"
+                ></i>
+              </div>
+              <div *appHasRole="['SuperAdmin', 'Admin']" class="flex gap-3">
+                <button class="btn btn-warning" (click)="editTask(item)">
+                  <svg width="26" height="25" viewBox="0 0 26 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M22.0486 8.63281L16.5486 3.13281M22.0486 8.63281L15.1757 15.5057C14.2701 16.4113 13.1708 17.1264 11.9086 17.3441C10.6343 17.5638 9.05279 17.637 8.29861 16.8828C7.54444 16.1286 7.61758 14.5471 7.83737 13.2728C8.05506 12.0106 8.7701 10.9113 9.67574 10.0057L16.5486 3.13281M22.0486 8.63281C22.0486 8.63281 26.1736 4.50781 23.4236 1.75781C20.6736 -0.992188 16.5486 3.13281 16.5486 3.13281M24.1875 12.5C24.1875 21.4375 21.4375 24.1875 12.5 24.1875C3.5625 24.1875 0.8125 21.4375 0.8125 12.5C0.8125 3.5625 3.5625 0.8125 12.5 0.8125" stroke="#179717" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+                <button class="btn btn-danger" (click)="confirmDelete(item)">
+                  <svg width="25" height="26" viewBox="0 0 25 26" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path d="M15.25 10.0625C15.25 10.0625 15.9375 11.4375 15.9375 14.1875C15.9375 16.9375 15.25 18.3125 15.25 18.3125M9.75 10.0625C9.75 10.0625 9.0625 11.4375 9.0625 14.1875C9.0625 16.9375 9.75 18.3125 9.75 18.3125M4.24999 5.25C4.24999 13.3057 2.36771 24.5 12.5 24.5C22.6323 24.5 20.75 13.3057 20.75 5.25M1.5 5.25H23.5M16.625 5.25V3.875C16.625 1.43432 14.3737 1.125 12.5 1.125C10.6263 1.125 8.375 1.43432 8.375 3.875V5.25" stroke="#D50000" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"/>
+                  </svg>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div> 
+
+        <!-- Course Link -->
+      </div>
+    </div>
+
+    }@empty {
+    <p class="flex justify-center items-center py-10 text-l font-semibold">
+      لا توجد دورات حاليا
+    </p>
+    }
+  </div>
+  }
+
+  <mat-paginator
+    [length]="totalCount"
+    [pageSizeOptions]="[5, 10, 100]"
+    aria-label="Select page"
+    (page)="onPageChange($event)"
+  >
+  </mat-paginator>
+  <p-menu #menu [model]="items" [popup]="true" />
+  <p-confirmDialog [rtl]="true" />
+  <p-toast />
+</div>

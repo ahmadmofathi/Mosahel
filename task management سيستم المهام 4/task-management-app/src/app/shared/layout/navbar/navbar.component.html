@@ -1,0 +1,40 @@
+<div class="flex bg-primary w-full">
+  <div class="bg-primary w-90 py-4">
+    <div class="flex justify-between items-center h-full px-6">
+      <div class="w-fit px-8 py-3 rounded-full">{{ currentTitle }}</div>
+      <div class="flex gap-12 items-center">
+        <div>
+          <div class="text-xl font-semibold">
+            {{ headerName }}
+          </div>
+          <!-- <div class="pt-2 flex items-center gap-1">
+            <span>رقم السجل التجاي:</span> <span> 01127313164 </span>
+          </div> -->
+        </div>
+      </div>
+    </div>
+  </div>
+  <div
+    class="flex logout-btn items-center hover:text-sky-200 hover:cursor-pointer"
+    (click)="logout()"
+  >
+    <span>تسجل الخروج</span>
+    <i class="fa-solid fa-arrow-right-from-bracket"></i>
+  </div>
+</div>
+
+<!-- Dismissable Confirmation Dialog -->
+<p-dialog [(visible)]="showConfirmDialog" [modal]="true" [dismissableMask]="true" [rtl]="true">
+  <ng-template pTemplate="header">
+    <span class="pi pi-info-circle" style="margin-right: 10px;"></span> تأكيد الخروج
+  </ng-template>
+
+  <div>
+    <p>هل تريد تسجيل الخروج؟</p>
+  </div>
+
+  <ng-template pTemplate="footer">
+    <button pButton label="نعم" class="p-button-text p-button-danger p-2" (click)="confirmLogout()">نعم</button>
+    <button pButton label="إلغاء" class="p-button-text p-button p-2" (click)="showConfirmDialog = false">إلغاء</button>
+  </ng-template>
+</p-dialog>

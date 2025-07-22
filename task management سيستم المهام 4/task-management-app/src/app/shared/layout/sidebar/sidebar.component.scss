@@ -1,0 +1,33 @@
+.h-screen{
+    border-left: 0.05rem solid rgba(33, 5, 89, 1);
+
+}
+.bg-purple{
+    background-color: white;
+    padding-top: 0;
+}
+.logo{
+    background-color: white;
+    padding: 12px;
+    display: flex;
+    justify-content: center;
+}
+.logo img{
+    width: 75%;
+}
+
+.text-primary{
+    color: white;
+    background-color: rgba(33, 5, 89, 1);
+}
+.text-color{
+    color: rgba(33, 5, 89, 1);
+}
+.text-color a:hover{
+    color: white;
+    background-color: rgba(33, 5, 89, 1);
+}
+
+.margin-companies{
+    margin-top: 25% !important;
+}
